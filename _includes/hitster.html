@@ -229,52 +229,21 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <input type="text" id="set-name" placeholder="My Mix · Summer 2024 · …">
     </div>
 
-    <!-- Spotify Connect -->
-    <div class="sp-connect-box">
-      <h3>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Spotify
-      </h3>
-      <div id="sp-auth-section">
-        <p data-i="sp_desc">Connect Spotify to import playlists and get full track metadata. No Client ID setup needed.</p>
-        <div class="sp-status" id="sp-status">
-          <div class="sp-dot" id="sp-dot"></div>
-          <span id="sp-status-label" data-i="sp_not_connected">Not connected</span>
-        </div>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap" id="sp-btn-row">
-          <button class="btn btn-spotify btn-sm" onclick="startPKCE()" id="btn-sp-connect">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#000"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-            <span data-i="btn_sp_connect">Connect with Spotify</span>
-          </button>
-        </div>
-        <div id="sp-connected-row" style="display:none;margin-top:10px" class="row">
-          <span class="sp-user" id="sp-user-name"></span>
-          <button class="btn btn-ghost btn-sm" onclick="loadUserPlaylists()" data-i="btn_browse_pl">Browse Playlists</button>
-          <button class="btn btn-ghost btn-sm" onclick="disconnectSpotify()" data-i="btn_disconnect">Disconnect</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Playlist browser -->
-    <div id="pl-browser" style="display:none;margin-bottom:16px">
-      <label class="label" data-i="lbl_your_pl">Your Playlists</label>
-      <div id="pl-list" style="max-height:220px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;background:var(--surface)"></div>
-    </div>
-
     <div class="hint">
       <strong data-i="h_single">Track:</strong> <code>https://open.spotify.com/track/…</code><br>
-      <strong data-i="h_playlist">Playlist:</strong> <code>https://open.spotify.com/playlist/…</code><br>
-      <span data-i="h_sep">One URL per line. Requires Spotify connection for playlists.</span>
+      <strong>Text:</strong> <code>Artist|Title(|Year|URL)</code><br>
+      <span data-i="h_sep">One Track per line.</span><br>
+      <span data-i="h_conv">Convert your Playlists to TXT here: https://bopster.app/wizard</span>
     </div>
     <div style="margin-bottom:14px">
       <label class="label" data-i="lbl_urls">Spotify URLs</label>
-      <textarea id="sp-input" placeholder="https://open.spotify.com/track/...&#10;https://open.spotify.com/playlist/..."></textarea>
+      <textarea id="sp-input" placeholder="https://open.spotify.com/track/..."></textarea>
     </div>
     <div class="row" style="margin-bottom:14px">
       <button class="btn" onclick="processLinks()" data-i="btn_fetch">Fetch Songs →</button>
       <span style="color:var(--text3);font-size:12px" data-i="or">or</span>
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('imp-file').click()" data-i="btn_import">Import JSON / CSV</button>
-      <input type="file" id="imp-file" accept=".json,.csv" style="display:none" onchange="importFile(event)">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('imp-file').click()" data-i="btn_import">Import JSON / CSV / TXT</button>
+      <input type="file" id="imp-file" accept=".json,.csv,.txt" style="display:none" onchange="importFile(event)">
     </div>
     <div id="s1-msg"></div>
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
@@ -314,6 +283,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <button class="btn btn-sm" onclick="goStep(3)" data-i="btn_des">Design →</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('json')" data-i="btn_expj">JSON</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('csv')" data-i="btn_expc">CSV</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportData('txt')" data-i="btn_expt">TXT</button>
     </div>
   </div>
 
@@ -393,6 +363,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <button class="btn" id="gen-btn" onclick="generatePDF()" data-i="btn_gen">Generate PDF</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('json')" data-i="btn_expj">Export JSON</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('csv')" data-i="btn_expc">Export CSV</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportData('txt')" data-i="btn_expt">Export TXT</button>
     </div>
     <div id="pdf-pw" style="display:none">
       <div class="prog-wrap"><div class="prog-fill" id="pdf-pf"></div></div>
@@ -409,9 +380,6 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div class="scan-icon">📷</div>
       <p style="font-size:13px;color:var(--text2);max-width:280px" data-i="scan_hint">Point camera at a Hitster QR code</p>
       <button class="btn" onclick="startScan()" data-i="btn_scan">Start Camera</button>
-      <div class="alert alert-info" style="font-size:11px;text-align:left;max-width:300px" data-i="scan_https_info">
-        Camera works on HTTPS only. GitHub Pages provides HTTPS automatically — it will work when published. On localhost, use Chrome with --unsafely-treat-insecure-origin-as-secure flag, or test via GitHub Pages.
-      </div>
     </div>
     <video id="qr-video" autoplay playsinline muted></video>
     <canvas id="qr-canvas" style="display:none"></canvas>
@@ -440,13 +408,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-//  CONFIG — replace with your own Spotify Client ID
-//  PKCE is safe for public apps: no client secret needed.
-//  Register at: https://developer.spotify.com/dashboard
-//  Add redirect URI: https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPO/
-//  (and http://127.0.0.1:PORT for local testing)
-// ══════════════════════════════════════════════
+
 const SPOTIFY_CLIENT_ID = 'YOUR_CLIENT_ID_HERE'; // replace this
 
 // ══════════════════════════════════════════════
@@ -461,14 +423,14 @@ const T={
     sp_not_connected:'Not connected',sp_connected:'Connected as',
     btn_sp_connect:'Connect with Spotify',btn_browse_pl:'Browse Playlists',btn_disconnect:'Disconnect',
     lbl_your_pl:'Your Playlists',
-    h_single:'Track:',h_playlist:'Playlist (needs Spotify):',h_sep:'One URL per line.',
+    h_single:'Track:',h_txt:'Artist|Title(|Year|URL)',h_sep:'One URL per line.',h_conv:'Convert your playlists and export as TXT here: https://bopster.app/wizard',
     lbl_name:'Set / Playlist Name',lbl_urls:'Spotify URLs',
-    btn_fetch:'Fetch Songs →',or:'or',btn_import:'Import JSON / CSV',
+    btn_fetch:'Fetch Songs →',or:'or',btn_import:'Import JSON / CSV / TXT',
     demo_hint:'No Spotify? Load demo songs:',btn_demo:'Load Demo',
     btn_refetch:'Re-fetch all',col_artist:'Artist',col_title:'Title',
     col_year:'Year',col_url:'Spotify',col_src:'MB',col_st:'●',
     hist_title:'Year distribution',
-    btn_des:'Design →',btn_expj:'JSON',btn_expc:'CSV',
+    btn_des:'Design →',btn_expj:'JSON',btn_expc:'CSV',btn_expt:'TXT',
     lbl_size:'Card Size (square)',sz_classic:'Classic',sz_travel:'Travel',sz_custom:'Custom',lbl_wh:'Side (mm)',
     lbl_design:'Card Design',dt_classic:'Classic Colors',dt_minimal:'Minimal B&W',dt_custom:'Custom Image',
     classic_hint:'Gradient follows release year across the full timeline. Or pick a fixed color:',
@@ -480,7 +442,6 @@ const T={
     pdf_info:'Front + back on A4. Print double-sided (flip short edge). Summary card fills available space.',
     btn_gen:'Generate PDF',pdf_done:'✓ PDF created — download started.',
     scan_hint:'Point camera at a Hitster QR code',
-    scan_https_info:'Camera works on HTTPS only. GitHub Pages provides HTTPS automatically — it will work when published. On localhost use http://127.0.0.1 (not localhost).',
     btn_scan:'Start Camera',btn_stop:'Stop Camera',
     tap_reveal:'Tap to reveal',btn_spotify:'Open Spotify',btn_browser:'▶ Play here',btn_next:'Next →',
   },
@@ -492,14 +453,14 @@ const T={
     sp_not_connected:'Nicht verbunden',sp_connected:'Verbunden als',
     btn_sp_connect:'Mit Spotify verbinden',btn_browse_pl:'Playlists durchsuchen',btn_disconnect:'Trennen',
     lbl_your_pl:'Deine Playlists',
-    h_single:'Track:',h_playlist:'Playlist (Spotify nötig):',h_sep:'Eine URL pro Zeile.',
+    h_single:'Track:',h_txt:'Künstler|Titel(|Jahr|URL)',h_sep:'Ein Track pro Zeile.',h_conv:'Playlists konvertieren und als TXT exportieren: https://bopster.app/wizard',
     lbl_name:'Set / Playlist-Name',lbl_urls:'Spotify URLs',
-    btn_fetch:'Songs laden →',or:'oder',btn_import:'JSON / CSV importieren',
+    btn_fetch:'Songs laden →',or:'oder',btn_import:'JSON / CSV / TXT importieren',
     demo_hint:'Kein Spotify? Demo-Songs laden:',btn_demo:'Demo laden',
     btn_refetch:'Alle neu abrufen',col_artist:'Interpret',col_title:'Titel',
     col_year:'Jahr',col_url:'Spotify',col_src:'MB',col_st:'●',
     hist_title:'Jahresverteilung',
-    btn_des:'Design →',btn_expj:'JSON',btn_expc:'CSV',
+    btn_des:'Design →',btn_expj:'JSON',btn_expc:'CSV',btn_expt:'TXT',
     lbl_size:'Kartengröße (quadratisch)',sz_classic:'Klassisch',sz_travel:'Reise',sz_custom:'Eigene',lbl_wh:'Seite (mm)',
     lbl_design:'Karten-Design',dt_classic:'Classic-Farben',dt_minimal:'Minimal S/W',dt_custom:'Eigenes Bild',
     classic_hint:'Gradient folgt dem Erscheinungsjahr. Oder feste Farbe:',
@@ -511,7 +472,6 @@ const T={
     pdf_info:'Vorder- und Rückseite auf A4. Doppelseitig drucken (kurze Kante). Summary-Karte füllt freien Platz.',
     btn_gen:'PDF erstellen',pdf_done:'✓ PDF erstellt — Download gestartet.',
     scan_hint:'Kamera auf Hitster-QR-Code richten',
-    scan_https_info:'Kamera funktioniert nur über HTTPS. GitHub Pages stellt HTTPS bereit — funktioniert nach dem Publizieren. Lokal http://127.0.0.1 verwenden (nicht localhost).',
     btn_scan:'Kamera starten',btn_stop:'Kamera stoppen',
     tap_reveal:'Antippen zum Aufdecken',btn_spotify:'Spotify öffnen',btn_browser:'▶ Abspielen',btn_next:'Weiter →',
   }
@@ -810,7 +770,7 @@ function loadDemo(){
     {artist:'David Bowie',title:'Heroes',spotifyId:'7Jh1bpe76CNTCgdgAdBw4Z',url:'https://open.spotify.com/track/7Jh1bpe76CNTCgdgAdBw4Z',year:null,mbUrl:null,status:'pending'},
     {artist:'Daft Punk',title:'Get Lucky',spotifyId:'2Foc5Q5nqNiosCNqttzHof',url:'https://open.spotify.com/track/2Foc5Q5nqNiosCNqttzHof',year:null,mbUrl:null,status:'pending'},
   ];
-  showMsg('s1-msg','✓ '+songs.length+' demo songs loaded.','ok');
+  showMsg('s1-msg','✓ ' + songs.length + ' demo songs loaded.','ok');
   setTimeout(()=>goStep(2),400);
 }
 
@@ -1170,18 +1130,18 @@ function drawFront(doc,song,x,y,sz){
   if(designMode==='minimal'){tc=[0,0,0];}
   else{const[c1,c2]=getSongGrad(song);tc=contrastText(lerpHex(c1,c2,.5))==='#000'?[0,0,0]:[255,255,255];}
   doc.setTextColor(...tc);
-  const pad=sz*.06;
+  const pad=sz*.1;
   // Title
   doc.setFont('helvetica','bold');
-  const tSz=Math.max(7,sz*.17);doc.setFontSize(tSz);
+  const tSz=Math.max(7,sz*.20);doc.setFontSize(tSz);
   const tLines=doc.splitTextToSize((song.title||'').toUpperCase(),sz-pad*2);
   doc.text(tLines.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
   // Year — very large
-  const ySz=Math.max(18,sz*.46);doc.setFontSize(ySz);
+  const ySz=Math.max(18,sz*.75);doc.setFontSize(ySz);
   doc.text(String(song.year||'????'),x+sz/2,y+sz*.54,{align:'center',baseline:'middle'});
   // Artist
   doc.setFont('helvetica','italic');
-  const aSz=Math.max(5,sz*.13);doc.setFontSize(aSz);
+  const aSz=Math.max(5,sz*.20);doc.setFontSize(aSz);
   const aLines=doc.splitTextToSize(song.artist||'',sz-pad*2);
   doc.text(aLines.slice(0,2),x+sz/2,y+sz-pad,{align:'center',baseline:'bottom'});
 }
@@ -1244,38 +1204,80 @@ function drawSummaryCard(doc,x,y,sz){
 // ══════════════════════════════════════════════
 //  IMPORT / EXPORT
 // ══════════════════════════════════════════════
-function exportData(fmt){
-  setName=document.getElementById('set-name').value.trim();
-  if(fmt==='json'){
-    dl(new Blob([JSON.stringify({meta:{setName},songs},null,2)],{type:'application/json'}),(setName||'hitster')+'.json');
-  }else{
-    const hdr='# setName: '+(setName||'')+'\n';
-    const rows=[['artist','title','year','url','mbUrl'],...songs.map(s=>[s.artist,s.title,s.year||'',s.url||'',s.mbUrl||''])];
-    dl(new Blob([hdr+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n')],{type:'text/csv'}),(setName||'hitster')+'.csv');
+function exportData(fmt) {
+  setName = document.getElementById('set-name').value.trim();
+  
+  if (fmt === 'json') {
+    dl(new Blob([JSON.stringify({ meta: { setName }, songs }, null, 2)], { type: 'application/json' }), (setName || 'hitster') + '.json');
+  } 
+  else if (fmt === 'txt') {
+    // TXT Export: Artist|Title|Year|URL
+    const hdr = '# setName: ' + (setName || '') + '\n';
+    const rows = songs.map(s => 
+      [s.artist, s.title, s.year || '', s.url || ''].join('|')
+    );
+    dl(new Blob([hdr + rows.join('\n')], { type: 'text/plain' }), (setName || 'hitster') + '.txt');
+  } 
+  else {
+    const hdr = '# setName: ' + (setName || '') + '\n';
+    const rows = [['artist', 'title', 'year', 'url', 'mbUrl'], ...songs.map(s => [s.artist, s.title, s.year || '', s.url || '', s.mbUrl || ''])];
+    dl(new Blob([hdr + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n')], { type: 'text/csv' }), (setName || 'hitster') + '.csv');
   }
 }
-function importFile(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    try{
-      if(f.name.endsWith('.json')){
-        const p=JSON.parse(ev.target.result);songs=p.songs||p;
-        if(p.meta?.setName){setName=p.meta.setName;document.getElementById('set-name').value=setName;}
-        songs.forEach(s=>{if(!s.status)s.status=s.year?'ok':'pending';s.url=s.url||s.spotifyUrl||'';s.spotifyId=s.spotifyId||xId(s.url,'track')||'';});
-      }else{
-        const lines=ev.target.result.split('\n');
-        const cl=lines.find(l=>l.startsWith('# setName:'));
-        if(cl){setName=cl.replace('# setName:','').trim();document.getElementById('set-name').value=setName;}
-        songs=lines.filter(l=>!l.startsWith('#')&&l.trim()).slice(1).map(l=>{
-          const p=l.split(',').map(v=>v.replace(/^"|"$/g,'').replace(/""/g,'"'));
-          return{artist:p[0]||'',title:p[1]||'',year:p[2]?+p[2]:null,url:p[3]||'',mbUrl:p[4]||'',spotifyId:xId(p[3]||'','track')||'',status:p[2]?'ok':'pending'};
-        }).filter(s=>s.title);
+function importFile(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const content = ev.target.result;
+      if (f.name.endsWith('.json')) {
+        const p = JSON.parse(content);
+        songs = p.songs || p;
+        if (p.meta?.setName) { 
+          setName = p.meta.setName; 
+          document.getElementById('set-name').value = setName; 
+        }
+        songs.forEach(s => {
+          if (!s.status) s.status = s.year ? 'ok' : 'pending';
+          s.url = s.url || s.spotifyUrl || '';
+          s.spotifyId = s.spotifyId || xId(s.url, 'track') || '';
+        });
+      } else {
+        const allLines = content.split(/\r?\n/);
+        const cl = allLines.find(l => l.startsWith('# setName:'));
+        if (cl) { 
+          setName = cl.replace('# setName:', '').trim(); 
+          document.getElementById('set-name').value = setName; 
+        }
+
+        const validLines = allLines.filter(l => l.trim() && !l.startsWith('#'));
+        
+        const isPipe = validLines.length > 0 && validLines[0].includes('|');
+        const sep = isPipe ? '|' : ',';
+        
+        const dataLines = isPipe ? validLines : validLines.slice(1);
+
+        songs = dataLines.map(l => {
+          const p = l.split(sep).map(v => v.replace(/^"|"$/g, '').replace(/""/g, '"').trim());
+          const url = p[3] || '';
+          return {
+            artist: p[0] || '',
+            title: p[1] || '',
+            year: p[2] ? parseInt(p[2]) : null,
+            url: url,
+            mbUrl: p[4] || '',
+            spotifyId: xId(url, 'track') || '',
+            status: p[2] ? 'ok' : 'pending'
+          };
+        }).filter(s => s.title);
       }
-      showMsg('s1-msg','✓ '+songs.length+' songs imported.','ok');
-      setTimeout(()=>goStep(2),400);
-    }catch(err){showMsg('s1-msg','Import failed: '+err.message,'err');}
-  };r.readAsText(f);
+      showMsg('s1-msg', '✓ ' + songs.length + ' songs imported.', 'ok');
+      setTimeout(() => goStep(2), 400);
+    } catch (err) { 
+      showMsg('s1-msg', 'Import failed: ' + err.message, 'err'); 
+    }
+  };
+  r.readAsText(f);
 }
 function dl(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);}
 
