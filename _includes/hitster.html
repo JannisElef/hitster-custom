@@ -18,21 +18,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 #topbar{height:var(--nav);display:flex;align-items:center;border-bottom:1px solid var(--border);padding:0 16px;position:sticky;top:0;z-index:50;background:var(--bg);}
 .logo-mini{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent);margin-right:16px;flex-shrink:0;cursor:pointer;}
-.tab-btns{display:flex;gap:2px;flex:1;}
-.tab-btn{background:none;border:none;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .15s;}
-.tab-btn:hover{color:var(--text2);background:var(--surface);}
-.tab-btn.active{color:var(--text);background:var(--surface2);}
-.lang-btn{background:none;border:1px solid var(--border);color:var(--text3);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 9px;border-radius:5px;cursor:pointer;margin-left:8px;flex-shrink:0;}
-
-#splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - var(--nav));text-align:center;padding:40px 20px;}
-.splash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,20vw,170px);letter-spacing:8px;line-height:.88;background:linear-gradient(160deg,#e8c547 0%,#e8804a 35%,#e84aaa 65%,#7030a0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;}
-.splash-sub{font-size:12px;color:var(--text3);letter-spacing:5px;text-transform:uppercase;margin-bottom:64px;}
-.splash-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:400px;width:100%;}
-.splash-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 20px;cursor:pointer;transition:all .2s;text-align:left;}
-.splash-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-.splash-card-icon{font-size:28px;margin-bottom:12px;display:block;}
-.splash-card h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-bottom:4px;}
-.splash-card p{font-size:12px;color:var(--text3);}
+.lang-btn{background:none;border:1px solid var(--border);color:var(--text3);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 9px;border-radius:5px;cursor:pointer;margin-left:auto;flex-shrink:0;}
 
 .page{display:none;padding:20px;max-width:960px;margin:0 auto;}
 .page.active{display:block;}
@@ -60,8 +46,6 @@ textarea{min-height:100px;resize:vertical;}
 .btn-ghost{background:none;color:var(--text2);border:1px solid var(--border2);}
 .btn-ghost:hover{border-color:var(--border2);color:var(--text);background:var(--surface);filter:none;}
 .btn-sm{padding:7px 12px;font-size:12px;}
-.btn-spotify{background:#1DB954;color:#000;}
-.btn-spotify:hover{background:#1ed760;}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
 .spacer{height:24px;}
 .hint{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:12px 14px;font-size:12px;color:var(--text2);line-height:1.8;margin-bottom:16px;}
@@ -74,15 +58,6 @@ textarea{min-height:100px;resize:vertical;}
 .alert-warn{background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.2);color:#fde68a;}
 .prog-wrap{height:3px;background:var(--surface2);border-radius:10px;overflow:hidden;margin:10px 0;}
 .prog-fill{height:100%;background:var(--accent);border-radius:10px;transition:width .3s;width:0;}
-
-/* Spotify Connect Box */
-.sp-connect-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
-.sp-connect-box h3{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
-.sp-connect-box p{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:12px;}
-.sp-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);}
-.sp-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;}
-.sp-dot.on{background:#1DB954;}
-.sp-user{font-weight:500;color:var(--text);}
 
 /* Histogram */
 #histogram-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;}
@@ -110,18 +85,15 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .year-in:focus{outline:none;border-color:var(--accent);}
 .mb-lnk{color:#60a5fa;font-size:11px;text-decoration:none;}
 .mb-lnk:hover{text-decoration:underline;}
-/* Status dot only */
 .st-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
 .st-ok{background:#4ade80;}
 .st-manual{background:#60a5fa;}
 .st-load{background:var(--text3);}
 .st-err{background:#f87171;}
-/* Spotify URL cell */
 .sp-url-cell{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;}
 .sp-url-cell a{color:#1DB954;text-decoration:none;}
 .sp-url-cell a:hover{text-decoration:underline;}
 
-/* Hide less-important columns on mobile */
 @media(max-width:600px){
   .col-src,.col-url{display:none;}
   .col-artist,.col-title{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -163,58 +135,39 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .check-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);cursor:pointer;margin-bottom:14px;}
 .check-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
 
-/* Play */
-.scan-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:16px;}
-#qr-video{width:100%;max-width:340px;border-radius:8px;display:none;}
-.scan-ph{display:flex;flex-direction:column;align-items:center;gap:14px;}
-.scan-icon{width:70px;height:70px;border:1.5px solid var(--border2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px;}
-.player-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:none;}
-.player-box.vis{display:block;}
-.p-artist{font-size:12px;color:var(--text3);margin-bottom:4px;}
-.p-title{font-size:18px;font-weight:600;margin-bottom:6px;}
-.p-year{display:inline-block;background:var(--accent);color:#000;font-weight:700;padding:2px 10px;border-radius:20px;font-size:12px;}
-.blur-el{filter:blur(7px);transition:filter .25s;cursor:pointer;user-select:none;}
-.blur-el:hover{filter:blur(3px);}
+/* PDF settings grid */
+.pdf-settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
+.pdf-field{display:flex;flex-direction:column;gap:5px;}
+.pdf-field label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+.pdf-field input[type="number"]{width:100%;padding:7px 10px;font-size:13px;}
+
+/* Spotify connect */
+.sp-connect-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
+.sp-connect-box h3{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.sp-connect-box p{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:12px;}
+.sp-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);}
+.sp-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;}
+.sp-dot.on{background:#1DB954;}
+.sp-user{font-weight:500;color:var(--text);}
 
 @media(max-width:580px){
   .page{padding:12px;}
   .size-grid{flex-direction:column;}
   .step-btn span:not(.step-num){display:none;}
   .preview-area{flex-direction:column;align-items:center;}
+  .pdf-settings{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
 <div id="topbar">
-  <div class="logo-mini" onclick="goSplash()">HITSTER</div>
-  <div class="tab-btns" id="tab-btns" style="display:none">
-    <button class="tab-btn" id="tab-create" onclick="showTab('create')"><span data-i="nav_create">Create</span></button>
-    <button class="tab-btn" id="tab-play" onclick="showTab('play')"><span data-i="nav_play">Play</span></button>
-  </div>
+  <div class="logo-mini" onclick="goCreate()">HITSTER</div>
   <button class="lang-btn" id="lang-btn" onclick="toggleLang()">DE</button>
 </div>
 
-<!-- SPLASH -->
-<div id="splash">
-  <div class="splash-title">HITSTER</div>
-  <div class="splash-sub" data-i="sub">The Music Timeline Game</div>
-  <div class="splash-cards">
-    <div class="splash-card" onclick="showTab('play')">
-      <span class="splash-card-icon">🎵</span>
-      <h2 data-i="nav_play">PLAY</h2>
-      <p data-i="play_desc">Scan &amp; guess</p>
-    </div>
-    <div class="splash-card" onclick="showTab('create')">
-      <span class="splash-card-icon">&#127183;</span>
-      <h2 data-i="nav_create">CREATE</h2>
-      <p data-i="create_desc">Build a deck</p>
-    </div>
-  </div>
-</div>
-
 <!-- CREATE -->
-<div id="pg-create" class="page">
+<div id="pg-create" class="page active">
   <div class="step-row">
     <button class="step-btn active" id="s1btn" onclick="goStep(1)"><span class="step-num">1</span><span data-i="s_import">Import</span></button>
     <button class="step-btn" id="s2btn" onclick="goStep(2)"><span class="step-num">2</span><span data-i="s_years">Years</span></button>
@@ -227,6 +180,27 @@ tr:hover td{background:rgba(255,255,255,.02);}
     <div style="margin-bottom:14px">
       <label class="label" data-i="lbl_name">Set / Playlist Name</label>
       <input type="text" id="set-name" placeholder="My Mix · Summer 2024 · …">
+    </div>
+
+    <div class="sp-connect-box">
+      <h3><span style="color:#1DB954">●</span> Spotify</h3>
+      <p data-i="sp_desc">Connect to import playlists and get full track info. Secure PKCE login — no passwords stored.</p>
+      <div class="sp-status">
+        <span class="sp-dot" id="sp-dot"></span>
+        <span id="sp-status-label" data-i="sp_not_connected">Not connected</span>
+      </div>
+      <div id="sp-btn-row" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-sm" style="background:#1DB954" onclick="startPKCE()" data-i="btn_sp_connect">Connect with Spotify</button>
+      </div>
+      <div id="sp-connected-row" style="margin-top:10px;display:none;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="sp-user" id="sp-user-name"></span>
+        <button class="btn btn-ghost btn-sm" onclick="loadUserPlaylists()" data-i="btn_browse_pl">Browse Playlists</button>
+        <button class="btn btn-ghost btn-sm" onclick="disconnectSpotify()" data-i="btn_disconnect">Disconnect</button>
+      </div>
+    </div>
+    <div id="pl-browser" style="display:none;margin-bottom:16px">
+      <label class="label" data-i="lbl_your_pl">Your Playlists</label>
+      <div id="pl-list" style="display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto"></div>
     </div>
 
     <div class="hint">
@@ -354,7 +328,24 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
   <!-- STEP 4 -->
   <div class="step-content" id="sc-4">
-    <div class="alert alert-info" data-i="pdf_info">Front + back on A4. Print double-sided (flip short edge) and cut. Summary card fills available space on last page.</div>
+    <div class="alert alert-info" data-i="pdf_info">Front + back on A4. Print double-sided (flip short edge) and cut.</div>
+
+    <label class="label" style="margin-bottom:10px" data-i="lbl_pdf_layout">PDF Layout</label>
+    <div class="pdf-settings">
+      <div class="pdf-field">
+        <label data-i="lbl_margin">Page margin (mm)</label>
+        <input type="number" id="pdf-margin" value="6" min="0" max="30" step="0.1">
+      </div>
+      <div class="pdf-field">
+        <label data-i="lbl_gap">Gap between cards (mm)</label>
+        <input type="number" id="pdf-gap" value="3" min="0" max="20" step="0.1">
+      </div>
+      <div class="pdf-field">
+        <label data-i="lbl_qr_pad">QR padding (mm)</label>
+        <input type="number" id="pdf-qr-pad" value="2" min="0" max="10" step="0.1">
+      </div>
+    </div>
+
     <label class="check-row">
       <input type="checkbox" id="chk-summary" checked>
       <span data-i="lbl_summary">Include summary card</span>
@@ -373,51 +364,15 @@ tr:hover td{background:rgba(255,255,255,.02);}
   </div>
 </div>
 
-<!-- PLAY -->
-<div id="pg-play" class="page">
-  <div class="scan-box">
-    <div class="scan-ph" id="scan-ph">
-      <div class="scan-icon">📷</div>
-      <p style="font-size:13px;color:var(--text2);max-width:280px" data-i="scan_hint">Point camera at a Hitster QR code</p>
-      <button class="btn" onclick="startScan()" data-i="btn_scan">Start Camera</button>
-    </div>
-    <video id="qr-video" autoplay playsinline muted></video>
-    <canvas id="qr-canvas" style="display:none"></canvas>
-    <div id="scan-msg" style="margin-top:12px;display:none"></div>
-    <div id="scan-stop-row" style="display:none;margin-top:10px">
-      <button class="btn btn-ghost btn-sm" onclick="stopScan()" data-i="btn_stop">Stop Camera</button>
-    </div>
-  </div>
-  <div class="player-box" id="player-box">
-    <div style="margin-bottom:16px">
-      <div class="p-artist blur-el" id="p-artist" onclick="this.classList.toggle('blur-el')">—</div>
-      <div class="p-title blur-el" id="p-title" onclick="this.classList.toggle('blur-el')">—</div>
-      <span class="p-year blur-el" id="p-year" onclick="this.classList.toggle('blur-el')">—</span>
-    </div>
-    <p style="font-size:11px;color:var(--text3);margin-bottom:14px" data-i="tap_reveal">Tap to reveal</p>
-    <div class="row">
-      <button class="btn btn-sm" onclick="openSpotify()" data-i="btn_spotify">Open Spotify</button>
-      <button class="btn btn-ghost btn-sm" onclick="toggleEmbed()" data-i="btn_browser">▶ Play here</button>
-      <button class="btn btn-ghost btn-sm" onclick="nextScan()" data-i="btn_next">Next →</button>
-    </div>
-    <div id="embed-wrap" style="margin-top:14px;display:none">
-      <iframe id="sp-embed" style="border-radius:8px;border:none" width="100%" height="80"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-  </div>
-</div>
-
 <script>
-
-const SPOTIFY_CLIENT_ID = 'YOUR_CLIENT_ID_HERE'; // replace this
+const SPOTIFY_CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
 
 // ══════════════════════════════════════════════
 //  I18N
 // ══════════════════════════════════════════════
 const T={
   en:{
-    nav_create:'Create',nav_play:'Play',sub:'The Music Timeline Game',
-    play_desc:'Scan & guess the year',create_desc:'Build your own deck',
+    nav_create:'Create',sub:'The Music Timeline Game',
     s_import:'Import',s_years:'Years',s_design:'Design',s_export:'Export',
     sp_desc:'Connect to import playlists and get full track info. Secure PKCE login — no passwords stored.',
     sp_not_connected:'Not connected',sp_connected:'Connected as',
@@ -437,17 +392,14 @@ const T={
     minimal_hint:'Black on white — ideal for cheap printing.',
     drop_hint:'Click to upload background image',btn_rmbg:'Remove',
     prev_front:'Front',prev_back:'Back',prev_h:'Card layout',
-    prev_p:'Front: title bold top · year huge center · artist italic bottom\nBack: QR only → Spotify\nPDF: aligned front + back, short-edge duplex',
+    prev_p:'Front: title bold top · year huge center · artist italic bottom\nBack: QR only → Spotify\nPDF: front left-aligned, back right-aligned (short-edge duplex)',
     btn_to_exp:'Generate PDF →',lbl_summary:'Include summary card',
-    pdf_info:'Front + back on A4. Print double-sided (flip short edge). Summary card fills available space.',
+    lbl_pdf_layout:'PDF Layout',lbl_margin:'Page margin (mm)',lbl_gap:'Gap between cards (mm)',lbl_qr_pad:'QR padding (mm)',
+    pdf_info:'Front + back on A4. Print double-sided (flip short edge) and cut.',
     btn_gen:'Generate PDF',pdf_done:'✓ PDF created — download started.',
-    scan_hint:'Point camera at a Hitster QR code',
-    btn_scan:'Start Camera',btn_stop:'Stop Camera',
-    tap_reveal:'Tap to reveal',btn_spotify:'Open Spotify',btn_browser:'▶ Play here',btn_next:'Next →',
   },
   de:{
-    nav_create:'Erstellen',nav_play:'Spielen',sub:'Das Musik-Zeitstrahl-Spiel',
-    play_desc:'Scannen & Jahr raten',create_desc:'Eigenes Deck erstellen',
+    nav_create:'Erstellen',sub:'Das Musik-Zeitstrahl-Spiel',
     s_import:'Import',s_years:'Jahre',s_design:'Design',s_export:'Export',
     sp_desc:'Verbinden um Playlists zu importieren und vollständige Track-Infos zu laden. Sicherer PKCE-Login.',
     sp_not_connected:'Nicht verbunden',sp_connected:'Verbunden als',
@@ -467,13 +419,11 @@ const T={
     minimal_hint:'Schwarz auf Weiß — günstig drucken.',
     drop_hint:'Klicken um Hintergrundbild hochzuladen',btn_rmbg:'Entfernen',
     prev_front:'Vorne',prev_back:'Hinten',prev_h:'Karten-Layout',
-    prev_p:'Vorne: Titel fett oben · Jahr riesig mitte · Interpret kursiv unten\nHinten: Nur QR → Spotify\nPDF: Duplex ausgerichtet, kurze Kante',
+    prev_p:'Vorne: Titel fett oben · Jahr riesig mitte · Interpret kursiv unten\nHinten: Nur QR → Spotify\nPDF: Vorderseite links, Rückseite rechts (kurze Kante Duplex)',
     btn_to_exp:'PDF erstellen →',lbl_summary:'Summary-Karte einschließen',
-    pdf_info:'Vorder- und Rückseite auf A4. Doppelseitig drucken (kurze Kante). Summary-Karte füllt freien Platz.',
+    lbl_pdf_layout:'PDF-Layout',lbl_margin:'Seitenrand (mm)',lbl_gap:'Abstand zwischen Karten (mm)',lbl_qr_pad:'QR-Padding (mm)',
+    pdf_info:'Vorder- und Rückseite auf A4. Doppelseitig drucken (kurze Kante). Ausschneiden.',
     btn_gen:'PDF erstellen',pdf_done:'✓ PDF erstellt — Download gestartet.',
-    scan_hint:'Kamera auf Hitster-QR-Code richten',
-    btn_scan:'Kamera starten',btn_stop:'Kamera stoppen',
-    tap_reveal:'Antippen zum Aufdecken',btn_spotify:'Spotify öffnen',btn_browser:'▶ Abspielen',btn_next:'Weiter →',
   }
 };
 let lang='en';
@@ -520,26 +470,15 @@ function yearGradPair(year){
 //  STATE
 // ══════════════════════════════════════════════
 let songs=[],designMode='classic',fixedColor=null,cardSz=66,bgDataUrl=null;
-let scanStream=null,scanTick=null,lastScan=null,setName='';
+let setName='';
 let tblSortCol=null,tblSortDir=1,tblFetching=false;
 let spToken=null,spExpiry=0;
 
 // ══════════════════════════════════════════════
 //  NAV
 // ══════════════════════════════════════════════
-function goSplash(){
-  document.getElementById('splash').style.display='';
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-btns').style.display='none';
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-}
-function showTab(name){
-  document.getElementById('splash').style.display='none';
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('pg-'+name).classList.add('active');
-  document.getElementById('tab-btns').style.display='';
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
+function goCreate(){
+  document.getElementById('pg-create').classList.add('active');
 }
 function goStep(n){
   if(n>1&&!songs.length){showMsg('s1-msg','Please load songs first.','err');return;}
@@ -557,8 +496,6 @@ function goStep(n){
 
 // ══════════════════════════════════════════════
 //  SPOTIFY PKCE AUTH
-//  Client ID is safe to expose in browser apps.
-//  No client secret used — PKCE handles security.
 // ══════════════════════════════════════════════
 function spRedirectUri(){
   return location.origin+location.pathname.split('?')[0].split('#')[0];
@@ -586,7 +523,6 @@ function updateSpUI(connected,displayName){
 async function startPKCE(){
   const clientId=SPOTIFY_CLIENT_ID;
   if(clientId==='YOUR_CLIENT_ID_HERE'){
-    // Show inline prompt for custom client ID
     const id=prompt('Enter your Spotify Client ID:\n(Get one free at developer.spotify.com → Dashboard → Create App)\n\nRedirect URI to add: '+spRedirectUri());
     if(!id)return;
     try{localStorage.setItem('sp_override_client',id);}catch{}
@@ -621,7 +557,7 @@ async function handleCallback(){
   const code=params.get('code');if(!code)return;
   history.replaceState({},'',location.pathname);
   let verifier='';try{verifier=sessionStorage.getItem('pkce_v')||'';}catch{}
-  if(!verifier){showMsg('s1-msg','Session expired. Please reconnect.','err');showTab('create');return;}
+  if(!verifier){showMsg('s1-msg','Session expired. Please reconnect.','err');return;}
   try{
     const r=await fetch('https://accounts.spotify.com/api/token',{
       method:'POST',
@@ -632,13 +568,11 @@ async function handleCallback(){
     const d=await r.json();
     spToken=d.access_token;spExpiry=Date.now()+d.expires_in*1000;
     try{localStorage.setItem('sp_token',spToken);localStorage.setItem('sp_expiry',String(spExpiry));}catch{}
-    // Get display name
     let name='';
     try{const ur=await fetch('https://api.spotify.com/v1/me',{headers:{Authorization:'Bearer '+spToken}});if(ur.ok){const ud=await ur.json();name=ud.display_name||ud.id||'';}}catch{}
     updateSpUI(true,name);
     showMsg('s1-msg','✓ Spotify connected!','ok');
   }catch(e){showMsg('s1-msg','Spotify auth failed: '+e.message,'err');}
-  showTab('create');
 }
 function disconnectSpotify(){
   spToken=null;spExpiry=0;
@@ -651,94 +585,34 @@ function spAuth(){return spToken&&Date.now()<spExpiry?spToken:null;}
 // ── Playlist browser ──
 async function loadUserPlaylists(){
   const tok=spAuth();if(!tok){showMsg('s1-msg','Please connect Spotify first.','warn');return;}
-  const plDiv=document.getElementById('pl-list');plDiv.innerHTML='<div style="padding:12px;color:var(--text3);font-size:12px">Loading…</div>';
+  const list=document.getElementById('pl-list');list.innerHTML='<p style="font-size:12px;color:var(--text3)">Loading…</p>';
   document.getElementById('pl-browser').style.display='block';
   try{
-    const r=await fetch('https://api.spotify.com/v1/me/playlists?limit=50',{headers:{Authorization:'Bearer '+tok}});
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const d=await r.json();
-    plDiv.innerHTML='';
-    (d.items||[]).forEach(pl=>{
-      const row=document.createElement('div');
-      row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s';
-      row.onmouseenter=()=>row.style.background='rgba(255,255,255,.04)';
-      row.onmouseleave=()=>row.style.background='';
-      const img=pl.images?.[0]?.url;
-      row.innerHTML=`${img?`<img src="${img}" width="36" height="36" style="border-radius:4px;flex-shrink:0">`:'<div style="width:36px;height:36px;background:var(--surface2);border-radius:4px;flex-shrink:0"></div>'}
-        <div style="min-width:0"><div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pl.name)}</div>
-        <div style="font-size:11px;color:var(--text3)">${pl.tracks?.total||0} tracks</div></div>`;
-      row.onclick=()=>{
-        document.getElementById('sp-input').value=`https://open.spotify.com/playlist/${pl.id}`;
-        if(!setName){setName=pl.name;document.getElementById('set-name').value=setName;}
-        document.getElementById('pl-browser').style.display='none';
-        processLinks();
-      };
-      plDiv.appendChild(row);
+    let items=[],offset=0,total=1;
+    while(offset<total){
+      const r=await fetch(`https://api.spotify.com/v1/me/playlists?limit=50&offset=${offset}`,{headers:{Authorization:'Bearer '+tok}});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      const d=await r.json();total=d.total||0;items.push(...(d.items||[]));offset+=50;
+    }
+    list.innerHTML='';
+    items.forEach(pl=>{
+      if(!pl)return;
+      const btn=document.createElement('button');
+      btn.className='btn btn-ghost btn-sm';
+      btn.style.cssText='text-align:left;justify-content:flex-start;width:100%;';
+      btn.textContent=`${pl.name} (${pl.tracks?.total||'?'})`;
+      btn.onclick=()=>importPlaylist(pl.id,pl.name);
+      list.appendChild(btn);
     });
-    if(!d.items?.length)plDiv.innerHTML='<div style="padding:12px;color:var(--text3);font-size:12px">No playlists found.</div>';
-  }catch(e){plDiv.innerHTML=`<div style="padding:12px;color:#f87171;font-size:12px">Error: ${e.message}</div>`;}
+    if(!items.length)list.innerHTML='<p style="font-size:12px;color:var(--text3)">No playlists found.</p>';
+  }catch(e){list.innerHTML=`<p style="font-size:12px;color:#fca5a5">Error: ${e.message}</p>`;}
 }
-
-// ══════════════════════════════════════════════
-//  STEP 1 — IMPORT
-// ══════════════════════════════════════════════
-function xId(url,type){const m=(url||'').match(new RegExp(`spotify\\.com\\/${type}\\/([a-zA-Z0-9]+)`));return m?m[1]:null;}
-
-async function processLinks(){
-  const raw=document.getElementById('sp-input').value.trim();
-  if(!raw){showMsg('s1-msg','Please enter at least one URL.','err');return;}
-  const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);
-  songs=[];
-  showMsg('s1-msg','Processing '+lines.length+' link(s)…','info');
-  for(const line of lines){
-    const tid=xId(line,'track');
-    if(tid){await resolveTrack(tid);continue;}
-    const pid=xId(line,'playlist');
-    if(pid){await resolvePlaylist(pid);continue;}
-  }
-  if(!songs.length){showMsg('s1-msg','No songs found. Check your URLs.','err');return;}
-  showMsg('s1-msg','✓ '+songs.length+' songs found.','ok');
-  setTimeout(()=>goStep(2),400);
-}
-
-async function resolveTrack(id){
-  let artist='',title='';
-  // 1. Try Spotify API if authenticated (best quality)
-  const tok=spAuth();
-  if(tok){
-    try{
-      const r=await fetch(`https://api.spotify.com/v1/tracks/${id}`,{headers:{Authorization:'Bearer '+tok}});
-      if(r.ok){
-        const d=await r.json();
-        title=d.name||'';
-        artist=(d.artists||[]).map(a=>a.name).join(', ');
-      }
-    }catch{}
-  }
-  // 2. Fallback: oEmbed
-  if(!title){
-    try{
-      const r=await fetch(`https://open.spotify.com/oembed?url=https://open.spotify.com/track/${id}`);
-      if(r.ok){
-        const d=await r.json();
-        const raw=d.title||'';
-        const byM=raw.match(/^(.+?)\s+by\s+(.+)$/i),dM=raw.match(/^(.+?)\s*[-–—]\s*(.+)$/);
-        if(byM){title=byM[1].trim();artist=byM[2].trim();}
-        else if(dM){title=dM[1].trim();artist=dM[2].trim();}
-        else title=raw;
-      }
-    }catch{}
-  }
-  songs.push({artist,title,spotifyId:id,url:`https://open.spotify.com/track/${id}`,year:null,mbUrl:null,status:'pending'});
-}
-
-async function resolvePlaylist(pid){
-  const tok=spAuth();
-  if(!tok){showMsg('s1-msg','Playlist import requires Spotify connection. Please connect above.','warn');return;}
-  let offset=0,total=9999;const newSongs=[];
+async function importPlaylist(pid,name){
+  const tok=spAuth();if(!tok)return;
+  if(name)document.getElementById('set-name').value=name;
+  showMsg('s1-msg','Loading playlist…','info');
   try{
-    const pr=await fetch(`https://api.spotify.com/v1/playlists/${pid}?fields=name`,{headers:{Authorization:'Bearer '+tok}});
-    if(pr.ok){const pd=await pr.json();if(pd.name&&!setName){setName=pd.name;document.getElementById('set-name').value=setName;}}
+    const newSongs=[];let offset=0,total=1;
     while(offset<total){
       const r=await fetch(`https://api.spotify.com/v1/playlists/${pid}/tracks?limit=50&offset=${offset}&fields=total,items(track(id,name,artists(name)))`,
         {headers:{Authorization:'Bearer '+tok}});
@@ -755,7 +629,56 @@ async function resolvePlaylist(pid){
       await sleep(80);
     }
     songs.push(...newSongs);
-  }catch(e){showMsg('s1-msg','Playlist failed: '+e.message,'err');}
+  }catch(e){showMsg('s1-msg','Playlist failed: '+e.message,'err');return;}
+  showMsg('s1-msg','✓ '+songs.length+' songs imported.','ok');
+  setTimeout(()=>goStep(2),400);
+}
+
+// ── processLinks ──
+async function processLinks(){
+  const raw=document.getElementById('sp-input').value.trim();
+  if(!raw){showMsg('s1-msg','Please enter Spotify URLs or track info.','err');return;}
+  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  const newSongs=[];
+  for(const line of lines){
+    const tid=xId(line,'track');
+    if(tid){
+      newSongs.push({artist:'',title:'',spotifyId:tid,url:`https://open.spotify.com/track/${tid}`,year:null,mbUrl:null,status:'pending'});
+    }else if(line.includes('|')){
+      const p=line.split('|').map(v=>v.trim());
+      const url=p[3]||'';
+      newSongs.push({artist:p[0]||'',title:p[1]||'',year:p[2]?+p[2]:null,url,spotifyId:xId(url,'track')||'',mbUrl:'',status:p[2]?'ok':'pending'});
+    }
+  }
+  if(!newSongs.length){showMsg('s1-msg','No valid tracks found.','err');return;}
+  // Fetch metadata from Spotify if connected
+  const tok=spAuth();
+  if(tok){
+    showMsg('s1-msg','Fetching track info from Spotify…','info');
+    const ids=newSongs.map(s=>s.spotifyId).filter(Boolean);
+    for(let i=0;i<ids.length;i+=50){
+      const chunk=ids.slice(i,i+50);
+      try{
+        const r=await fetch(`https://api.spotify.com/v1/tracks?ids=${chunk.join(',')}`,{headers:{Authorization:'Bearer '+tok}});
+        if(r.ok){
+          const d=await r.json();
+          (d.tracks||[]).forEach(t=>{
+            if(!t)return;
+            const s=newSongs.find(x=>x.spotifyId===t.id);
+            if(s){s.artist=(t.artists||[]).map(a=>a.name).join(', ');s.title=t.name||'';}
+          });
+        }
+      }catch{}
+      await sleep(100);
+    }
+  }
+  songs.push(...newSongs.filter(s=>s.title||s.spotifyId));
+  showMsg('s1-msg','✓ '+songs.length+' songs loaded.','ok');
+  setTimeout(()=>goStep(2),400);
+}
+function xId(url,type){
+  const m=url.match(new RegExp(`spotify\\.com\\/${type}\\/([A-Za-z0-9]+)`));
+  return m?m[1]:null;
 }
 
 function loadDemo(){
@@ -770,7 +693,7 @@ function loadDemo(){
     {artist:'David Bowie',title:'Heroes',spotifyId:'7Jh1bpe76CNTCgdgAdBw4Z',url:'https://open.spotify.com/track/7Jh1bpe76CNTCgdgAdBw4Z',year:null,mbUrl:null,status:'pending'},
     {artist:'Daft Punk',title:'Get Lucky',spotifyId:'2Foc5Q5nqNiosCNqttzHof',url:'https://open.spotify.com/track/2Foc5Q5nqNiosCNqttzHof',year:null,mbUrl:null,status:'pending'},
   ];
-  showMsg('s1-msg','✓ ' + songs.length + ' demo songs loaded.','ok');
+  showMsg('s1-msg','✓ '+songs.length+' demo songs loaded.','ok');
   setTimeout(()=>goStep(2),400);
 }
 
@@ -849,7 +772,6 @@ async function refetchYears(){
 async function fetchYear(song){
   const H={'User-Agent':'HitsterWeb/2.0 (github.com/hitster-web)'};
   try{
-    // Strategy A: release-group search → most accurate original date
     const q=encodeURIComponent(`release:"${song.title}" AND artist:"${song.artist}"`);
     const rgR=await fetch(`https://musicbrainz.org/ws/2/release-group/?query=${q}&limit=5&fmt=json`,{headers:H});
     if(rgR.ok){
@@ -865,7 +787,6 @@ async function fetchYear(song){
       }
       if(bestY){song.year=bestY;song.mbUrl=bestUrl;song.status='ok';return;}
     }
-    // Strategy B: recording search
     const rq=encodeURIComponent(`recording:"${song.title}" AND artist:"${song.artist}"`);
     const recR=await fetch(`https://musicbrainz.org/ws/2/recording/?query=${rq}&limit=5&fmt=json`,{headers:H});
     if(!recR.ok)throw new Error('HTTP '+recR.status);
@@ -1010,13 +931,22 @@ function renderPreview(){
 // ══════════════════════════════════════════════
 //  STEP 4 — PDF
 //
-//  SUMMARY CARD PLACEMENT:
-//  After all song-cards are placed on front/back pages,
-//  check if there is room on the last front page for the
-//  summary card. If yes, place it there (next available slot).
-//  The corresponding back position is left white (no QR needed).
-//  If no room, add a new page for it.
+//  Duplex short-edge alignment:
+//  Front page: cards start at left margin (left-aligned)
+//  Back page:  cards mirrored → right-aligned
+//  Formula: backX = A4W - margin - (col+1)*sz - col*gap
+//         = A4W - margin - sz - col*(sz+gap)
+//
+//  QR size: min(35mm, cardSz - 2*qrPad), centered
 // ══════════════════════════════════════════════
+function getPdfSettings(){
+  return{
+    margin: Math.max(0, parseFloat(document.getElementById('pdf-margin').value)||6),
+    gap:    Math.max(0, parseFloat(document.getElementById('pdf-gap').value)||3),
+    qrPad:  Math.max(0, parseFloat(document.getElementById('pdf-qr-pad').value)||2),
+  };
+}
+
 async function generatePDF(){
   if(!songs.length)return;
   setName=document.getElementById('set-name').value.trim();
@@ -1027,9 +957,11 @@ async function generatePDF(){
   const pf=document.getElementById('pdf-pf'),pt=document.getElementById('pdf-ptxt');
 
   const{jsPDF}=window.jspdf;
-  const A4W=210,A4H=297,margin=6,gap=3,sz=cardSz;
-  const cols=Math.floor((A4W-2*margin+gap)/(sz+gap));
-  const rows_=Math.floor((A4H-2*margin+gap)/(sz+gap));
+  const A4W=210,A4H=297;
+  const{margin,gap}=getPdfSettings();
+  const sz=cardSz;
+  const cols=Math.max(1,Math.floor((A4W-2*margin+gap)/(sz+gap)));
+  const rows_=Math.max(1,Math.floor((A4H-2*margin+gap)/(sz+gap)));
   const perPage=cols*rows_;
 
   // Pre-generate QR images
@@ -1044,44 +976,46 @@ async function generatePDF(){
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const pageCount=Math.ceil(songs.length/perPage);
 
-  // Determine summary card position
-  // Place it as the next slot after the last song card on the LAST front page
-  const lastPageSongs=songs.length-(pageCount-1)*perPage; // songs on final page
-  const summarySlotOnLastPage=inclSummary&&lastPageSongs<perPage; // room available?
-  const summarySlotIdx=inclSummary?lastPageSongs:-1; // index within the last page grid
+  const lastPageSongs=songs.length-(pageCount-1)*perPage;
+  const summarySlotOnLastPage=inclSummary&&lastPageSongs<perPage;
+  const summarySlotIdx=inclSummary?lastPageSongs:-1;
 
   for(let p=0;p<pageCount;p++){
     const batch=songs.slice(p*perPage,(p+1)*perPage);
     if(p>0)doc.addPage();
 
-    // Front page
+    // — Front page: left-aligned —
     batch.forEach((s,i)=>{
       const col=i%cols,row=Math.floor(i/cols);
-      drawFront(doc,s,margin+col*(sz+gap),margin+row*(sz+gap),sz);
+      const x=margin+col*(sz+gap);
+      const y=margin+row*(sz+gap);
+      drawFront(doc,s,x,y,sz);
     });
 
-    // Summary on last front page if there's room
+    // Summary card on last front page
     if(p===pageCount-1&&summarySlotOnLastPage){
       const si=summarySlotIdx;
       const col=si%cols,row=Math.floor(si/cols);
       drawSummaryCard(doc,margin+col*(sz+gap),margin+row*(sz+gap),sz);
     }
 
-    // Back page (short-edge duplex mirror: col_back = cols-1-col_front)
+    // — Back page: right-aligned (short-edge duplex mirror) —
     doc.addPage();
     batch.forEach((s,i)=>{
       const colF=i%cols,row=Math.floor(i/cols);
+      // Mirror: rightmost front col → leftmost back col
       const colB=(cols-1)-colF;
-      drawBack(doc,qrImgs[p*perPage+i],margin+colB*(sz+gap),margin+row*(sz+gap),sz);
+      const x=A4W-margin-sz-colB*(sz+gap);
+      const y=margin+row*(sz+gap);
+      drawBack(doc,qrImgs[p*perPage+i],x,y,sz);
     });
-    // Back of summary slot = blank white square (already white background)
 
     pf.style.width=Math.round(40+((p+1)/pageCount*55))+'%';
     pt.textContent=`Page ${p+1}/${pageCount}`;
     await sleep(20);
   }
 
-  // If no room on last page, add new page for summary
+  // Summary on new page if no room
   if(inclSummary&&!summarySlotOnLastPage){
     doc.addPage();
     drawSummaryCard(doc,margin,margin,sz);
@@ -1131,15 +1065,12 @@ function drawFront(doc,song,x,y,sz){
   else{const[c1,c2]=getSongGrad(song);tc=contrastText(lerpHex(c1,c2,.5))==='#000'?[0,0,0]:[255,255,255];}
   doc.setTextColor(...tc);
   const pad=sz*.1;
-  // Title
   doc.setFont('helvetica','bold');
   const tSz=Math.max(7,sz*.20);doc.setFontSize(tSz);
   const tLines=doc.splitTextToSize((song.title||'').toUpperCase(),sz-pad*2);
   doc.text(tLines.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
-  // Year — very large
   const ySz=Math.max(18,sz*.75);doc.setFontSize(ySz);
   doc.text(String(song.year||'????'),x+sz/2,y+sz*.54,{align:'center',baseline:'middle'});
-  // Artist
   doc.setFont('helvetica','italic');
   const aSz=Math.max(5,sz*.20);doc.setFontSize(aSz);
   const aLines=doc.splitTextToSize(song.artist||'',sz-pad*2);
@@ -1147,13 +1078,19 @@ function drawFront(doc,song,x,y,sz){
 }
 
 function drawBack(doc,qrDataUrl,x,y,sz){
+  const{qrPad}=getPdfSettings();
   doc.setFillColor(255,255,255);doc.rect(x,y,sz,sz,'F');
-  if(qrDataUrl){const p=sz*.04;doc.addImage(qrDataUrl,'PNG',x+p,y+p,sz-p*2,sz-p*2);}
+  if(qrDataUrl){
+    // QR size: max 35mm, but always fits inside card with padding
+    const maxQr=35;
+    const qrSize=Math.min(maxQr,sz-qrPad*2);
+    const qrOffset=(sz-qrSize)/2;
+    doc.addImage(qrDataUrl,'PNG',x+qrOffset,y+qrOffset,qrSize,qrSize);
+  }
   doc.setDrawColor(190,190,190);doc.setLineWidth(.2);doc.rect(x,y,sz,sz,'S');
 }
 
 function drawSummaryCard(doc,x,y,sz){
-  // Minimal B&W if minimal design, otherwise light gray
   const isMinimal=designMode==='minimal';
   doc.setFillColor(isMinimal?255:248,isMinimal?255:248,isMinimal?255:248);
   doc.rect(x,y,sz,sz,'F');
@@ -1162,13 +1099,13 @@ function drawSummaryCard(doc,x,y,sz){
 
   const pad=sz*.07;
   doc.setFont('helvetica','bold');
-  doc.setFontSize(Math.max(6,sz*.14));
+  doc.setFontSize(Math.max(7,sz*.20));
   doc.setTextColor(20,20,20);
   const nl=doc.splitTextToSize((setName||'HITSTER').toUpperCase(),sz-pad*2);
   doc.text(nl.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
 
   doc.setFont('helvetica','normal');
-  doc.setFontSize(Math.max(5,sz*.09));
+  doc.setFontSize(Math.max(6,sz*.14));
   doc.setTextColor(100,100,100);
   doc.text(`${songs.length} ${lang==='de'?'Songs':'songs'}`,x+sz/2,y+sz*.36,{align:'center',baseline:'top'});
 
@@ -1186,7 +1123,6 @@ function drawSummaryCard(doc,x,y,sz){
       const bh=(count/maxC)*chartH*.95;
       const bx=hx+i*bw,by=chartTop+chartH-bh;
       if(isMinimal){
-        // Grayscale for minimal
         const gray=Math.round(80+120*(i/Math.max(keys.length-1,1)));
         doc.setFillColor(gray,gray,gray);
       }else{
@@ -1196,7 +1132,7 @@ function drawSummaryCard(doc,x,y,sz){
       }
       doc.rect(bx+.2,by,bw-.2,bh,'F');
     });
-    doc.setFontSize(Math.max(4,sz*.07));doc.setTextColor(140,140,140);
+    doc.setFontSize(Math.max(5,sz*.09));doc.setTextColor(140,140,140);
     doc.text(`${minY} – ${maxY}`,x+sz/2,y+sz*.88,{align:'center',baseline:'top'});
   }
 }
@@ -1204,153 +1140,56 @@ function drawSummaryCard(doc,x,y,sz){
 // ══════════════════════════════════════════════
 //  IMPORT / EXPORT
 // ══════════════════════════════════════════════
-function exportData(fmt) {
-  setName = document.getElementById('set-name').value.trim();
-  
-  if (fmt === 'json') {
-    dl(new Blob([JSON.stringify({ meta: { setName }, songs }, null, 2)], { type: 'application/json' }), (setName || 'hitster') + '.json');
-  } 
-  else if (fmt === 'txt') {
-    // TXT Export: Artist|Title|Year|URL
-    const hdr = '# setName: ' + (setName || '') + '\n';
-    const rows = songs.map(s => 
-      [s.artist, s.title, s.year || '', s.url || ''].join('|')
-    );
-    dl(new Blob([hdr + rows.join('\n')], { type: 'text/plain' }), (setName || 'hitster') + '.txt');
-  } 
-  else {
-    const hdr = '# setName: ' + (setName || '') + '\n';
-    const rows = [['artist', 'title', 'year', 'url', 'mbUrl'], ...songs.map(s => [s.artist, s.title, s.year || '', s.url || '', s.mbUrl || ''])];
-    dl(new Blob([hdr + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n')], { type: 'text/csv' }), (setName || 'hitster') + '.csv');
+function exportData(fmt){
+  setName=document.getElementById('set-name').value.trim();
+  if(fmt==='json'){
+    dl(new Blob([JSON.stringify({meta:{setName},songs},null,2)],{type:'application/json'}),(setName||'hitster')+'.json');
+  }else if(fmt==='txt'){
+    const hdr='# setName: '+(setName||'')+'\n';
+    const rows=songs.map(s=>[s.artist,s.title,s.year||'',s.url||''].join('|'));
+    dl(new Blob([hdr+rows.join('\n')],{type:'text/plain'}),(setName||'hitster')+'.txt');
+  }else{
+    const hdr='# setName: '+(setName||'')+'\n';
+    const rows=[['artist','title','year','url','mbUrl'],...songs.map(s=>[s.artist,s.title,s.year||'',s.url||'',s.mbUrl||''])];
+    dl(new Blob([hdr+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n')],{type:'text/csv'}),(setName||'hitster')+'.csv');
   }
 }
-function importFile(e) {
-  const f = e.target.files[0]; if (!f) return;
-  const r = new FileReader();
-  r.onload = ev => {
-    try {
-      const content = ev.target.result;
-      if (f.name.endsWith('.json')) {
-        const p = JSON.parse(content);
-        songs = p.songs || p;
-        if (p.meta?.setName) { 
-          setName = p.meta.setName; 
-          document.getElementById('set-name').value = setName; 
-        }
-        songs.forEach(s => {
-          if (!s.status) s.status = s.year ? 'ok' : 'pending';
-          s.url = s.url || s.spotifyUrl || '';
-          s.spotifyId = s.spotifyId || xId(s.url, 'track') || '';
+function importFile(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const content=ev.target.result;
+      if(f.name.endsWith('.json')){
+        const p=JSON.parse(content);
+        songs=p.songs||p;
+        if(p.meta?.setName){setName=p.meta.setName;document.getElementById('set-name').value=setName;}
+        songs.forEach(s=>{
+          if(!s.status)s.status=s.year?'ok':'pending';
+          s.url=s.url||s.spotifyUrl||'';
+          s.spotifyId=s.spotifyId||xId(s.url,'track')||'';
         });
-      } else {
-        const allLines = content.split(/\r?\n/);
-        const cl = allLines.find(l => l.startsWith('# setName:'));
-        if (cl) { 
-          setName = cl.replace('# setName:', '').trim(); 
-          document.getElementById('set-name').value = setName; 
-        }
-
-        const validLines = allLines.filter(l => l.trim() && !l.startsWith('#'));
-        
-        const isPipe = validLines.length > 0 && validLines[0].includes('|');
-        const sep = isPipe ? '|' : ',';
-        
-        const dataLines = isPipe ? validLines : validLines.slice(1);
-
-        songs = dataLines.map(l => {
-          const p = l.split(sep).map(v => v.replace(/^"|"$/g, '').replace(/""/g, '"').trim());
-          const url = p[3] || '';
-          return {
-            artist: p[0] || '',
-            title: p[1] || '',
-            year: p[2] ? parseInt(p[2]) : null,
-            url: url,
-            mbUrl: p[4] || '',
-            spotifyId: xId(url, 'track') || '',
-            status: p[2] ? 'ok' : 'pending'
-          };
-        }).filter(s => s.title);
+      }else{
+        const allLines=content.split(/\r?\n/);
+        const cl=allLines.find(l=>l.startsWith('# setName:'));
+        if(cl){setName=cl.replace('# setName:','').trim();document.getElementById('set-name').value=setName;}
+        const validLines=allLines.filter(l=>l.trim()&&!l.startsWith('#'));
+        const isPipe=validLines.length>0&&validLines[0].includes('|');
+        const sep=isPipe?'|':',';
+        const dataLines=isPipe?validLines:validLines.slice(1);
+        songs=dataLines.map(l=>{
+          const p=l.split(sep).map(v=>v.replace(/^"|"$/g,'').replace(/""/g,'"').trim());
+          const url=p[3]||'';
+          return{artist:p[0]||'',title:p[1]||'',year:p[2]?parseInt(p[2]):null,url,mbUrl:p[4]||'',spotifyId:xId(url,'track')||'',status:p[2]?'ok':'pending'};
+        }).filter(s=>s.title);
       }
-      showMsg('s1-msg', '✓ ' + songs.length + ' songs imported.', 'ok');
-      setTimeout(() => goStep(2), 400);
-    } catch (err) { 
-      showMsg('s1-msg', 'Import failed: ' + err.message, 'err'); 
-    }
+      showMsg('s1-msg','✓ '+songs.length+' songs imported.','ok');
+      setTimeout(()=>goStep(2),400);
+    }catch(err){showMsg('s1-msg','Import failed: '+err.message,'err');}
   };
   r.readAsText(f);
 }
 function dl(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);}
-
-// ══════════════════════════════════════════════
-//  PLAY — CAMERA
-// ══════════════════════════════════════════════
-async function startScan(){
-  const m=document.getElementById('scan-msg');m.style.display='none';
-  // localhost check — note: http://127.0.0.1 IS allowed by browsers for camera
-  const isSecure=location.protocol==='https:'||location.hostname==='127.0.0.1'||location.hostname==='[::1]';
-  if(!isSecure){
-    m.style.display='block';m.className='alert alert-warn';
-    m.textContent='Camera requires HTTPS or http://127.0.0.1 (not localhost). Use GitHub Pages for HTTPS.';return;
-  }
-  if(!navigator.mediaDevices?.getUserMedia){
-    m.style.display='block';m.className='alert alert-err';m.textContent='Camera API not available in this browser.';return;
-  }
-  try{
-    scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}});
-    const v=document.getElementById('qr-video');v.srcObject=scanStream;v.style.display='block';
-    document.getElementById('scan-ph').style.display='none';
-    document.getElementById('scan-stop-row').style.display='block';
-    await v.play().catch(()=>{});
-    scanTick=setInterval(scanFrame,250);
-  }catch(err){
-    m.style.display='block';m.className='alert alert-err';
-    if(err.name==='NotAllowedError')m.textContent='Permission denied. In Chrome: tap the camera icon in the address bar → Allow → reload.';
-    else if(err.name==='NotFoundError')m.textContent='No camera found on this device.';
-    else if(err.name==='NotReadableError')m.textContent='Camera is in use by another app.';
-    else m.textContent='Camera error: '+err.name+' — '+err.message;
-  }
-}
-function stopScan(){
-  if(scanStream)scanStream.getTracks().forEach(t=>t.stop());
-  scanStream=null;clearInterval(scanTick);
-  document.getElementById('qr-video').style.display='none';
-  document.getElementById('scan-ph').style.display='flex';
-  document.getElementById('scan-stop-row').style.display='none';
-}
-function scanFrame(){
-  const v=document.getElementById('qr-video');if(!v.videoWidth||v.readyState<v.HAVE_ENOUGH_DATA)return;
-  const c=document.getElementById('qr-canvas');c.width=v.videoWidth;c.height=v.videoHeight;
-  c.getContext('2d').drawImage(v,0,0);
-  if('BarcodeDetector'in window)new BarcodeDetector({formats:['qr_code']}).detect(c)
-    .then(codes=>{if(codes.length)handleQR(codes[0].rawValue);}).catch(()=>{});
-}
-function handleQR(url){
-  if(url===lastScan)return;lastScan=url;clearInterval(scanTick);
-  const m=document.getElementById('scan-msg');m.style.display='block';m.className='alert alert-ok';m.textContent='✓ QR scanned';
-  const tid=xId(url,'track');if(tid)showPlayer(tid,url);
-}
-function showPlayer(tid,url){
-  const box=document.getElementById('player-box');box.classList.add('vis');
-  const song=songs.find(s=>s.spotifyId===tid||s.url===url);
-  document.getElementById('p-artist').textContent=song?song.artist:'—';
-  document.getElementById('p-title').textContent=song?song.title:'—';
-  document.getElementById('p-year').textContent=song?(song.year||'?'):'?';
-  ['p-artist','p-title','p-year'].forEach(id=>{const el=document.getElementById(id);el.classList.add('blur-el');el.onclick=()=>el.classList.toggle('blur-el');});
-  box.dataset.url=url;box.dataset.id=tid;
-}
-function openSpotify(){window.open(document.getElementById('player-box').dataset.url,'_blank');}
-function toggleEmbed(){
-  const w=document.getElementById('embed-wrap'),id=document.getElementById('player-box').dataset.id;
-  if(w.style.display==='none'){document.getElementById('sp-embed').src=`https://open.spotify.com/embed/track/${id}?utm_source=generator`;w.style.display='block';}
-  else w.style.display='none';
-}
-function nextScan(){
-  lastScan=null;document.getElementById('player-box').classList.remove('vis');
-  document.getElementById('scan-msg').style.display='none';
-  document.getElementById('embed-wrap').style.display='none';
-  document.getElementById('sp-embed').src='';
-  scanTick=setInterval(scanFrame,250);
-}
 
 // ══════════════════════════════════════════════
 //  UTILS
