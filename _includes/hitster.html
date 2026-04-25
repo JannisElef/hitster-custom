@@ -63,9 +63,9 @@ textarea{min-height:100px;resize:vertical;}
 .hist-title{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
 .hist-container{position:relative;}
 #histogram-canvas{width:100%;display:block;cursor:crosshair;}
-.hist-tooltip{position:absolute;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 10px;font-size:11px;color:var(--text);pointer-events:none;display:none;z-index:10;max-width:240px;}
+.hist-tooltip{position:fixed;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 10px;font-size:11px;color:var(--text);pointer-events:none;display:none;z-index:999;max-width:260px;}
 .hist-tooltip strong{display:block;margin-bottom:4px;color:var(--accent);font-size:12px;}
-.hist-tooltip .tt-songs{font-size:11px;color:var(--text2);max-height:120px;overflow-y:auto;line-height:1.6;}
+.hist-tooltip .tt-songs{font-size:11px;color:var(--text2);line-height:1.6;}
 
 /* Table */
 .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);}
@@ -144,6 +144,15 @@ tr:hover td{background:rgba(255,255,255,.02);}
   .preview-area{flex-direction:column;align-items:center;}
   .pdf-settings{grid-template-columns:1fr 1fr;}
 }
+.sets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px;}
+.set-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s;}
+.set-tile:hover{border-color:var(--border2);}
+.set-tile-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;}
+.set-tile-desc{font-size:11px;color:var(--text2);line-height:1.5;flex:1;}
+.set-tile-meta{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+.set-tile-count{font-size:10px;color:var(--text3);}
+.set-tile-err{font-size:11px;color:var(--text3);font-style:italic;}
+@media(max-width:580px){.sets-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -189,8 +198,12 @@ tr:hover td{background:rgba(255,255,255,.02);}
     </div>
     <div id="s1-msg"></div>
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-      <p style="font-size:12px;color:var(--text3);margin-bottom:10px" data-i="demo_hint">No data yet? Load demo songs:</p>
-      <button class="btn btn-ghost btn-sm" onclick="loadDemo()" data-i="btn_demo">Load Demo</button>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px" data-i="demo_hint">No data yet? Browse ready-made sets:</p>
+      <div class="sets-grid" id="sets-grid">
+        <div class="set-tile" style="border-style:dashed">
+          <div class="set-tile-err" data-i="sets_loading">Loading sets…</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -349,7 +362,8 @@ const T={
     bopster_text:"Spotify doesn't give private users direct API access to read playlist URLs. Use",
     bopster_detail:'fetch your playlist, edit it with their tools, auto-fill years with Yearify, and export as TXT for use here.',
     btn_load:'Load Songs →',or:'or',btn_import:'Import JSON / CSV / TXT',
-    demo_hint:'No data yet? Load demo songs:',btn_demo:'Load Demo',
+    demo_hint:'No data yet? Browse ready-made sets:',btn_demo:'Load Demo',
+    sets_loading:'Loading sets…',sets_empty:'No sets found.',sets_songs:'songs',sets_load:'Load Set',
     btn_refetch:'Re-fetch all',col_artist:'Artist',col_title:'Title',
     col_year:'Year',col_url:'URL',col_src:'MB',col_st:'●',
     hist_title:'Year distribution',
@@ -376,7 +390,8 @@ const T={
     bopster_text:'Spotify erlaubt Privatpersonen keinen direkten API-Zugriff zum Auslesen von Playlist-URLs. Nutze stattdessen',
     bopster_detail:'dort kannst du deine Playlist abrufen, mit den Tools bearbeiten, mit Yearify automatisch Jahreszahlen ergänzen und als TXT für hier exportieren.',
     btn_load:'Songs laden →',or:'oder',btn_import:'JSON / CSV / TXT importieren',
-    demo_hint:'Noch keine Daten? Demo-Songs laden:',btn_demo:'Demo laden',
+    demo_hint:'Noch keine Daten? Fertige Sets laden:',btn_demo:'Demo laden',
+    sets_loading:'Sets werden geladen…',sets_empty:'Keine Sets gefunden.',sets_songs:'Songs',sets_load:'Set laden',
     btn_refetch:'Alle neu abrufen',col_artist:'Interpret',col_title:'Titel',
     col_year:'Jahr',col_url:'URL',col_src:'MB',col_st:'●',
     hist_title:'Jahresverteilung',
@@ -691,9 +706,16 @@ function drawHistogram(){
     if(!lst?.length){document.getElementById('hist-tt').style.display='none';return;}
     const tt=document.getElementById('hist-tt');
     tt.style.display='block';
-    tt.style.left=Math.min(ev.clientX-rect.left+10,W-250)+'px';
-    tt.style.top='2px';
     tt.innerHTML=`<strong>${yr}–${yr+BIN-1} (${lst.length})</strong><div class="tt-songs">${lst.join('<br>')}</div>`;
+    // Position with fixed coords, keep inside viewport
+    const ttW=tt.offsetWidth||260,ttH=tt.offsetHeight||100;
+    const vw=window.innerWidth,vh=window.innerHeight;
+    let tx=ev.clientX+14,ty=ev.clientY-10;
+    if(tx+ttW>vw-8)tx=ev.clientX-ttW-10;
+    if(ty+ttH>vh-8)ty=vh-ttH-8;
+    if(ty<8)ty=8;
+    tt.style.left=tx+'px';
+    tt.style.top=ty+'px';
   };
   canvas.onmouseleave=()=>{document.getElementById('hist-tt').style.display='none';};
 }
@@ -991,18 +1013,84 @@ function drawSummaryCard(doc,x,y,sz){
 }
 
 // ══════════════════════════════════════════════
+//  REMOTE SETS (GitHub Pages)
+// ══════════════════════════════════════════════
+async function loadSetsIndex(){
+  const grid=document.getElementById('sets-grid');
+  try{
+    const res=await fetch('assets/sets/sets-index.json');
+    if(!res.ok)throw new Error('not found');
+    const index=await res.json(); // [{file,name,description,count?}]
+    if(!index.length){
+      grid.innerHTML=`<div class="set-tile" style="border-style:dashed"><div class="set-tile-err">${T[lang].sets_empty}</div></div>`;
+      return;
+    }
+    grid.innerHTML='';
+    for(const s of index){
+      const tile=document.createElement('div');
+      tile.className='set-tile';
+      const count=s.count!==undefined?s.count:'?';
+      tile.innerHTML=`
+        <div class="set-tile-name">${esc(s.name||s.file)}</div>
+        <div class="set-tile-desc">${esc(s.description||'')}</div>
+        <div class="set-tile-meta">
+          <span class="set-tile-count">${count} ${T[lang].sets_songs}</span>
+          <button class="btn btn-sm" onclick="loadRemoteSet(${JSON.stringify(s.file)})">${T[lang].sets_load}</button>
+        </div>`;
+      grid.appendChild(tile);
+    }
+  }catch(e){
+    grid.innerHTML=`<div class="set-tile" style="border-style:dashed"><div class="set-tile-err">${T[lang].sets_empty}</div></div>`;
+  }
+}
+
+async function loadRemoteSet(file){
+  showMsg('s1-msg',`<span style="color:var(--text3)">Loading ${file}…</span>`,'info');
+  try{
+    const res=await fetch('assets/sets/'+file);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const content=await res.text();
+    parseContent(content,file);
+    showMsg('s1-msg','✓ '+songs.length+' songs loaded.','ok');
+    setTimeout(()=>goStep(2),400);
+  }catch(e){showMsg('s1-msg','Failed to load set: '+e.message,'err');}
+}
+
+function parseContent(content,filename){
+  if(filename.endsWith('.json')){
+    const p=JSON.parse(content);
+    songs=p.songs||p;
+    if(p.meta?.setName){setName=p.meta.setName;document.getElementById('set-name').value=setName;}
+    songs.forEach(s=>{if(!s.status)s.status=s.year?'ok':'pending';s.url=s.url||'';});
+  }else{
+    const allLines=content.split(/\r?\n/);
+    const cl=allLines.find(l=>l.startsWith('# setName:'));
+    if(cl){setName=cl.replace('# setName:','').trim();document.getElementById('set-name').value=setName;}
+    const validLines=allLines.filter(l=>l.trim()&&!l.startsWith('#'));
+    const isPipe=validLines.length>0&&validLines[0].includes('|');
+    const sep=isPipe?'|':',';
+    const dataLines=isPipe?validLines:validLines.slice(1);
+    songs=dataLines.map(l=>{
+      const p=l.split(sep).map(v=>v.replace(/^"|"$/g,'').replace(/""/g,'"').trim());
+      return{artist:p[0]||'',title:p[1]||'',year:p[2]?parseInt(p[2]):null,url:p[3]||'',mbUrl:p[4]||'',status:p[2]?'ok':'pending'};
+    }).filter(s=>s.title);
+  }
+}
+
+// ══════════════════════════════════════════════
 //  IMPORT / EXPORT
 // ══════════════════════════════════════════════
 function exportData(fmt){
   setName=document.getElementById('set-name').value.trim();
+  const desc=''; // could be extended with a description field later
   if(fmt==='json'){
-    dl(new Blob([JSON.stringify({meta:{setName},songs},null,2)],{type:'application/json'}),(setName||'hitster')+'.json');
+    dl(new Blob([JSON.stringify({meta:{setName,description:desc},songs},null,2)],{type:'application/json'}),(setName||'hitster')+'.json');
   }else if(fmt==='txt'){
-    const rows=['# setName: '+(setName||''),...songs.map(s=>[s.artist,s.title,s.year||'',s.url||''].join('|'))];
+    const rows=['# setName: '+(setName||''),'# description: '+desc,...songs.map(s=>[s.artist,s.title,s.year||'',s.url||''].join('|'))];
     dl(new Blob([rows.join('\n')],{type:'text/plain'}),(setName||'hitster')+'.txt');
   }else{
     const rows=[['artist','title','year','url','mbUrl'],...songs.map(s=>[s.artist,s.title,s.year||'',s.url||'',s.mbUrl||''])];
-    const csv='# setName: '+(setName||'')+'\n'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const csv='# setName: '+(setName||'')+'\n# description: '+desc+'\n'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
     dl(new Blob([csv],{type:'text/csv'}),(setName||'hitster')+'.csv');
   }
 }
@@ -1012,25 +1100,7 @@ function importFile(e){
   const r=new FileReader();
   r.onload=ev=>{
     try{
-      const content=ev.target.result;
-      if(f.name.endsWith('.json')){
-        const p=JSON.parse(content);
-        songs=p.songs||p;
-        if(p.meta?.setName){setName=p.meta.setName;document.getElementById('set-name').value=setName;}
-        songs.forEach(s=>{if(!s.status)s.status=s.year?'ok':'pending';s.url=s.url||'';});
-      }else{
-        const allLines=content.split(/\r?\n/);
-        const cl=allLines.find(l=>l.startsWith('# setName:'));
-        if(cl){setName=cl.replace('# setName:','').trim();document.getElementById('set-name').value=setName;}
-        const validLines=allLines.filter(l=>l.trim()&&!l.startsWith('#'));
-        const isPipe=validLines.length>0&&validLines[0].includes('|');
-        const sep=isPipe?'|':',';
-        const dataLines=isPipe?validLines:validLines.slice(1);
-        songs=dataLines.map(l=>{
-          const p=l.split(sep).map(v=>v.replace(/^"|"$/g,'').replace(/""/g,'"').trim());
-          return{artist:p[0]||'',title:p[1]||'',year:p[2]?parseInt(p[2]):null,url:p[3]||'',mbUrl:p[4]||'',status:p[2]?'ok':'pending'};
-        }).filter(s=>s.title);
-      }
+      parseContent(ev.target.result,f.name);
       showMsg('s1-msg','✓ '+songs.length+' songs imported.','ok');
       setTimeout(()=>goStep(2),400);
     }catch(err){showMsg('s1-msg','Import failed: '+err.message,'err');}
@@ -1056,6 +1126,7 @@ function showMsg(id,text,type='info'){
 }
 
 detectLang();
+loadSetsIndex();
 </script>
 </body>
 </html>

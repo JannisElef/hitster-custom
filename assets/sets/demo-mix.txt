@@ -1,0 +1,10 @@
+# setName: Demo Mix
+# description: 8 classic songs from the 60s to the 2010s - great for testing.
+ABBA|Dancing Queen|1976|https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr
+Michael Jackson|Thriller|1982|https://open.spotify.com/track/2LlQb7Uoj1kKyGhlkBf9aC
+The Beatles|Hey Jude|1968|https://open.spotify.com/track/0aym2LBJBk9DAYuHHutrIl
+Nirvana|Smells Like Teen Spirit|1991|https://open.spotify.com/track/5ghIJDpPoe3CfHMGu71E6T
+Madonna|Like a Prayer|1989|https://open.spotify.com/track/1z3ugFmUKoCzGsI6jdY4Ci
+Queen|Bohemian Rhapsody|1975|https://open.spotify.com/track/7tFiyTwD0nx5a1eklYtX2J
+David Bowie|Heroes|1977|https://open.spotify.com/track/7Jh1bpe76CNTCgdgAdBw4Z
+Daft Punk|Get Lucky|2013|https://open.spotify.com/track/2Foc5Q5nqNiosCNqttzHof

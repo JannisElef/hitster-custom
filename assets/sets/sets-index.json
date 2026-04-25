@@ -1,0 +1,14 @@
+[
+  {
+    "file": "demo-mix.txt",
+    "name": "Demo Mix",
+    "description": "8 classic songs from the 60s to the 2010s - great for testing.",
+    "count": 8
+  },
+  {
+    "file": "HITSTER-Celebration.txt",
+    "name": "HITSTER Celebration",
+    "description": "German Version of HITSTER Celebration.",
+    "count": 308
+  }
+]
