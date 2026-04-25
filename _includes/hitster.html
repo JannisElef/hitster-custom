@@ -88,6 +88,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .st-ok{background:#4ade80;}.st-manual{background:#60a5fa;}.st-load{background:var(--text3);}.st-err{background:#f87171;}
 .url-cell{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;}
 .url-cell a{color:var(--text3);text-decoration:none;}
+.url-cell a[href*="spotify"]{color:#1db954;}
 .url-cell a:hover{color:var(--text2);text-decoration:underline;}
 
 @media(max-width:600px){
@@ -477,8 +478,15 @@ function goStep(n){
 //  STEP 1 — INPUT
 // ══════════════════════════════════════════════
 function trackId(url){
-  const m=(url||'').match(/spotify\.com\/track\/([A-Za-z0-9]+)/);
+  // Handle intl links: /intl-de/track/, /intl-en/track/ etc.
+  const m=(url||'').match(/spotify\.com(?:\/intl-[a-z]+)?\/track\/([A-Za-z0-9]+)/);
   return m?m[1]:null;
+}
+
+function normalizeSpotifyUrl(url){
+  // Strip intl prefix and query params, return clean track URL
+  const id=trackId(url);
+  return id?`https://open.spotify.com/track/${id}`:url;
 }
 
 function processInput(){
@@ -488,17 +496,36 @@ function processInput(){
   const newSongs=[];
   for(const line of lines){
     if(line.startsWith('#'))continue;
-    if(trackId(line)){
-      // bare Spotify track URL — artist/title unknown until MB lookup
-      newSongs.push({artist:'',title:'',url:line,year:null,mbUrl:null,status:'pending'});
+    // Skip placeholder/header lines like "artist|title|year|url"
+    if(/^artist\s*[|,]/i.test(line))continue;
+    const spotifyId=trackId(line);
+    if(spotifyId){
+      const cleanUrl=normalizeSpotifyUrl(line);
+      newSongs.push({artist:'',title:'Spotify: '+spotifyId.slice(0,8)+'…',url:cleanUrl,year:null,mbUrl:null,status:'pending'});
     }else if(line.includes('|')){
       const p=line.split('|').map(v=>v.trim());
+      // Skip if first two fields look like header words
+      if(/^artist$/i.test(p[0])&&/^title$/i.test(p[1]))continue;
+      // Skip if both artist and title are empty
+      if(!p[0]&&!p[1])continue;
       newSongs.push({
         artist:p[0]||'',title:p[1]||'',
-        year:p[2]?+p[2]:null,
+        year:p[2]&&/^\d{4}$/.test(p[2].trim())?+p[2]:null,
         url:p[3]||'',
         mbUrl:'',
-        status:p[2]?'ok':'pending'
+        status:p[2]&&/^\d{4}$/.test(p[2].trim())?'ok':'pending'
+      });
+    }else if(line.includes(',')){
+      // bare CSV line without quotes
+      const p=line.split(',').map(v=>v.trim());
+      if(/^artist$/i.test(p[0]))continue;
+      if(!p[0]&&!p[1])continue;
+      newSongs.push({
+        artist:p[0]||'',title:p[1]||'',
+        year:p[2]&&/^\d{4}$/.test(p[2].trim())?+p[2]:null,
+        url:p[3]||'',
+        mbUrl:'',
+        status:p[2]&&/^\d{4}$/.test(p[2].trim())?'ok':'pending'
       });
     }
   }
@@ -551,7 +578,7 @@ function renderTable(){
           oninput="songs[${i}].year=this.value?+this.value:null;songs[${i}].status='manual';updSt(${i});drawHistogram()"></td>
       <td class="col-url url-cell">${s.url?`<a href="${esc(s.url)}" target="_blank" title="${esc(s.url)}">${esc(shortUrl)}</a>`:'—'}</td>
       <td class="col-src" id="src-${i}">${s.mbUrl?`<a class="mb-lnk" href="${s.mbUrl}" target="_blank">↗</a>`:'—'}</td>
-      <td id="st-${i}" style="text-align:center">${stDot(s.status)}</td>`;
+      <td id="st-${i}" style="text-align:center">${stDot(s.status,i)}</td>`;
     tbody.appendChild(tr);
   });
   document.querySelectorAll('th.sortable').forEach(th=>{
@@ -566,11 +593,39 @@ function renderTable(){
   if(!tblFetching)fetchYears();
 }
 
-function stDot(s){
-  const m={pending:'st-load',ok:'st-ok',manual:'st-manual',error:'st-err'};
-  return`<span class="st-dot ${m[s]||'st-load'}"></span>`;
+function stLabel(s){
+  const labels={
+    pending:{en:'Searching…',de:'Suche läuft…'},
+    ok:{en:'Year found',de:'Jahr gefunden'},
+    manual:{en:'Manually set',de:'Manuell gesetzt'},
+    error:{en:'Not found',de:'Nicht gefunden'},
+  };
+  return(labels[s]||labels.pending)[lang];
 }
-function updSt(i){const e=document.getElementById('st-'+i);if(e)e.innerHTML=stDot(songs[i].status);}
+function stDot(s,idx){
+  const m={pending:'st-load',ok:'st-ok',manual:'st-manual',error:'st-err'};
+  const cls=m[s]||'st-load';
+  return`<span class="st-dot ${cls}" title="${stLabel(s)}" style="cursor:pointer" onclick="showStTooltip(${idx},this)"></span>`;
+}
+
+function showStTooltip(idx,el){
+  // Remove any existing tooltip
+  document.querySelectorAll('.st-tooltip').forEach(t=>t.remove());
+  const s=songs[idx];
+  const labels={pending:{en:'Searching via MusicBrainz…',de:'Suche via MusicBrainz…'},ok:{en:'Year found via MusicBrainz',de:'Jahr via MusicBrainz gefunden'},manual:{en:'Year set manually',de:'Jahr manuell gesetzt'},error:{en:'No year found — set manually',de:'Kein Jahr gefunden — manuell setzen'}};
+  const tip=document.createElement('div');
+  tip.className='st-tooltip';
+  tip.textContent=(labels[s.status]||labels.pending)[lang];
+  document.body.appendChild(tip);
+  const r=el.getBoundingClientRect();
+  const tw=140;
+  let tx=r.left-tw/2+r.width/2,ty=r.top-34;
+  if(tx<4)tx=4;if(tx+tw>window.innerWidth-4)tx=window.innerWidth-tw-4;
+  if(ty<4)ty=r.bottom+6;
+  tip.style.cssText=`position:fixed;left:${tx}px;top:${ty}px;width:${tw}px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:10px;color:var(--text2);z-index:999;text-align:center;pointer-events:none;`;
+  setTimeout(()=>tip.remove(),2500);
+}
+function updSt(i){const e=document.getElementById('st-'+i);if(e)e.innerHTML=stDot(songs[i].status,i);}
 function updSrc(i){const e=document.getElementById('src-'+i);if(e)e.innerHTML=songs[i].mbUrl?`<a class="mb-lnk" href="${songs[i].mbUrl}" target="_blank">↗</a>`:'—';}
 function updYearCell(i){
   const vi=sortedSongs().indexOf(songs[i]);if(vi<0)return;
@@ -578,11 +633,44 @@ function updYearCell(i){
   if(row&&songs[i].year)row.value=songs[i].year;
 }
 
+async function fetchSpotifyMeta(song){
+  // Normalize URL first (strip intl prefix, query params)
+  const cleanUrl=normalizeSpotifyUrl(song.url);
+  song.url=cleanUrl; // store clean URL for QR code
+  try{
+    const res=await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(cleanUrl)}`);
+    if(!res.ok)return;
+    const data=await res.json();
+    if(data.title){
+      // oEmbed title format: "Track Title" — artist is in provider_name or not available directly
+      // Try to split on " - " but only use first occurrence to handle titles with dashes
+      const dashIdx=data.title.indexOf(' - ');
+      if(dashIdx>0&&!song.artist){
+        // Could be "Artist - Title" or "Title - Artist" — Spotify oEmbed gives track title only
+        // so just use the full title as title, artist stays empty for MB lookup
+        song.title=data.title;
+      }else{
+        song.title=data.title;
+      }
+      // artist_name is not in oEmbed — MB will fill it in via lookup
+    }
+  }catch(e){console.warn('Spotify oEmbed:',e.message);}
+}
+
 async function fetchYears(){
   tblFetching=true;
   const pw=document.getElementById('mb-pw'),pf=document.getElementById('mb-pf');
   pw.style.display='block';pf.style.width='0%';
-  const pending=songs.filter(s=>s.status==='pending'&&s.artist&&s.title);
+
+  // First: fetch Spotify metadata for songs that only have a URL
+  const spotifyOnly=songs.filter(s=>s.url&&trackId(s.url)&&!s.artist&&(!s.title||s.title.startsWith('Spotify:')));
+  for(const s of spotifyOnly){
+    await fetchSpotifyMeta(s);
+    await sleep(100);
+  }
+  if(spotifyOnly.length)renderTable();
+
+  const pending=songs.filter(s=>s.status==='pending'&&s.artist&&s.title&&!s.title.startsWith('Spotify:'));
   for(let i=0;i<pending.length;i++){
     await fetchYear(pending[i]);
     pf.style.width=Math.round((i+1)/pending.length*100)+'%';
@@ -1018,7 +1106,7 @@ function drawSummaryCard(doc,x,y,sz){
 async function loadSetsIndex(){
   const grid=document.getElementById('sets-grid');
   try{
-    const res=await fetch('./assets/sets/sets-index.json');
+    const res=await fetch('assets/sets/sets-index.json');
     if(!res.ok)throw new Error('HTTP '+res.status);
     const text=await res.text();
     let index;
@@ -1054,7 +1142,7 @@ async function loadRemoteSet(file){
   const loadingMsg=lang==='de'?`${file} wird geladen…`:`Loading ${file}…`;
   showMsg('s1-msg',`<span style="color:var(--text3)">${loadingMsg}</span>`,'info');
   try{
-    const res=await fetch('./assets/sets/'+file);
+    const res=await fetch('assets/sets/'+file);
     if(!res.ok)throw new Error('HTTP '+res.status);
     const content=await res.text();
     parseContent(content,file);
@@ -1080,11 +1168,13 @@ function parseContent(content,filename){
     const validLines=allLines.filter(l=>l.trim()&&!l.startsWith('#'));
     const isPipe=validLines.length>0&&validLines[0].includes('|');
     const sep=isPipe?'|':',';
-    const dataLines=isPipe?validLines:validLines.slice(1);
-    songs=dataLines.map(l=>{
+    songs=validLines.map(l=>{
       const p=l.split(sep).map(v=>v.replace(/^"|"$/g,'').replace(/""/g,'"').trim());
-      return{artist:p[0]||'',title:p[1]||'',year:p[2]?parseInt(p[2]):null,url:p[3]||'',mbUrl:p[4]||'',status:p[2]?'ok':'pending'};
-    }).filter(s=>s.title);
+      if(/^artist$/i.test(p[0]))return null;
+      if(!p[0]&&!p[1])return null;
+      const yr=p[2]&&/^\d{4}$/.test(p[2])?+p[2]:null;
+      return{artist:p[0]||'',title:p[1]||'',year:yr,url:p[3]||'',mbUrl:p[4]||'',status:yr?'ok':'pending'};
+    }).filter(Boolean).filter(s=>s.title||s.url);
   }
 }
 
@@ -1138,6 +1228,20 @@ function showMsg(id,text,type='info'){
 
 detectLang();
 loadSetsIndex();
+
+// Mouse back/forward buttons (button 3=forward, 4=back in mouseup)
+let _curStep=1;
+const _origGoStep=goStep;
+window.goStep=function(n){_curStep=n;_origGoStep(n);};
+document.addEventListener('mouseup',e=>{
+  if(e.button===3){// back
+    const prev=Math.max(1,_curStep-1);
+    if(prev!==_curStep)goStep(prev);
+  }else if(e.button===4){// forward
+    const next=Math.min(4,_curStep+1);
+    if(next!==_curStep&&songs.length)goStep(next);
+  }
+});
 </script>
 </body>
 </html>
