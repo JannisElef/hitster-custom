@@ -1,4 +1,4 @@
-# HITSTER CUSTOM
+# HITSTER Custom
 
 [website](https://janniselef.github.io/hitster-custom/) · [more information](https://janniselef.github.io/projects/hitster-custom/)
 
