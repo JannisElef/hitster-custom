@@ -1019,9 +1019,11 @@ async function loadSetsIndex(){
   const grid=document.getElementById('sets-grid');
   try{
     const res=await fetch('assets/sets/sets-index.json');
-    if(!res.ok)throw new Error('not found');
-    const index=await res.json(); // [{file,name,description,count?}]
-    if(!index.length){
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const text=await res.text();
+    let index;
+    try{index=JSON.parse(text);}catch{throw new Error('Invalid JSON in sets-index.json');}
+    if(!Array.isArray(index)||!index.length){
       grid.innerHTML=`<div class="set-tile" style="border-style:dashed"><div class="set-tile-err">${T[lang].sets_empty}</div></div>`;
       return;
     }
@@ -1030,9 +1032,11 @@ async function loadSetsIndex(){
       const tile=document.createElement('div');
       tile.className='set-tile';
       const count=s.count!==undefined?s.count:'?';
+      // Store description in both lang keys if only one provided
+      const desc=lang==='de'?(s.description_de||s.description||''):(s.description_en||s.description||'');
       tile.innerHTML=`
         <div class="set-tile-name">${esc(s.name||s.file)}</div>
-        <div class="set-tile-desc">${esc(s.description||'')}</div>
+        <div class="set-tile-desc">${esc(desc)}</div>
         <div class="set-tile-meta">
           <span class="set-tile-count">${count} ${T[lang].sets_songs}</span>
           <button class="btn btn-sm" onclick="loadRemoteSet(${JSON.stringify(s.file)})">${T[lang].sets_load}</button>
@@ -1041,19 +1045,25 @@ async function loadSetsIndex(){
     }
   }catch(e){
     grid.innerHTML=`<div class="set-tile" style="border-style:dashed"><div class="set-tile-err">${T[lang].sets_empty}</div></div>`;
+    console.warn('sets-index.json not loaded:',e.message);
   }
 }
 
 async function loadRemoteSet(file){
-  showMsg('s1-msg',`<span style="color:var(--text3)">Loading ${file}…</span>`,'info');
+  const loadingMsg=lang==='de'?`${file} wird geladen…`:`Loading ${file}…`;
+  showMsg('s1-msg',`<span style="color:var(--text3)">${loadingMsg}</span>`,'info');
   try{
     const res=await fetch('assets/sets/'+file);
     if(!res.ok)throw new Error('HTTP '+res.status);
     const content=await res.text();
     parseContent(content,file);
-    showMsg('s1-msg','✓ '+songs.length+' songs loaded.','ok');
+    const okMsg=lang==='de'?`✓ ${songs.length} Songs geladen.`:`✓ ${songs.length} songs loaded.`;
+    showMsg('s1-msg',okMsg,'ok');
     setTimeout(()=>goStep(2),400);
-  }catch(e){showMsg('s1-msg','Failed to load set: '+e.message,'err');}
+  }catch(e){
+    const errMsg=lang==='de'?`Set konnte nicht geladen werden: ${e.message}`:`Failed to load set: ${e.message}`;
+    showMsg('s1-msg',errMsg,'err');
+  }
 }
 
 function parseContent(content,filename){

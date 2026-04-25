@@ -2,13 +2,15 @@
   {
     "file": "demo-mix.txt",
     "name": "Demo Mix",
-    "description": "8 classic songs from the 60s to the 2010s - great for testing.",
+    "description_en": "8 classic songs from the 60s to the 2010s - great for testing.",
+    "description_de": "8 klassische Songs von den 60ern bis zu den 2010ern - perfekt zum Testen.",
     "count": 8
   },
   {
     "file": "HITSTER-Celebration.txt",
     "name": "HITSTER Celebration",
-    "description": "German Version of HITSTER Celebration.",
+    "description_en": "German Version of HITSTER Celebration.",
+    "description_de": "Deutschland Version von HITSTER Celebration.",
     "count": 308
   }
 ]
