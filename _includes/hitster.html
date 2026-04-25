@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
-  --bg:#0c0c0e;--bg2:#141416;--surface:#1c1c1f;--surface2:#242428;
+  --bg:#0c0c0e;--surface:#1c1c1f;--surface2:#242428;
   --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.14);
   --text:#f2efe9;--text2:#9a9590;--text3:#5c5855;
   --accent:#e8c547;--radius:10px;--nav:52px;
@@ -17,11 +17,10 @@ html,body{height:100%;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;-webkit-text-size-adjust:100%;}
 
 #topbar{height:var(--nav);display:flex;align-items:center;border-bottom:1px solid var(--border);padding:0 16px;position:sticky;top:0;z-index:50;background:var(--bg);}
-.logo-mini{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent);margin-right:16px;flex-shrink:0;cursor:pointer;}
+.logo-mini{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent);flex-shrink:0;}
 .lang-btn{background:none;border:1px solid var(--border);color:var(--text3);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 9px;border-radius:5px;cursor:pointer;margin-left:auto;flex-shrink:0;}
 
-.page{display:none;padding:20px;max-width:960px;margin:0 auto;}
-.page.active{display:block;}
+.page{padding:20px;max-width:960px;margin:0 auto;}
 
 .step-row{display:flex;gap:2px;margin-bottom:24px;background:var(--surface);border-radius:var(--radius);padding:3px;border:1px solid var(--border);}
 .step-btn{flex:1;background:none;border:none;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:8px 4px;border-radius:7px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px;}
@@ -86,13 +85,10 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .mb-lnk{color:#60a5fa;font-size:11px;text-decoration:none;}
 .mb-lnk:hover{text-decoration:underline;}
 .st-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
-.st-ok{background:#4ade80;}
-.st-manual{background:#60a5fa;}
-.st-load{background:var(--text3);}
-.st-err{background:#f87171;}
-.sp-url-cell{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;}
-.sp-url-cell a{color:#1DB954;text-decoration:none;}
-.sp-url-cell a:hover{text-decoration:underline;}
+.st-ok{background:#4ade80;}.st-manual{background:#60a5fa;}.st-load{background:var(--text3);}.st-err{background:#f87171;}
+.url-cell{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;}
+.url-cell a{color:var(--text3);text-decoration:none;}
+.url-cell a:hover{color:var(--text2);text-decoration:underline;}
 
 @media(max-width:600px){
   .col-src,.col-url{display:none;}
@@ -135,20 +131,11 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .check-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);cursor:pointer;margin-bottom:14px;}
 .check-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
 
-/* PDF settings grid */
+/* PDF settings */
 .pdf-settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
 .pdf-field{display:flex;flex-direction:column;gap:5px;}
 .pdf-field label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
 .pdf-field input[type="number"]{width:100%;padding:7px 10px;font-size:13px;}
-
-/* Spotify connect */
-.sp-connect-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
-.sp-connect-box h3{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
-.sp-connect-box p{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:12px;}
-.sp-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);}
-.sp-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;}
-.sp-dot.on{background:#1DB954;}
-.sp-user{font-weight:500;color:var(--text);}
 
 @media(max-width:580px){
   .page{padding:12px;}
@@ -162,12 +149,11 @@ tr:hover td{background:rgba(255,255,255,.02);}
 <body>
 
 <div id="topbar">
-  <div class="logo-mini" onclick="goCreate()">HITSTER</div>
+  <div class="logo-mini">HITSTER</div>
   <button class="lang-btn" id="lang-btn" onclick="toggleLang()">DE</button>
 </div>
 
-<!-- CREATE -->
-<div id="pg-create" class="page active">
+<div class="page">
   <div class="step-row">
     <button class="step-btn active" id="s1btn" onclick="goStep(1)"><span class="step-num">1</span><span data-i="s_import">Import</span></button>
     <button class="step-btn" id="s2btn" onclick="goStep(2)"><span class="step-num">2</span><span data-i="s_years">Years</span></button>
@@ -181,47 +167,29 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <label class="label" data-i="lbl_name">Set / Playlist Name</label>
       <input type="text" id="set-name" placeholder="My Mix · Summer 2024 · …">
     </div>
-
-    <div class="sp-connect-box">
-      <h3><span style="color:#1DB954">●</span> Spotify</h3>
-      <p data-i="sp_desc">Connect to import playlists and get full track info. Secure PKCE login — no passwords stored.</p>
-      <div class="sp-status">
-        <span class="sp-dot" id="sp-dot"></span>
-        <span id="sp-status-label" data-i="sp_not_connected">Not connected</span>
-      </div>
-      <div id="sp-btn-row" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-sm" style="background:#1DB954" onclick="startPKCE()" data-i="btn_sp_connect">Connect with Spotify</button>
-      </div>
-      <div id="sp-connected-row" style="margin-top:10px;display:none;gap:8px;flex-wrap:wrap;align-items:center">
-        <span class="sp-user" id="sp-user-name"></span>
-        <button class="btn btn-ghost btn-sm" onclick="loadUserPlaylists()" data-i="btn_browse_pl">Browse Playlists</button>
-        <button class="btn btn-ghost btn-sm" onclick="disconnectSpotify()" data-i="btn_disconnect">Disconnect</button>
-      </div>
+    <div class="alert alert-info" style="margin-bottom:14px;line-height:1.7" id="bopster-hint">
+      💡 <span data-i="bopster_title"></span><br>
+      <span data-i="bopster_text"></span> <a href="https://bopster.app/wizard" target="_blank" rel="noopener" style="color:#93c5fd;text-decoration:underline">bopster.app/wizard</a> — <span data-i="bopster_detail"></span>
     </div>
-    <div id="pl-browser" style="display:none;margin-bottom:16px">
-      <label class="label" data-i="lbl_your_pl">Your Playlists</label>
-      <div id="pl-list" style="display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto"></div>
-    </div>
-
     <div class="hint">
-      <strong data-i="h_single">Track:</strong> <code>https://open.spotify.com/track/…</code><br>
-      <strong>Text:</strong> <code>Artist|Title(|Year|URL)</code><br>
-      <span data-i="h_sep">One Track per line.</span><br>
-      <span data-i="h_conv">Convert your Playlists to TXT here: https://bopster.app/wizard</span>
+      <strong data-i="h_url">Track URL:</strong> <code>https://open.spotify.com/track/…</code><br>
+      <strong data-i="h_txt">Text:</strong> <code>Artist|Title|Year|URL</code><br>
+      <span data-i="h_sep">One entry per line. URL is optional — used as QR code target.</span><br>
+      <span data-i="h_conv">Convert playlists to TXT: https://bopster.app/wizard</span>
     </div>
     <div style="margin-bottom:14px">
-      <label class="label" data-i="lbl_urls">Spotify URLs</label>
-      <textarea id="sp-input" placeholder="https://open.spotify.com/track/..."></textarea>
+      <label class="label" data-i="lbl_input">Songs</label>
+      <textarea id="sp-input" placeholder="https://open.spotify.com/track/...&#10;Artist|Title|Year|URL&#10;…"></textarea>
     </div>
     <div class="row" style="margin-bottom:14px">
-      <button class="btn" onclick="processLinks()" data-i="btn_fetch">Fetch Songs →</button>
+      <button class="btn" onclick="processInput()" data-i="btn_load">Load Songs →</button>
       <span style="color:var(--text3);font-size:12px" data-i="or">or</span>
       <button class="btn btn-ghost btn-sm" onclick="document.getElementById('imp-file').click()" data-i="btn_import">Import JSON / CSV / TXT</button>
       <input type="file" id="imp-file" accept=".json,.csv,.txt" style="display:none" onchange="importFile(event)">
     </div>
     <div id="s1-msg"></div>
     <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-      <p style="font-size:12px;color:var(--text3);margin-bottom:10px" data-i="demo_hint">No Spotify? Load demo songs:</p>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px" data-i="demo_hint">No data yet? Load demo songs:</p>
       <button class="btn btn-ghost btn-sm" onclick="loadDemo()" data-i="btn_demo">Load Demo</button>
     </div>
   </div>
@@ -243,10 +211,10 @@ tr:hover td{background:rgba(255,255,255,.02);}
     <div class="tbl-wrap">
       <table>
         <thead><tr>
-          <th class="sortable" data-col="artist" data-i="col_artist">Artist</th>
-          <th class="sortable" data-col="title" data-i="col_title">Title</th>
+          <th class="sortable col-artist" data-col="artist" data-i="col_artist">Artist</th>
+          <th class="sortable col-title" data-col="title" data-i="col_title">Title</th>
           <th class="sortable" data-col="year" data-i="col_year">Year</th>
-          <th class="col-url" data-i="col_url">Spotify URL</th>
+          <th class="col-url" data-i="col_url">URL</th>
           <th class="col-src sortable" data-col="mbUrl" data-i="col_src">MB</th>
           <th data-i="col_st">●</th>
         </tr></thead>
@@ -265,9 +233,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
   <div class="step-content" id="sc-3">
     <label class="label" data-i="lbl_size">Card Size (square)</label>
     <div class="size-grid">
-      <div class="size-opt sel" data-sz="66" onclick="pickSz(this,66)">
+      <div class="size-opt sel" data-sz="65" onclick="pickSz(this,65)">
         <div class="size-opt-name" data-i="sz_classic">Classic</div>
-        <div class="size-opt-dim">66 × 66 mm</div>
+        <div class="size-opt-dim">65 × 65 mm</div>
       </div>
       <div class="size-opt" data-sz="45" onclick="pickSz(this,45)">
         <div class="size-opt-name" data-i="sz_travel">Travel</div>
@@ -289,7 +257,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <button class="dtab" id="dt-custom_img" onclick="switchDesign('custom_img')" data-i="dt_custom">Custom Image</button>
     </div>
     <div id="design-classic">
-      <p style="font-size:12px;color:var(--text3);margin-bottom:10px" data-i="classic_hint">Gradient follows release year across the full timeline. Or pick a fixed color:</p>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px" data-i="classic_hint">Gradient follows release year. Or pick a fixed color:</p>
       <div class="swatch-row" id="swatch-row"></div>
     </div>
     <div id="design-minimal" style="display:none">
@@ -301,9 +269,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <span data-i="drop_hint">Click to upload background image</span>
       </div>
       <input type="file" id="bg-inp" accept="image/*" style="display:none" onchange="loadBg(event)">
-      <div id="bg-thumb" style="display:none;margin-top:10px">
+      <div id="bg-thumb" style="display:none;margin-top:10px;display:flex;align-items:center;gap:10px">
         <img id="bg-img" style="height:60px;border-radius:6px;border:1px solid var(--border)">
-        <button class="btn btn-ghost btn-sm" style="margin-left:10px" onclick="clearBg()" data-i="btn_rmbg">Remove</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearBg()" data-i="btn_rmbg">Remove</button>
       </div>
     </div>
     <div class="preview-area">
@@ -319,7 +287,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
       </div>
       <div class="prev-meta">
         <h3 data-i="prev_h">Card layout</h3>
-        <p data-i="prev_p">Front: title bold top · year huge center · artist italic bottom&#10;Back: QR code only → Spotify&#10;PDF: aligned front + back, short-edge duplex</p>
+        <p data-i="prev_p">Front: title bold top · year huge center · artist italic bottom&#10;Back: QR code → scan with phone camera&#10;PDF: front left-aligned, back right-aligned (short-edge duplex)</p>
       </div>
     </div>
     <div class="spacer"></div>
@@ -329,9 +297,8 @@ tr:hover td{background:rgba(255,255,255,.02);}
   <!-- STEP 4 -->
   <div class="step-content" id="sc-4">
     <div class="alert alert-info" data-i="pdf_info">Front + back on A4. Print double-sided (flip short edge) and cut.</div>
-
     <label class="label" style="margin-bottom:10px" data-i="lbl_pdf_layout">PDF Layout</label>
-    <div class="pdf-settings">
+    <div class="pdf-settings" id="pdf-settings-grid">
       <div class="pdf-field">
         <label data-i="lbl_margin">Page margin (mm)</label>
         <input type="number" id="pdf-margin" value="6" min="0" max="30" step="0.1">
@@ -344,8 +311,11 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <label data-i="lbl_qr_pad">QR padding (mm)</label>
         <input type="number" id="pdf-qr-pad" value="2" min="0" max="10" step="0.1">
       </div>
+      <div class="pdf-field">
+        <label data-i="lbl_qr_size">QR code size (mm)</label>
+        <input type="number" id="pdf-qr-size" value="35" min="5" max="120" step="0.5">
+      </div>
     </div>
-
     <label class="check-row">
       <input type="checkbox" id="chk-summary" checked>
       <span data-i="lbl_summary">Include summary card</span>
@@ -365,52 +335,50 @@ tr:hover td{background:rgba(255,255,255,.02);}
 </div>
 
 <script>
-const SPOTIFY_CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
-
 // ══════════════════════════════════════════════
 //  I18N
 // ══════════════════════════════════════════════
 const T={
   en:{
-    nav_create:'Create',sub:'The Music Timeline Game',
     s_import:'Import',s_years:'Years',s_design:'Design',s_export:'Export',
-    sp_desc:'Connect to import playlists and get full track info. Secure PKCE login — no passwords stored.',
-    sp_not_connected:'Not connected',sp_connected:'Connected as',
-    btn_sp_connect:'Connect with Spotify',btn_browse_pl:'Browse Playlists',btn_disconnect:'Disconnect',
-    lbl_your_pl:'Your Playlists',
-    h_single:'Track:',h_txt:'Artist|Title(|Year|URL)',h_sep:'One URL per line.',h_conv:'Convert your playlists and export as TXT here: https://bopster.app/wizard',
-    lbl_name:'Set / Playlist Name',lbl_urls:'Spotify URLs',
-    btn_fetch:'Fetch Songs →',or:'or',btn_import:'Import JSON / CSV / TXT',
-    demo_hint:'No Spotify? Load demo songs:',btn_demo:'Load Demo',
+    lbl_name:'Set / Playlist Name',lbl_input:'Songs',
+    h_url:'Track URL:',h_txt:'Text:',
+    h_sep:'One entry per line. URL is optional — used as QR code target.',
+    h_conv:'Convert playlists to TXT: https://bopster.app/wizard',
+    bopster_title:'Want to import a Spotify playlist?',
+    bopster_text:"Spotify doesn't give private users direct API access to read playlist URLs. Use",
+    bopster_detail:'fetch your playlist, edit it with their tools, auto-fill years with Yearify, and export as TXT for use here.',
+    btn_load:'Load Songs →',or:'or',btn_import:'Import JSON / CSV / TXT',
+    demo_hint:'No data yet? Load demo songs:',btn_demo:'Load Demo',
     btn_refetch:'Re-fetch all',col_artist:'Artist',col_title:'Title',
-    col_year:'Year',col_url:'Spotify',col_src:'MB',col_st:'●',
+    col_year:'Year',col_url:'URL',col_src:'MB',col_st:'●',
     hist_title:'Year distribution',
     btn_des:'Design →',btn_expj:'JSON',btn_expc:'CSV',btn_expt:'TXT',
     lbl_size:'Card Size (square)',sz_classic:'Classic',sz_travel:'Travel',sz_custom:'Custom',lbl_wh:'Side (mm)',
     lbl_design:'Card Design',dt_classic:'Classic Colors',dt_minimal:'Minimal B&W',dt_custom:'Custom Image',
-    classic_hint:'Gradient follows release year across the full timeline. Or pick a fixed color:',
+    classic_hint:'Gradient follows release year. Or pick a fixed color:',
     minimal_hint:'Black on white — ideal for cheap printing.',
     drop_hint:'Click to upload background image',btn_rmbg:'Remove',
     prev_front:'Front',prev_back:'Back',prev_h:'Card layout',
-    prev_p:'Front: title bold top · year huge center · artist italic bottom\nBack: QR only → Spotify\nPDF: front left-aligned, back right-aligned (short-edge duplex)',
+    prev_p:'Front: title bold top · year huge center · artist italic bottom\nBack: QR code → scan with phone camera\nPDF: front left-aligned, back right-aligned (short-edge duplex)',
     btn_to_exp:'Generate PDF →',lbl_summary:'Include summary card',
-    lbl_pdf_layout:'PDF Layout',lbl_margin:'Page margin (mm)',lbl_gap:'Gap between cards (mm)',lbl_qr_pad:'QR padding (mm)',
+    lbl_pdf_layout:'PDF Layout',lbl_margin:'Page margin (mm)',lbl_gap:'Gap between cards (mm)',lbl_qr_pad:'QR padding (mm)',lbl_qr_size:'QR code size (mm)',
     pdf_info:'Front + back on A4. Print double-sided (flip short edge) and cut.',
     btn_gen:'Generate PDF',pdf_done:'✓ PDF created — download started.',
   },
   de:{
-    nav_create:'Erstellen',sub:'Das Musik-Zeitstrahl-Spiel',
     s_import:'Import',s_years:'Jahre',s_design:'Design',s_export:'Export',
-    sp_desc:'Verbinden um Playlists zu importieren und vollständige Track-Infos zu laden. Sicherer PKCE-Login.',
-    sp_not_connected:'Nicht verbunden',sp_connected:'Verbunden als',
-    btn_sp_connect:'Mit Spotify verbinden',btn_browse_pl:'Playlists durchsuchen',btn_disconnect:'Trennen',
-    lbl_your_pl:'Deine Playlists',
-    h_single:'Track:',h_txt:'Künstler|Titel(|Jahr|URL)',h_sep:'Ein Track pro Zeile.',h_conv:'Playlists konvertieren und als TXT exportieren: https://bopster.app/wizard',
-    lbl_name:'Set / Playlist-Name',lbl_urls:'Spotify URLs',
-    btn_fetch:'Songs laden →',or:'oder',btn_import:'JSON / CSV / TXT importieren',
-    demo_hint:'Kein Spotify? Demo-Songs laden:',btn_demo:'Demo laden',
+    lbl_name:'Set / Playlist-Name',lbl_input:'Songs',
+    h_url:'Track-URL:',h_txt:'Text:',
+    h_sep:'Ein Eintrag pro Zeile. URL optional — wird als QR-Ziel verwendet.',
+    h_conv:'Playlists konvertieren: https://bopster.app/wizard',
+    bopster_title:'Spotify-Playlist importieren?',
+    bopster_text:'Spotify erlaubt Privatpersonen keinen direkten API-Zugriff zum Auslesen von Playlist-URLs. Nutze stattdessen',
+    bopster_detail:'dort kannst du deine Playlist abrufen, mit den Tools bearbeiten, mit Yearify automatisch Jahreszahlen ergänzen und als TXT für hier exportieren.',
+    btn_load:'Songs laden →',or:'oder',btn_import:'JSON / CSV / TXT importieren',
+    demo_hint:'Noch keine Daten? Demo-Songs laden:',btn_demo:'Demo laden',
     btn_refetch:'Alle neu abrufen',col_artist:'Interpret',col_title:'Titel',
-    col_year:'Jahr',col_url:'Spotify',col_src:'MB',col_st:'●',
+    col_year:'Jahr',col_url:'URL',col_src:'MB',col_st:'●',
     hist_title:'Jahresverteilung',
     btn_des:'Design →',btn_expj:'JSON',btn_expc:'CSV',btn_expt:'TXT',
     lbl_size:'Kartengröße (quadratisch)',sz_classic:'Klassisch',sz_travel:'Reise',sz_custom:'Eigene',lbl_wh:'Seite (mm)',
@@ -419,9 +387,9 @@ const T={
     minimal_hint:'Schwarz auf Weiß — günstig drucken.',
     drop_hint:'Klicken um Hintergrundbild hochzuladen',btn_rmbg:'Entfernen',
     prev_front:'Vorne',prev_back:'Hinten',prev_h:'Karten-Layout',
-    prev_p:'Vorne: Titel fett oben · Jahr riesig mitte · Interpret kursiv unten\nHinten: Nur QR → Spotify\nPDF: Vorderseite links, Rückseite rechts (kurze Kante Duplex)',
+    prev_p:'Vorne: Titel fett oben · Jahr riesig mitte · Interpret kursiv unten\nHinten: QR-Code → mit Handy-Kamera scannen\nPDF: Vorderseite links, Rückseite rechts (kurze Kante Duplex)',
     btn_to_exp:'PDF erstellen →',lbl_summary:'Summary-Karte einschließen',
-    lbl_pdf_layout:'PDF-Layout',lbl_margin:'Seitenrand (mm)',lbl_gap:'Abstand zwischen Karten (mm)',lbl_qr_pad:'QR-Padding (mm)',
+    lbl_pdf_layout:'PDF-Layout',lbl_margin:'Seitenrand (mm)',lbl_gap:'Abstand zwischen Karten (mm)',lbl_qr_pad:'QR-Padding (mm)',lbl_qr_size:'QR-Code Größe (mm)',
     pdf_info:'Vorder- und Rückseite auf A4. Doppelseitig drucken (kurze Kante). Ausschneiden.',
     btn_gen:'PDF erstellen',pdf_done:'✓ PDF erstellt — Download gestartet.',
   }
@@ -453,7 +421,6 @@ function tToColor(t){
   const n=CC.length-1,idx=t*n,lo=Math.floor(idx),hi=Math.min(n,Math.ceil(idx));
   return lerpHex(CC[lo].h,CC[hi].h,idx-lo);
 }
-function yearToColor(y){return tToColor(yearToT(y));}
 function lerpHex(a,b,t){
   const p=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
   const[ar,ag,ab]=p(a),[br,bg,bb]=p(b);
@@ -469,229 +436,75 @@ function yearGradPair(year){
 // ══════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════
-let songs=[],designMode='classic',fixedColor=null,cardSz=66,bgDataUrl=null;
-let setName='';
+let songs=[],designMode='classic',fixedColor=null,cardSz=65,bgDataUrl=null,setName='';
 let tblSortCol=null,tblSortDir=1,tblFetching=false;
-let spToken=null,spExpiry=0;
 
 // ══════════════════════════════════════════════
 //  NAV
 // ══════════════════════════════════════════════
-function goCreate(){
-  document.getElementById('pg-create').classList.add('active');
-}
 function goStep(n){
   if(n>1&&!songs.length){showMsg('s1-msg','Please load songs first.','err');return;}
   setName=document.getElementById('set-name').value.trim();
   document.querySelectorAll('.step-content').forEach(s=>s.classList.remove('active'));
   for(let i=1;i<=4;i++){
-    const b=document.getElementById('s'+i+'btn');b.classList.remove('active','done');
+    const b=document.getElementById('s'+i+'btn');
+    b.classList.remove('active','done');
     if(i<n)b.classList.add('done');
   }
   document.getElementById('sc-'+n).classList.add('active');
   document.getElementById('s'+n+'btn').classList.add('active');
   if(n===2){renderTable();drawHistogram();}
   if(n===3){buildSwatches();renderPreview();}
+  if(n===4){updatePdfDefaults();}
 }
 
 // ══════════════════════════════════════════════
-//  SPOTIFY PKCE AUTH
+//  STEP 1 — INPUT
 // ══════════════════════════════════════════════
-function spRedirectUri(){
-  return location.origin+location.pathname.split('?')[0].split('#')[0];
-}
-function loadStoredAuth(){
-  try{
-    const t=localStorage.getItem('sp_token'),e=localStorage.getItem('sp_expiry');
-    if(t&&e&&Date.now()<+e){spToken=t;spExpiry=+e;updateSpUI(true);}
-    else{localStorage.removeItem('sp_token');localStorage.removeItem('sp_expiry');}
-  }catch{}
-}
-function updateSpUI(connected,displayName){
-  document.getElementById('sp-dot').className='sp-dot'+(connected?' on':'');
-  if(connected){
-    document.getElementById('sp-status-label').textContent=(T[lang].sp_connected||'Connected as')+' '+(displayName||'');
-    document.getElementById('sp-btn-row').style.display='none';
-    document.getElementById('sp-connected-row').style.display='flex';
-    if(displayName)document.getElementById('sp-user-name').textContent=displayName;
-  }else{
-    document.getElementById('sp-status-label').textContent=T[lang].sp_not_connected||'Not connected';
-    document.getElementById('sp-btn-row').style.display='flex';
-    document.getElementById('sp-connected-row').style.display='none';
-  }
-}
-async function startPKCE(){
-  const clientId=SPOTIFY_CLIENT_ID;
-  if(clientId==='YOUR_CLIENT_ID_HERE'){
-    const id=prompt('Enter your Spotify Client ID:\n(Get one free at developer.spotify.com → Dashboard → Create App)\n\nRedirect URI to add: '+spRedirectUri());
-    if(!id)return;
-    try{localStorage.setItem('sp_override_client',id);}catch{}
-  }
-  const finalId=getClientId();
-  const verifier=genVerifier();
-  const challenge=await genChallenge(verifier);
-  try{sessionStorage.setItem('pkce_v',verifier);}catch{}
-  const params=new URLSearchParams({
-    client_id:finalId,response_type:'code',
-    redirect_uri:spRedirectUri(),
-    code_challenge_method:'S256',code_challenge:challenge,
-    scope:'playlist-read-private playlist-read-collaborative user-read-private',
-  });
-  location.href='https://accounts.spotify.com/authorize?'+params;
-}
-function getClientId(){
-  try{const ov=localStorage.getItem('sp_override_client');if(ov)return ov;}catch{}
-  return SPOTIFY_CLIENT_ID;
-}
-function genVerifier(){
-  const arr=new Uint8Array(64);crypto.getRandomValues(arr);
-  return btoa(String.fromCharCode(...arr)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'').slice(0,128);
-}
-async function genChallenge(v){
-  const d=new TextEncoder().encode(v);
-  const h=await crypto.subtle.digest('SHA-256',d);
-  return btoa(String.fromCharCode(...new Uint8Array(h))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
-}
-async function handleCallback(){
-  const params=new URLSearchParams(location.search);
-  const code=params.get('code');if(!code)return;
-  history.replaceState({},'',location.pathname);
-  let verifier='';try{verifier=sessionStorage.getItem('pkce_v')||'';}catch{}
-  if(!verifier){showMsg('s1-msg','Session expired. Please reconnect.','err');return;}
-  try{
-    const r=await fetch('https://accounts.spotify.com/api/token',{
-      method:'POST',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({grant_type:'authorization_code',code,redirect_uri:spRedirectUri(),client_id:getClientId(),code_verifier:verifier})
-    });
-    if(!r.ok)throw new Error(await r.text());
-    const d=await r.json();
-    spToken=d.access_token;spExpiry=Date.now()+d.expires_in*1000;
-    try{localStorage.setItem('sp_token',spToken);localStorage.setItem('sp_expiry',String(spExpiry));}catch{}
-    let name='';
-    try{const ur=await fetch('https://api.spotify.com/v1/me',{headers:{Authorization:'Bearer '+spToken}});if(ur.ok){const ud=await ur.json();name=ud.display_name||ud.id||'';}}catch{}
-    updateSpUI(true,name);
-    showMsg('s1-msg','✓ Spotify connected!','ok');
-  }catch(e){showMsg('s1-msg','Spotify auth failed: '+e.message,'err');}
-}
-function disconnectSpotify(){
-  spToken=null;spExpiry=0;
-  try{localStorage.removeItem('sp_token');localStorage.removeItem('sp_expiry');}catch{}
-  updateSpUI(false);
-  document.getElementById('pl-browser').style.display='none';
-}
-function spAuth(){return spToken&&Date.now()<spExpiry?spToken:null;}
-
-// ── Playlist browser ──
-async function loadUserPlaylists(){
-  const tok=spAuth();if(!tok){showMsg('s1-msg','Please connect Spotify first.','warn');return;}
-  const list=document.getElementById('pl-list');list.innerHTML='<p style="font-size:12px;color:var(--text3)">Loading…</p>';
-  document.getElementById('pl-browser').style.display='block';
-  try{
-    let items=[],offset=0,total=1;
-    while(offset<total){
-      const r=await fetch(`https://api.spotify.com/v1/me/playlists?limit=50&offset=${offset}`,{headers:{Authorization:'Bearer '+tok}});
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      const d=await r.json();total=d.total||0;items.push(...(d.items||[]));offset+=50;
-    }
-    list.innerHTML='';
-    items.forEach(pl=>{
-      if(!pl)return;
-      const btn=document.createElement('button');
-      btn.className='btn btn-ghost btn-sm';
-      btn.style.cssText='text-align:left;justify-content:flex-start;width:100%;';
-      btn.textContent=`${pl.name} (${pl.tracks?.total||'?'})`;
-      btn.onclick=()=>importPlaylist(pl.id,pl.name);
-      list.appendChild(btn);
-    });
-    if(!items.length)list.innerHTML='<p style="font-size:12px;color:var(--text3)">No playlists found.</p>';
-  }catch(e){list.innerHTML=`<p style="font-size:12px;color:#fca5a5">Error: ${e.message}</p>`;}
-}
-async function importPlaylist(pid,name){
-  const tok=spAuth();if(!tok)return;
-  if(name)document.getElementById('set-name').value=name;
-  showMsg('s1-msg','Loading playlist…','info');
-  try{
-    const newSongs=[];let offset=0,total=1;
-    while(offset<total){
-      const r=await fetch(`https://api.spotify.com/v1/playlists/${pid}/tracks?limit=50&offset=${offset}&fields=total,items(track(id,name,artists(name)))`,
-        {headers:{Authorization:'Bearer '+tok}});
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      const d=await r.json();
-      total=d.total||0;
-      for(const item of d.items||[]){
-        const t=item?.track;if(!t?.id)continue;
-        newSongs.push({artist:(t.artists||[]).map(a=>a.name).join(', '),title:t.name||'',spotifyId:t.id,
-          url:`https://open.spotify.com/track/${t.id}`,year:null,mbUrl:null,status:'pending'});
-      }
-      offset+=50;
-      showMsg('s1-msg',`Playlist: ${newSongs.length}/${total} tracks…`,'info');
-      await sleep(80);
-    }
-    songs.push(...newSongs);
-  }catch(e){showMsg('s1-msg','Playlist failed: '+e.message,'err');return;}
-  showMsg('s1-msg','✓ '+songs.length+' songs imported.','ok');
-  setTimeout(()=>goStep(2),400);
-}
-
-// ── processLinks ──
-async function processLinks(){
-  const raw=document.getElementById('sp-input').value.trim();
-  if(!raw){showMsg('s1-msg','Please enter Spotify URLs or track info.','err');return;}
-  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
-  const newSongs=[];
-  for(const line of lines){
-    const tid=xId(line,'track');
-    if(tid){
-      newSongs.push({artist:'',title:'',spotifyId:tid,url:`https://open.spotify.com/track/${tid}`,year:null,mbUrl:null,status:'pending'});
-    }else if(line.includes('|')){
-      const p=line.split('|').map(v=>v.trim());
-      const url=p[3]||'';
-      newSongs.push({artist:p[0]||'',title:p[1]||'',year:p[2]?+p[2]:null,url,spotifyId:xId(url,'track')||'',mbUrl:'',status:p[2]?'ok':'pending'});
-    }
-  }
-  if(!newSongs.length){showMsg('s1-msg','No valid tracks found.','err');return;}
-  // Fetch metadata from Spotify if connected
-  const tok=spAuth();
-  if(tok){
-    showMsg('s1-msg','Fetching track info from Spotify…','info');
-    const ids=newSongs.map(s=>s.spotifyId).filter(Boolean);
-    for(let i=0;i<ids.length;i+=50){
-      const chunk=ids.slice(i,i+50);
-      try{
-        const r=await fetch(`https://api.spotify.com/v1/tracks?ids=${chunk.join(',')}`,{headers:{Authorization:'Bearer '+tok}});
-        if(r.ok){
-          const d=await r.json();
-          (d.tracks||[]).forEach(t=>{
-            if(!t)return;
-            const s=newSongs.find(x=>x.spotifyId===t.id);
-            if(s){s.artist=(t.artists||[]).map(a=>a.name).join(', ');s.title=t.name||'';}
-          });
-        }
-      }catch{}
-      await sleep(100);
-    }
-  }
-  songs.push(...newSongs.filter(s=>s.title||s.spotifyId));
-  showMsg('s1-msg','✓ '+songs.length+' songs loaded.','ok');
-  setTimeout(()=>goStep(2),400);
-}
-function xId(url,type){
-  const m=url.match(new RegExp(`spotify\\.com\\/${type}\\/([A-Za-z0-9]+)`));
+function trackId(url){
+  const m=(url||'').match(/spotify\.com\/track\/([A-Za-z0-9]+)/);
   return m?m[1]:null;
 }
 
+function processInput(){
+  const raw=document.getElementById('sp-input').value.trim();
+  if(!raw){showMsg('s1-msg','Please enter song data.','err');return;}
+  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  const newSongs=[];
+  for(const line of lines){
+    if(line.startsWith('#'))continue;
+    if(trackId(line)){
+      // bare Spotify track URL — artist/title unknown until MB lookup
+      newSongs.push({artist:'',title:'',url:line,year:null,mbUrl:null,status:'pending'});
+    }else if(line.includes('|')){
+      const p=line.split('|').map(v=>v.trim());
+      newSongs.push({
+        artist:p[0]||'',title:p[1]||'',
+        year:p[2]?+p[2]:null,
+        url:p[3]||'',
+        mbUrl:'',
+        status:p[2]?'ok':'pending'
+      });
+    }
+  }
+  if(!newSongs.length){showMsg('s1-msg','No valid entries found.','err');return;}
+  songs.push(...newSongs.filter(s=>s.title||s.url));
+  showMsg('s1-msg','✓ '+songs.length+' songs loaded.','ok');
+  setTimeout(()=>goStep(2),400);
+}
+
 function loadDemo(){
-  setName='Demo Mix';document.getElementById('set-name').value=setName;
+  setName='Demo Mix';
+  document.getElementById('set-name').value=setName;
   songs=[
-    {artist:'ABBA',title:'Dancing Queen',spotifyId:'0GjEhVFGZW8afUYGChu3Rr',url:'https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr',year:null,mbUrl:null,status:'pending'},
-    {artist:'Michael Jackson',title:'Thriller',spotifyId:'2LlQb7Uoj1kKyGhlkBf9aC',url:'https://open.spotify.com/track/2LlQb7Uoj1kKyGhlkBf9aC',year:null,mbUrl:null,status:'pending'},
-    {artist:'The Beatles',title:'Hey Jude',spotifyId:'0aym2LBJBk9DAYuHHutrIl',url:'https://open.spotify.com/track/0aym2LBJBk9DAYuHHutrIl',year:null,mbUrl:null,status:'pending'},
-    {artist:'Nirvana',title:'Smells Like Teen Spirit',spotifyId:'5ghIJDpPoe3CfHMGu71E6T',url:'https://open.spotify.com/track/5ghIJDpPoe3CfHMGu71E6T',year:null,mbUrl:null,status:'pending'},
-    {artist:'Madonna',title:'Like a Prayer',spotifyId:'1z3ugFmUKoCzGsI6jdY4Ci',url:'https://open.spotify.com/track/1z3ugFmUKoCzGsI6jdY4Ci',year:null,mbUrl:null,status:'pending'},
-    {artist:'Queen',title:'Bohemian Rhapsody',spotifyId:'7tFiyTwD0nx5a1eklYtX2J',url:'https://open.spotify.com/track/7tFiyTwD0nx5a1eklYtX2J',year:null,mbUrl:null,status:'pending'},
-    {artist:'David Bowie',title:'Heroes',spotifyId:'7Jh1bpe76CNTCgdgAdBw4Z',url:'https://open.spotify.com/track/7Jh1bpe76CNTCgdgAdBw4Z',year:null,mbUrl:null,status:'pending'},
-    {artist:'Daft Punk',title:'Get Lucky',spotifyId:'2Foc5Q5nqNiosCNqttzHof',url:'https://open.spotify.com/track/2Foc5Q5nqNiosCNqttzHof',year:null,mbUrl:null,status:'pending'},
+    {artist:'ABBA',title:'Dancing Queen',url:'https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr',year:null,mbUrl:null,status:'pending'},
+    {artist:'Michael Jackson',title:'Thriller',url:'https://open.spotify.com/track/2LlQb7Uoj1kKyGhlkBf9aC',year:null,mbUrl:null,status:'pending'},
+    {artist:'The Beatles',title:'Hey Jude',url:'https://open.spotify.com/track/0aym2LBJBk9DAYuHHutrIl',year:null,mbUrl:null,status:'pending'},
+    {artist:'Nirvana',title:'Smells Like Teen Spirit',url:'https://open.spotify.com/track/5ghIJDpPoe3CfHMGu71E6T',year:null,mbUrl:null,status:'pending'},
+    {artist:'Madonna',title:'Like a Prayer',url:'https://open.spotify.com/track/1z3ugFmUKoCzGsI6jdY4Ci',year:null,mbUrl:null,status:'pending'},
+    {artist:'Queen',title:'Bohemian Rhapsody',url:'https://open.spotify.com/track/7tFiyTwD0nx5a1eklYtX2J',year:null,mbUrl:null,status:'pending'},
+    {artist:'David Bowie',title:'Heroes',url:'https://open.spotify.com/track/7Jh1bpe76CNTCgdgAdBw4Z',year:null,mbUrl:null,status:'pending'},
+    {artist:'Daft Punk',title:'Get Lucky',url:'https://open.spotify.com/track/2Foc5Q5nqNiosCNqttzHof',year:null,mbUrl:null,status:'pending'},
   ];
   showMsg('s1-msg','✓ '+songs.length+' demo songs loaded.','ok');
   setTimeout(()=>goStep(2),400);
@@ -708,18 +521,20 @@ function sortedSongs(){
     return String(va).localeCompare(String(vb))*tblSortDir;
   });
 }
+
 function renderTable(){
-  const tbody=document.getElementById('tbl-body');tbody.innerHTML='';
+  const tbody=document.getElementById('tbl-body');
+  tbody.innerHTML='';
   sortedSongs().forEach(s=>{
     const i=songs.indexOf(s);
-    const shortUrl=s.url?s.url.replace('https://open.spotify.com/track/','…/track/'):'';
+    const shortUrl=s.url?s.url.replace(/^https?:\/\/(open\.spotify\.com\/)?/,'').slice(0,28)+'…':'';
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td class="col-artist"><input class="td-edit" value="${esc(s.artist)}" oninput="songs[${i}].artist=this.value"></td>
       <td class="col-title"><input class="td-edit" value="${esc(s.title)}" oninput="songs[${i}].title=this.value"></td>
       <td><input class="year-in" type="number" min="1900" max="2025" value="${s.year||''}" placeholder="—"
           oninput="songs[${i}].year=this.value?+this.value:null;songs[${i}].status='manual';updSt(${i});drawHistogram()"></td>
-      <td class="col-url sp-url-cell">${s.url?`<a href="${s.url}" target="_blank" title="${s.url}">${esc(shortUrl)}</a>`:'—'}</td>
+      <td class="col-url url-cell">${s.url?`<a href="${esc(s.url)}" target="_blank" title="${esc(s.url)}">${esc(shortUrl)}</a>`:'—'}</td>
       <td class="col-src" id="src-${i}">${s.mbUrl?`<a class="mb-lnk" href="${s.mbUrl}" target="_blank">↗</a>`:'—'}</td>
       <td id="st-${i}" style="text-align:center">${stDot(s.status)}</td>`;
     tbody.appendChild(tr);
@@ -728,12 +543,14 @@ function renderTable(){
     th.classList.remove('sort-asc','sort-desc');
     if(th.dataset.col===tblSortCol)th.classList.add(tblSortDir===1?'sort-asc':'sort-desc');
     th.onclick=()=>{
-      if(tblSortCol===th.dataset.col)tblSortDir*=-1;else{tblSortCol=th.dataset.col;tblSortDir=1;}
+      if(tblSortCol===th.dataset.col)tblSortDir*=-1;
+      else{tblSortCol=th.dataset.col;tblSortDir=1;}
       renderTable();
     };
   });
   if(!tblFetching)fetchYears();
 }
+
 function stDot(s){
   const m={pending:'st-load',ok:'st-ok',manual:'st-manual',error:'st-err'};
   return`<span class="st-dot ${m[s]||'st-load'}"></span>`;
@@ -741,7 +558,7 @@ function stDot(s){
 function updSt(i){const e=document.getElementById('st-'+i);if(e)e.innerHTML=stDot(songs[i].status);}
 function updSrc(i){const e=document.getElementById('src-'+i);if(e)e.innerHTML=songs[i].mbUrl?`<a class="mb-lnk" href="${songs[i].mbUrl}" target="_blank">↗</a>`:'—';}
 function updYearCell(i){
-  const sorted=sortedSongs();const vi=sorted.indexOf(songs[i]);if(vi<0)return;
+  const vi=sortedSongs().indexOf(songs[i]);if(vi<0)return;
   const row=document.querySelector(`#tbl-body tr:nth-child(${vi+1}) .year-in`);
   if(row&&songs[i].year)row.value=songs[i].year;
 }
@@ -750,23 +567,25 @@ async function fetchYears(){
   tblFetching=true;
   const pw=document.getElementById('mb-pw'),pf=document.getElementById('mb-pf');
   pw.style.display='block';pf.style.width='0%';
-  const pending=songs.filter(s=>s.status==='pending');
+  const pending=songs.filter(s=>s.status==='pending'&&s.artist&&s.title);
   for(let i=0;i<pending.length;i++){
-    const s=pending[i];
-    await fetchYear(s);
+    await fetchYear(pending[i]);
     pf.style.width=Math.round((i+1)/pending.length*100)+'%';
-    const idx=songs.indexOf(s);
+    const idx=songs.indexOf(pending[i]);
     updSt(idx);updSrc(idx);updYearCell(idx);drawHistogram();
     await sleep(340);
   }
-  pw.style.display='none';tblFetching=false;
+  pw.style.display='none';
+  tblFetching=false;
   const found=songs.filter(s=>s.year).length;
   document.getElementById('yr-sum').textContent=`${found}/${songs.length} ${lang==='de'?'Jahre gefunden':'years found'}`;
   drawHistogram();
 }
+
 async function refetchYears(){
   songs.forEach(s=>{if(s.status!=='manual'){s.status='pending';s.year=null;s.mbUrl=null;}});
-  tblFetching=false;renderTable();
+  tblFetching=false;
+  renderTable();
 }
 
 async function fetchYear(song){
@@ -821,7 +640,8 @@ function drawHistogram(){
   const canvas=document.getElementById('histogram-canvas');
   const dpr=window.devicePixelRatio||1;
   const W=canvas.parentElement.offsetWidth||600;
-  const minY=Math.floor(Math.min(...years)/BIN)*BIN,maxY=Math.ceil(Math.max(...years)/BIN)*BIN;
+  const minY=Math.floor(Math.min(...years)/BIN)*BIN;
+  const maxY=Math.ceil(Math.max(...years)/BIN)*BIN;
   const bins={};for(let y=minY;y<=maxY;y+=BIN)bins[y]=[];
   songs.forEach(s=>{
     if(!s.year)return;
@@ -834,7 +654,7 @@ function drawHistogram(){
   canvas.width=W*dpr;canvas.height=(BAR_H+LBL_H)*dpr;
   canvas.style.width=W+'px';canvas.style.height=(BAR_H+LBL_H)+'px';
   const ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);ctx.scale(dpr,dpr);
-  const padL=2,padR=2,bw=(W-padL-padR)/keys.length;
+  const padL=2,bw=(W-padL*2)/keys.length;
   keys.forEach((yr,i)=>{
     const count=bins[yr].length;if(!count)return;
     const bh=Math.round((count/maxC)*BAR_H*.9);
@@ -846,9 +666,15 @@ function drawHistogram(){
     g.addColorStop(0,hexL);g.addColorStop(1,hexR);
     ctx.fillStyle=g;
     ctx.beginPath();
-    if(ctx.roundRect)ctx.roundRect(bx+.5,by,bw-1,bh,2);else ctx.rect(bx+.5,by,bw-1,bh);
+    if(ctx.roundRect)ctx.roundRect(bx+.5,by,bw-1,bh,2);
+    else ctx.rect(bx+.5,by,bw-1,bh);
     ctx.fill();
-    if(bh>14){ctx.fillStyle='rgba(255,255,255,.8)';ctx.font=`bold ${Math.min(10,bh*.45)}px DM Sans,sans-serif`;ctx.textAlign='center';ctx.fillText(count,bx+bw/2,by+bh*.62);}
+    if(bh>14){
+      ctx.fillStyle='rgba(255,255,255,.8)';
+      ctx.font=`bold ${Math.min(10,bh*.45)}px DM Sans,sans-serif`;
+      ctx.textAlign='center';
+      ctx.fillText(count,bx+bw/2,by+bh*.62);
+    }
   });
   ctx.font='9px DM Sans,sans-serif';ctx.textAlign='center';
   const showAll=keys.length<=20;
@@ -877,7 +703,7 @@ function drawHistogram(){
 // ══════════════════════════════════════════════
 function buildSwatches(){
   const row=document.getElementById('swatch-row');row.innerHTML='';
-  const auto=Object.assign(document.createElement('div'),{className:'swatch'+(fixedColor===null?' sel':''),title:'Auto (year-based gradient)'});
+  const auto=Object.assign(document.createElement('div'),{className:'swatch'+(fixedColor===null?' sel':''),title:'Auto'});
   auto.style.background='linear-gradient(90deg,#6A0DAD,#DD1A72,#FF5C00,#FFD700,#1E40AF)';
   auto.onclick=()=>{fixedColor=null;row.querySelectorAll('.swatch').forEach(s=>s.classList.remove('sel'));auto.classList.add('sel');renderPreview();};
   row.appendChild(auto);
@@ -893,21 +719,35 @@ function switchDesign(mode){
   document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
   document.getElementById('dt-'+mode).classList.add('active');
   ['classic','minimal','custom_img'].forEach(m=>{
-    const el=document.getElementById('design-'+m);if(el)el.style.display=m===mode?'':'none';
+    const el=document.getElementById('design-'+m);
+    if(el)el.style.display=m===mode?'':'none';
   });
   drawHistogram();renderPreview();
 }
 function pickSz(el,sz){
-  document.querySelectorAll('.size-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');
+  document.querySelectorAll('.size-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
   document.getElementById('cust-sz-row').style.display=sz===0?'block':'none';
-  cardSz=sz===0?(+document.getElementById('cust-sz').value||60):sz;renderPreview();
+  cardSz=sz===0?(+document.getElementById('cust-sz').value||60):sz;
+  ['pdf-margin','pdf-gap','pdf-qr-pad','pdf-qr-size'].forEach(id=>{const e=document.getElementById(id);if(e)e._userEdited=false;});
+  renderPreview();
 }
-function updateCustDim(){cardSz=+document.getElementById('cust-sz').value||60;document.getElementById('cust-dim-lbl').textContent=cardSz+' mm';renderPreview();}
-function loadBg(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{bgDataUrl=ev.target.result;document.getElementById('bg-img').src=bgDataUrl;document.getElementById('bg-thumb').style.display='block';renderPreview();};r.readAsDataURL(f);}
+function updateCustDim(){
+  cardSz=+document.getElementById('cust-sz').value||60;
+  document.getElementById('cust-dim-lbl').textContent=cardSz+' mm';
+  ['pdf-margin','pdf-gap','pdf-qr-pad','pdf-qr-size'].forEach(id=>{const e=document.getElementById(id);if(e)e._userEdited=false;});
+  renderPreview();
+}
+function loadBg(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{bgDataUrl=ev.target.result;document.getElementById('bg-img').src=bgDataUrl;document.getElementById('bg-thumb').style.display='flex';renderPreview();};
+  r.readAsDataURL(f);
+}
 function clearBg(){bgDataUrl=null;document.getElementById('bg-thumb').style.display='none';renderPreview();}
 
 function getSongGrad(song){
-  if(fixedColor){return[lerpHex(fixedColor,'#000000',0.18),lerpHex(fixedColor,'#ffffff',0.18)];}
+  if(fixedColor)return[lerpHex(fixedColor,'#000000',0.18),lerpHex(fixedColor,'#ffffff',0.18)];
   return yearGradPair(song?.year);
 }
 function renderPreview(){
@@ -930,20 +770,41 @@ function renderPreview(){
 
 // ══════════════════════════════════════════════
 //  STEP 4 — PDF
-//
-//  Duplex short-edge alignment:
-//  Front page: cards start at left margin (left-aligned)
-//  Back page:  cards mirrored → right-aligned
-//  Formula: backX = A4W - margin - (col+1)*sz - col*gap
-//         = A4W - margin - sz - col*(sz+gap)
-//
-//  QR size: min(35mm, cardSz - 2*qrPad), centered
+//  Front page: left-aligned  x = margin + col*(sz+gap)
+//  Back page:  right-aligned x = A4W - margin - sz - colB*(sz+gap)
+//  where colB = (cols-1) - colF  (mirror for short-edge duplex)
 // ══════════════════════════════════════════════
+function updatePdfDefaults(){
+  const sz=cardSz;
+  const margin=document.getElementById('pdf-margin');
+  const gap=document.getElementById('pdf-gap');
+  const qrPad=document.getElementById('pdf-qr-pad');
+  const qrSize=document.getElementById('pdf-qr-size');
+  // For 65mm: margin=5, gap=2.5 → 2*5 + 2*2.5 + 3*65 = 210 (exactly 3 cards wide on A4)
+  // Scale proportionally for other sizes
+  const scale=sz/65;
+  if(!margin._userEdited) margin.value=(Math.round(5*scale*10)/10);
+  if(!gap._userEdited)    gap.value=(Math.round(2.5*scale*10)/10);
+  if(!qrPad._userEdited)  qrPad.value=(Math.round(sz*0.03*10)/10);
+  if(!qrSize._userEdited) qrSize.value=(Math.round(sz*0.75*10)/10);
+}
+['pdf-margin','pdf-gap','pdf-qr-pad','pdf-qr-size'].forEach(id=>{
+  // Mark as user-edited once changed manually
+  document.addEventListener('DOMContentLoaded',()=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('change',()=>{el._userEdited=true;});
+  });
+});
 function getPdfSettings(){
+  const margin=parseFloat(document.getElementById('pdf-margin').value);
+  const gap=parseFloat(document.getElementById('pdf-gap').value);
+  const qrPad=parseFloat(document.getElementById('pdf-qr-pad').value);
+  const qrSize=parseFloat(document.getElementById('pdf-qr-size').value);
   return{
-    margin: Math.max(0, parseFloat(document.getElementById('pdf-margin').value)||6),
-    gap:    Math.max(0, parseFloat(document.getElementById('pdf-gap').value)||3),
-    qrPad:  Math.max(0, parseFloat(document.getElementById('pdf-qr-pad').value)||2),
+    margin: isNaN(margin)?6:Math.max(0,margin),
+    gap:    isNaN(gap)?3:Math.max(0,gap),
+    qrPad:  isNaN(qrPad)?2:Math.max(0,qrPad),
+    qrSize: isNaN(qrSize)?35:Math.max(1,qrSize),
   };
 }
 
@@ -964,7 +825,23 @@ async function generatePDF(){
   const rows_=Math.max(1,Math.floor((A4H-2*margin+gap)/(sz+gap)));
   const perPage=cols*rows_;
 
-  // Pre-generate QR images
+  // Letter codes: A, B, C, ... Z, AA, AB, ...
+  function pairCode(idx){
+    const alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if(idx<26)return alpha[idx];
+    return alpha[Math.floor(idx/26)-1]+alpha[idx%26];
+  }
+  const deckName=setName||'Deck';
+
+  function drawPageLabel(doc,pageIdx){
+    const label=deckName+' · '+pairCode(pageIdx);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(7);
+    doc.setTextColor(160,160,160);
+    doc.text(label,A4W/2,A4H-3,{align:'center',baseline:'bottom'});
+  }
+
+  // Pre-render all QR images
   const qrImgs=[];
   for(let i=0;i<songs.length;i++){
     pf.style.width=Math.round(i/songs.length*40)+'%';
@@ -975,48 +852,43 @@ async function generatePDF(){
 
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const pageCount=Math.ceil(songs.length/perPage);
-
   const lastPageSongs=songs.length-(pageCount-1)*perPage;
-  const summarySlotOnLastPage=inclSummary&&lastPageSongs<perPage;
-  const summarySlotIdx=inclSummary?lastPageSongs:-1;
+  const summaryFitsOnLast=inclSummary&&lastPageSongs<perPage;
 
   for(let p=0;p<pageCount;p++){
     const batch=songs.slice(p*perPage,(p+1)*perPage);
     if(p>0)doc.addPage();
 
-    // — Front page: left-aligned —
+    // Front — left-aligned
     batch.forEach((s,i)=>{
       const col=i%cols,row=Math.floor(i/cols);
-      const x=margin+col*(sz+gap);
-      const y=margin+row*(sz+gap);
-      drawFront(doc,s,x,y,sz);
+      drawFront(doc,s,margin+col*(sz+gap),margin+row*(sz+gap),sz);
     });
-
-    // Summary card on last front page
-    if(p===pageCount-1&&summarySlotOnLastPage){
-      const si=summarySlotIdx;
-      const col=si%cols,row=Math.floor(si/cols);
+    if(p===pageCount-1&&summaryFitsOnLast){
+      const si=lastPageSongs,col=si%cols,row=Math.floor(si/cols);
       drawSummaryCard(doc,margin+col*(sz+gap),margin+row*(sz+gap),sz);
     }
+    drawPageLabel(doc,p);
 
-    // — Back page: right-aligned (short-edge duplex mirror) —
+    // Back — right-aligned block, cards mirrored horizontally for short-edge duplex
+    // After flipping the page, col 0 (left) becomes rightmost → mirror: colB = (cols-1) - col
     doc.addPage();
+    const gridW=cols*sz+(cols-1)*gap;
+    const backGridLeft=A4W-margin-gridW;
     batch.forEach((s,i)=>{
-      const colF=i%cols,row=Math.floor(i/cols);
-      // Mirror: rightmost front col → leftmost back col
-      const colB=(cols-1)-colF;
-      const x=A4W-margin-sz-colB*(sz+gap);
-      const y=margin+row*(sz+gap);
-      drawBack(doc,qrImgs[p*perPage+i],x,y,sz);
+      const col=i%cols,row=Math.floor(i/cols);
+      const colB=(cols-1)-col; // mirror column so card aligns with its front after flip
+      const globalIdx=p*perPage+i;
+      drawBack(doc,qrImgs[globalIdx],backGridLeft+colB*(sz+gap),margin+row*(sz+gap),sz);
     });
+    drawPageLabel(doc,p);
 
     pf.style.width=Math.round(40+((p+1)/pageCount*55))+'%';
     pt.textContent=`Page ${p+1}/${pageCount}`;
     await sleep(20);
   }
 
-  // Summary on new page if no room
-  if(inclSummary&&!summarySlotOnLastPage){
+  if(inclSummary&&!summaryFitsOnLast){
     doc.addPage();
     drawSummaryCard(doc,margin,margin,sz);
   }
@@ -1024,7 +896,9 @@ async function generatePDF(){
   pf.style.width='100%';
   doc.save((setName||'hitster')+'-cards.pdf');
   document.getElementById('pdf-pw').style.display='none';
-  const done=document.getElementById('pdf-done');done.style.display='block';done.textContent=T[lang].pdf_done;
+  const done=document.getElementById('pdf-done');
+  done.style.display='block';
+  done.textContent=T[lang].pdf_done;
   document.getElementById('gen-btn').disabled=false;
 }
 
@@ -1065,50 +939,37 @@ function drawFront(doc,song,x,y,sz){
   else{const[c1,c2]=getSongGrad(song);tc=contrastText(lerpHex(c1,c2,.5))==='#000'?[0,0,0]:[255,255,255];}
   doc.setTextColor(...tc);
   const pad=sz*.1;
-  doc.setFont('helvetica','bold');
-  const tSz=Math.max(7,sz*.20);doc.setFontSize(tSz);
+  doc.setFont('helvetica','bold');doc.setFontSize(Math.max(7,sz*.20));
   const tLines=doc.splitTextToSize((song.title||'').toUpperCase(),sz-pad*2);
   doc.text(tLines.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
-  const ySz=Math.max(18,sz*.75);doc.setFontSize(ySz);
+  doc.setFontSize(Math.max(18,sz*.75));
   doc.text(String(song.year||'????'),x+sz/2,y+sz*.54,{align:'center',baseline:'middle'});
-  doc.setFont('helvetica','italic');
-  const aSz=Math.max(5,sz*.20);doc.setFontSize(aSz);
+  doc.setFont('helvetica','italic');doc.setFontSize(Math.max(5,sz*.20));
   const aLines=doc.splitTextToSize(song.artist||'',sz-pad*2);
   doc.text(aLines.slice(0,2),x+sz/2,y+sz-pad,{align:'center',baseline:'bottom'});
 }
 
 function drawBack(doc,qrDataUrl,x,y,sz){
-  const{qrPad}=getPdfSettings();
+  const{qrPad,qrSize}=getPdfSettings();
   doc.setFillColor(255,255,255);doc.rect(x,y,sz,sz,'F');
   if(qrDataUrl){
-    // QR size: max 35mm, but always fits inside card with padding
-    const maxQr=35;
-    const qrSize=Math.min(maxQr,sz-qrPad*2);
-    const qrOffset=(sz-qrSize)/2;
-    doc.addImage(qrDataUrl,'PNG',x+qrOffset,y+qrOffset,qrSize,qrSize);
+    const qrSz=Math.min(qrSize,sz-qrPad*2);
+    const off=(sz-qrSz)/2;
+    doc.addImage(qrDataUrl,'PNG',x+off,y+off,qrSz,qrSz);
   }
   doc.setDrawColor(190,190,190);doc.setLineWidth(.2);doc.rect(x,y,sz,sz,'S');
 }
 
 function drawSummaryCard(doc,x,y,sz){
-  const isMinimal=designMode==='minimal';
-  doc.setFillColor(isMinimal?255:248,isMinimal?255:248,isMinimal?255:248);
-  doc.rect(x,y,sz,sz,'F');
-  doc.setDrawColor(isMinimal?0:180,isMinimal?0:180,isMinimal?0:180);
-  doc.setLineWidth(.3);doc.rect(x,y,sz,sz,'S');
-
+  const isM=designMode==='minimal';
+  doc.setFillColor(isM?255:248,isM?255:248,isM?255:248);doc.rect(x,y,sz,sz,'F');
+  doc.setDrawColor(isM?0:180,isM?0:180,isM?0:180);doc.setLineWidth(.3);doc.rect(x,y,sz,sz,'S');
   const pad=sz*.07;
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(Math.max(7,sz*.20));
-  doc.setTextColor(20,20,20);
+  doc.setFont('helvetica','bold');doc.setFontSize(Math.max(7,sz*.20));doc.setTextColor(20,20,20);
   const nl=doc.splitTextToSize((setName||'HITSTER').toUpperCase(),sz-pad*2);
   doc.text(nl.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
-
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(Math.max(6,sz*.14));
-  doc.setTextColor(100,100,100);
+  doc.setFont('helvetica','normal');doc.setFontSize(Math.max(6,sz*.14));doc.setTextColor(100,100,100);
   doc.text(`${songs.length} ${lang==='de'?'Songs':'songs'}`,x+sz/2,y+sz*.36,{align:'center',baseline:'top'});
-
   const years=songs.map(s=>s.year).filter(y=>y&&y>=1900&&y<=2030);
   if(years.length){
     const minY=Math.floor(Math.min(...years)/BIN)*BIN,maxY=Math.ceil(Math.max(...years)/BIN)*BIN;
@@ -1116,20 +977,12 @@ function drawSummaryCard(doc,x,y,sz){
     years.forEach(y=>{const b=Math.floor(y/BIN)*BIN;if(bins[b]!==undefined)bins[b]++;});
     const keys=Object.keys(bins).map(Number).sort((a,b)=>a-b);
     const maxC=Math.max(...Object.values(bins),1);
-    const hx=x+pad,hw=sz-pad*2,chartTop=y+sz*.47,chartH=sz*.37;
-    const bw=hw/keys.length;
+    const hx=x+pad,hw=sz-pad*2,chartTop=y+sz*.47,chartH=sz*.37,bw=hw/keys.length;
     keys.forEach((yr,i)=>{
       const count=bins[yr];if(!count)return;
-      const bh=(count/maxC)*chartH*.95;
-      const bx=hx+i*bw,by=chartTop+chartH-bh;
-      if(isMinimal){
-        const gray=Math.round(80+120*(i/Math.max(keys.length-1,1)));
-        doc.setFillColor(gray,gray,gray);
-      }else{
-        const t=i/Math.max(keys.length-1,1);
-        const{r,g,b}=hexRgb(tToColor(yearToT(minY+t*(maxY-minY))));
-        doc.setFillColor(r,g,b);
-      }
+      const bh=(count/maxC)*chartH*.95,bx=hx+i*bw,by=chartTop+chartH-bh;
+      if(isM){const g=Math.round(80+120*(i/Math.max(keys.length-1,1)));doc.setFillColor(g,g,g);}
+      else{const t=i/Math.max(keys.length-1,1);const{r,g,b}=hexRgb(tToColor(yearToT(minY+t*(maxY-minY))));doc.setFillColor(r,g,b);}
       doc.rect(bx+.2,by,bw-.2,bh,'F');
     });
     doc.setFontSize(Math.max(5,sz*.09));doc.setTextColor(140,140,140);
@@ -1145,15 +998,15 @@ function exportData(fmt){
   if(fmt==='json'){
     dl(new Blob([JSON.stringify({meta:{setName},songs},null,2)],{type:'application/json'}),(setName||'hitster')+'.json');
   }else if(fmt==='txt'){
-    const hdr='# setName: '+(setName||'')+'\n';
-    const rows=songs.map(s=>[s.artist,s.title,s.year||'',s.url||''].join('|'));
-    dl(new Blob([hdr+rows.join('\n')],{type:'text/plain'}),(setName||'hitster')+'.txt');
+    const rows=['# setName: '+(setName||''),...songs.map(s=>[s.artist,s.title,s.year||'',s.url||''].join('|'))];
+    dl(new Blob([rows.join('\n')],{type:'text/plain'}),(setName||'hitster')+'.txt');
   }else{
-    const hdr='# setName: '+(setName||'')+'\n';
     const rows=[['artist','title','year','url','mbUrl'],...songs.map(s=>[s.artist,s.title,s.year||'',s.url||'',s.mbUrl||''])];
-    dl(new Blob([hdr+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n')],{type:'text/csv'}),(setName||'hitster')+'.csv');
+    const csv='# setName: '+(setName||'')+'\n'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+    dl(new Blob([csv],{type:'text/csv'}),(setName||'hitster')+'.csv');
   }
 }
+
 function importFile(e){
   const f=e.target.files[0];if(!f)return;
   const r=new FileReader();
@@ -1164,11 +1017,7 @@ function importFile(e){
         const p=JSON.parse(content);
         songs=p.songs||p;
         if(p.meta?.setName){setName=p.meta.setName;document.getElementById('set-name').value=setName;}
-        songs.forEach(s=>{
-          if(!s.status)s.status=s.year?'ok':'pending';
-          s.url=s.url||s.spotifyUrl||'';
-          s.spotifyId=s.spotifyId||xId(s.url,'track')||'';
-        });
+        songs.forEach(s=>{if(!s.status)s.status=s.year?'ok':'pending';s.url=s.url||'';});
       }else{
         const allLines=content.split(/\r?\n/);
         const cl=allLines.find(l=>l.startsWith('# setName:'));
@@ -1179,8 +1028,7 @@ function importFile(e){
         const dataLines=isPipe?validLines:validLines.slice(1);
         songs=dataLines.map(l=>{
           const p=l.split(sep).map(v=>v.replace(/^"|"$/g,'').replace(/""/g,'"').trim());
-          const url=p[3]||'';
-          return{artist:p[0]||'',title:p[1]||'',year:p[2]?parseInt(p[2]):null,url,mbUrl:p[4]||'',spotifyId:xId(url,'track')||'',status:p[2]?'ok':'pending'};
+          return{artist:p[0]||'',title:p[1]||'',year:p[2]?parseInt(p[2]):null,url:p[3]||'',mbUrl:p[4]||'',status:p[2]?'ok':'pending'};
         }).filter(s=>s.title);
       }
       showMsg('s1-msg','✓ '+songs.length+' songs imported.','ok');
@@ -1189,7 +1037,12 @@ function importFile(e){
   };
   r.readAsText(f);
 }
-function dl(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);}
+
+function dl(blob,name){
+  const u=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(u);
+}
 
 // ══════════════════════════════════════════════
 //  UTILS
@@ -1198,15 +1051,11 @@ function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function showMsg(id,text,type='info'){
   const el=document.getElementById(id);if(!el)return;
-  el.innerHTML=text?`<div class="alert alert-${type==='err'?'err':type==='ok'?'ok':type==='warn'?'warn':'info'}">${text}</div>`:'';
+  const cls={err:'alert-err',ok:'alert-ok',warn:'alert-warn',info:'alert-info'}[type]||'alert-info';
+  el.innerHTML=text?`<div class="alert ${cls}">${text}</div>`:'';
 }
 
-// ══════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════
 detectLang();
-loadStoredAuth();
-handleCallback();
 </script>
 </body>
 </html>
