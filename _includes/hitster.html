@@ -1039,9 +1039,10 @@ async function loadSetsIndex(){
         <div class="set-tile-desc">${esc(desc)}</div>
         <div class="set-tile-meta">
           <span class="set-tile-count">${count} ${T[lang].sets_songs}</span>
-          <button class="btn btn-sm" onclick="loadRemoteSet(${JSON.stringify(s.file)})">${T[lang].sets_load}</button>
+          <button class="btn btn-sm set-load-btn" data-file="${esc(s.file)}">${T[lang].sets_load}</button>
         </div>`;
       grid.appendChild(tile);
+      tile.querySelector('.set-load-btn').addEventListener('click',()=>loadRemoteSet(s.file));
     }
   }catch(e){
     grid.innerHTML=`<div class="set-tile" style="border-style:dashed"><div class="set-tile-err">${T[lang].sets_empty}</div></div>`;
