@@ -1018,7 +1018,7 @@ function drawSummaryCard(doc,x,y,sz){
 async function loadSetsIndex(){
   const grid=document.getElementById('sets-grid');
   try{
-    const res=await fetch('assets/sets/sets-index.json');
+    const res=await fetch('./assets/sets/sets-index.json');
     if(!res.ok)throw new Error('HTTP '+res.status);
     const text=await res.text();
     let index;
@@ -1054,7 +1054,7 @@ async function loadRemoteSet(file){
   const loadingMsg=lang==='de'?`${file} wird geladen…`:`Loading ${file}…`;
   showMsg('s1-msg',`<span style="color:var(--text3)">${loadingMsg}</span>`,'info');
   try{
-    const res=await fetch('assets/sets/'+file);
+    const res=await fetch('./assets/sets/'+file);
     if(!res.ok)throw new Error('HTTP '+res.status);
     const content=await res.text();
     parseContent(content,file);
