@@ -1,0 +1,310 @@
+# setName: HITSTER Summer Party
+# description: German Version of HITSTER Summer Party.
+Katrina & The Waves|Walking On Sunshine|1985|https://open.spotify.com/track/05wIrZSwuaVWhcv5FfqeH0
+Joe Cocker|Summer In the City|1994|https://open.spotify.com/track/4JaAu7X4zqWols837Myn5X
+Fairground Attraction|Perfect|1988|https://open.spotify.com/track/2X90tKH59XlulLjbT4vci1
+Creedence Clearwater Revival|Have You Ever Seen The Rain|1970|https://open.spotify.com/track/2LawezPeJhN4AWuSB0GtAU
+Namika|Je ne parle pas français|2018|https://open.spotify.com/track/4eJqzRN15DabYK4byfWghD
+Drake|One Dance|2016|https://open.spotify.com/track/1zi7xx7UVEFkmKfv06H8x0
+Marquess|Vayamos compañeros|2007|https://open.spotify.com/track/6LTAv2W4zYWM5rSKdgHWZS
+Hanson|MMMBop|1997|https://open.spotify.com/track/0lnxrQAd9ZxbhBBe7d8FO8
+Lighthouse Family|High|1997|https://open.spotify.com/track/0AQHfKjzky28rf5ytfBANJ
+Lionel Richie|All Night Long (All Night)|1983|https://open.spotify.com/track/4czNORk5MjW5WOn98bki32
+Barry White|Let The Music Play|1975|https://open.spotify.com/track/2sR6PY1YgPZTB8hZflRbFq
+Sin With Sebastian|Shut Up (And Sleep With Me)|1995|https://open.spotify.com/track/0fXy5mDtuSBtBMkNtAUhG6
+Gipsy Kings|Baila Me|1991|https://open.spotify.com/track/06HRc41zK97Hh9AcuyXVZn
+DJ Jazzy Jeff & The Fresh Prince|Summertime|1991|https://open.spotify.com/track/20XdEFyaUR9C7aDIdq2OAd
+Elvis Crespo|Suavemente|1998|https://open.spotify.com/track/1YwPNemawMgGe6sF4U0FTE
+Black Eyed Peas|I Gotta Feeling|2009|https://open.spotify.com/track/4kLLWz7srcuLKA7Et40PQR
+Roxette|The Look|1988|https://open.spotify.com/track/2oWMI54r0qT4N8Xb4C76vq
+Peter Andre|Mysterious Girl|1995|https://open.spotify.com/track/3CiM7fBGbaP6jiyuH2Ot4j
+Topic|Breaking Me|2019|https://open.spotify.com/track/3H7ihDc1dqLriiWXwsc2po
+The Beatles|Here Comes The Sun|1969|https://open.spotify.com/track/6dGnYIeXmHdcikdzNNDMm2
+Mickie Krause|Eine Woche wach|2019|https://open.spotify.com/track/6aRlZoOO6dqXQtqq2wiQZ1
+Bausa|Was du Liebe nennst|2017|https://open.spotify.com/track/4hKWUzhQWsOkgT6LnDEASe
+America|A Horse With No Name|1971|https://open.spotify.com/track/3BCSIFo2mLFFhSsg0QwpPw
+Calvin Harris|How Deep Is Your Love|2015|https://open.spotify.com/track/22mek4IiqubGD9ctzxc69s
+DJ Ötzi|Hey Baby|2000|https://open.spotify.com/track/0HNXnhNZZtRZFLhP4hfyCP
+Christina Aguilera|Lady Marmalade|2001|https://open.spotify.com/track/0PSZ9G584Ve27GK6ThlY6P
+DJ Snake|Loco Contigo|2019|https://open.spotify.com/track/6osaMSJh9NguagEDQcZaKx
+Milli Vanilli|Girl You Know It's True|1988|https://open.spotify.com/track/0C7dYeCLF6ukChtW64UNge
+Peter Fox|Alles neu|2008|https://open.spotify.com/track/5hqxBvQJ3XJDSbxT9vyyqA
+Jimmy Cliff|Reggae Night|1983|https://open.spotify.com/track/1OE5bn5HUmCqTLNpo13ya3
+Taio Cruz|World In Our Hands|2011|https://open.spotify.com/track/79xJXZeudmfMq4ay9yCFGd
+Les Humphries Singers|Mama Loo|1973|https://open.spotify.com/track/3Y37ytfQDMp2KTA1SG9bpl
+Trio Rio|New York-Rio-Tokyo|1986|https://open.spotify.com/track/68h3Um0UOY8FkMfcelv4Vb
+Laid Back|Sunshine Reggae|1982|https://open.spotify.com/track/0z0JSkE5Nw3i3nin3BBSuG
+Goombay Dance Band|Sun of Jamaica|1979|https://open.spotify.com/track/5apwlmvQphkCJbHnMGUP2t
+Billy Idol|Sweet Sixteen|1986|https://open.spotify.com/track/3kyW3qviTr2dIyvqa1lEWC
+Sheryl Crow|All I Wanna Do|1993|https://open.spotify.com/track/3ZpQiJ78LKINrW9SQTgbXd
+France Gall|Ella, elle l'a|1987|https://open.spotify.com/track/6fyyO9wAmiW9oEAXrOR8jQ
+Inner Circle|Sweat (A La La La La Long)|1992|https://open.spotify.com/track/1SssFw74DdHVjRa6ADggdD
+Tom Gregory|River|2020|https://open.spotify.com/track/5nD2zmNcN7jZ1lrdj4ZVxX
+Vengaboys|Boom, Boom, Boom, Boom!!|1998|https://open.spotify.com/track/5N6M8yDiMV32T6Rkzh8EbW
+Edward Reekers|So schmeckt der Sommer|1995|https://open.spotify.com/track/0ftIaUx27vc9K0ztdiZgHf
+Sabrina|Boys (Summertime Love)|1987|https://open.spotify.com/track/1uI848raFaNWwe9HjHpjQ5
+The Underdog Project|Summer Jam|2000|https://open.spotify.com/track/78Mqt7lWuaxVhN0ZptsuCY
+Oliver Onions|Flying Through the Air|1973|https://open.spotify.com/track/1PEZiGU255hLkwyn5CwHqj
+K'NAAN|Wavin' Flag|2009|https://open.spotify.com/track/20Vs0dtWsL7eZ87YAvubJj
+Bob Marley & The Wailers|Could You Be Loved|1980|https://open.spotify.com/track/5O4erNlJ74PIF6kGol1ZrC
+Alexander Klaws|Take Me Tonight|2003|https://open.spotify.com/track/2lWLGJ0C4vCi8EmNAvzzzm
+Prince Ital Joe|United|1994|https://open.spotify.com/track/0f3cKxB4avKAHNgucJ6S9O
+Stromae|Alors on danse|2009|https://open.spotify.com/track/2GYHyAoLWpkxLVa4oYTVko
+Domenico Modugno|Volare|1958|https://open.spotify.com/track/71hIekopkrYCGgggsBOpVG
+Leony|Faded Love|2021|https://open.spotify.com/track/0HzHUF33G1dPmd2eNULyfa
+Naughty Boy|La La La|2013|https://open.spotify.com/track/3wPPWcVuinAU7dXcJXtCID
+Kool & The Gang|Fresh|1984|https://open.spotify.com/track/1mMYaXpT65iZDtvfRA9EkE
+Rudi Carrell|Wann wird's mal wieder richtig Sommer|1975|https://open.spotify.com/track/1JViGsU8CVY7j0o4coomDA
+Revolverheld|Helden 2008|2008|https://open.spotify.com/track/4iyshfXSQnB0yhQr4Uoyqp
+Ibo|Ratzfatz nach Mallorca|2000|https://open.spotify.com/track/6G2lRHL7CJjHEaf6AGK9Q5
+Alvaro Soler|Sofia|2016|https://open.spotify.com/track/5vj59ONIVbyhcrI8ZSwoRo
+Massive Töne|Cruisen|2002|https://open.spotify.com/track/6e5kuZssmkwWL3Yt4jwTRy
+Kungs|This Girl|2016|https://open.spotify.com/track/1A8j067qyiNwQnZT0bzUpZ
+Gerry Rafferty|Baker Street|1978|https://open.spotify.com/track/5gOd6zDC8vhlYjqbQdJVWP
+Ike & Tina Turner|Nutbush City Limits|1973|https://open.spotify.com/track/06yREZ9X92R2e9RJpdzZ2O
+Queen|I Want To Break Free|1984|https://open.spotify.com/track/7iAqvWLgZzXvH38lA06QZg
+Kenny Loggins|Footloose|1984|https://open.spotify.com/track/6W2VbtvMrDXm5vYeB7amkO
+Justin Timberlake|CAN'T STOP THE FEELING!|2016|https://open.spotify.com/track/0x93VOS1AOKUgJkZjcG1sh
+Avicii|Wake Me Up|2013|https://open.spotify.com/track/0nrRP2bk19rLc0orkWPQk2
+Gwen Stefani|Hollaback Girl|2004|https://open.spotify.com/track/0LzrhCZFXW94Y8nwtTuRlw
+No Mercy|Where Do You Go|1996|https://open.spotify.com/track/37tzoWY1ubBQKGXiWdO5Qv
+Bata Illic|Bella Isola|1977|https://open.spotify.com/track/0tRdzXtsvcdVcUCvLYa6Ow
+Level 42|Lessons In Love|1986|https://open.spotify.com/track/3EGI5qmVmGlfgy9BmNb1R8
+CRO|Whatever|2013|https://open.spotify.com/track/2jEM4UBJxs98Uf4NEe48iD
+Daft Punk|Get Lucky|2013|https://open.spotify.com/track/2Foc5Q5nqNiosCNqttzHof
+Bananarama|Venus|1986|https://open.spotify.com/track/4XX1pFUkQOZTYp6Hb6a6Ae
+The Turtles|Happy Together|1967|https://open.spotify.com/track/1JO1xLtVc8mWhIoE3YaCL0
+Technotronic|Pump Up The Jam|1989|https://open.spotify.com/track/21qnJAMtzC6S5SESuqQLEK
+Ritchie Valens|La Bamba|1958|https://open.spotify.com/track/2aEeghgUcnu75tzcolFMfs
+Glass Animals|Heat Waves|2020|https://open.spotify.com/track/3USxtqRwSYz57Ewm6wWRMp
+Nana Darkman|Lonely|1997|https://open.spotify.com/track/2XAuKwZuf3EPDo9GLfBDsB
+Miami Sound Machine|Conga!|1985|https://open.spotify.com/track/3FdHgoJbH3DXNtGLh56pFu
+MC Miker & DJ Sven|Holiday Rap|1986|https://open.spotify.com/track/2wCgOxYof67qXam24a3pHz
+Earth & Fire|Weekend|1979|https://open.spotify.com/track/1bZr5vH0cfmKu5ODpD0DEO
+Thomas Godoj|Love Is You|2008|https://open.spotify.com/track/0ydk0oiUuGNyeUFeWlkjUS
+Club Honululu|Itsy Bitsy Teenie Weenie Honolulu Strandbikini|1960|https://open.spotify.com/track/1rvr5N1PGjoE7rsJZCdomp
+Arrested Development|People Everyday|1992|https://open.spotify.com/track/6JvodgYcsthsORxPsEYUoe
+Jonas Brothers|Sucker|2019|https://open.spotify.com/track/22vgEDb5hykfaTwLuskFGD
+Katy Perry|California Gurls|2010|https://open.spotify.com/track/6tS3XVuOyu10897O3ae7bi
+Jennifer Lopez|Let's Get Loud|1999|https://open.spotify.com/track/42nSaPdT6g3ZIMHmKLlP2p
+Calvin Harris|One Kiss|2018|https://open.spotify.com/track/7ef4DlsgrMEH11cDZd32M6
+Lou Bega|Mambo No. 5|1999|https://open.spotify.com/track/6x4tKaOzfNJpEJHySoiJcs
+Stan Getz|The Girl From Ipanema|1964|https://open.spotify.com/track/4qGfJb2KByjvzrwo8HNibg
+Tracy Chapman|Talkin' Bout a Revolution|1988|https://open.spotify.com/track/0YMFcrMtBowDdD5bPz0cgy
+Members Of Mayday|Sonic Empire|1997|https://open.spotify.com/track/19iYbGg080uoVvudEvrN43
+Zucchero|Senza Una Donna|1987|https://open.spotify.com/track/3ShEGKdskF0ke7iW2u9gjD
+Fleetwood Mac|Don't Stop|1977|https://open.spotify.com/track/6l6vgKIgXLnqgSMqf4nGNc
+Mr. President|Coco Jamboo|1996|https://open.spotify.com/track/5fRvePkRGdpn2nKacG7I6d
+Lumidee|Never Leave You (Uh Oooh, Uh Oooh)|2003|https://open.spotify.com/track/1AjQE5MtP5jHQMyDepbvLI
+Ö La Palöma Boys|Ö La Palöma|1999|https://open.spotify.com/track/6JUhYg1RCDoEkBDoX9eDQL
+Maite Kelly|Jetzt oder nie|2017|https://open.spotify.com/track/5Q5mE6WAW410uleWj0Qjz7
+B 3|I.O.I.O.|2002|https://open.spotify.com/track/3b2lYcUl4Scnm4CnltLMvY
+ABBA|SOS|1975|https://open.spotify.com/track/5pMmWfuL0FTGshYt7HVJ8P
+Gusttavo Lima|Balada|2011|https://open.spotify.com/track/6d63QA85w4FXhlXYtz7nco
+Cher|The Shoop Shoop Song (It's In His Kiss)|1990|https://open.spotify.com/track/5oV1YjM2rtyZ55txHHsFUu
+Rihanna|Umbrella|2007|https://open.spotify.com/track/113v1MA9MTShy98uCz37nO
+Bellini|Samba de Janeiro|1997|https://open.spotify.com/track/4YopUHLBgDj3l17HYm2OoX
+The Supremes|Stop! In The Name Of Love|1965|https://open.spotify.com/track/52FlwUMMDnTK8TGkCag9Jd
+Desireless|Voyage voyage|1986|https://open.spotify.com/track/2d8D7uk3tbAThjRkdfrx9c
+Las Ketchup|The Ketchup Song (Aserejé)|2002|https://open.spotify.com/track/6UEfyhyfhYQsyipxOd95Ie
+Righeira|Vamos a la Playa|1983|https://open.spotify.com/track/3iB7lzsBC7PdJLU9k2nttT
+Los Del Rio|Macarena|1993|https://open.spotify.com/track/6mhw2fEPH4fMF0wolNm96e
+Nancy Sinatra|Summer Wine|1966|https://open.spotify.com/track/2JKRZGp4LwT9GGbcXtx2sw
+Elton John|Rocket Man|1972|https://open.spotify.com/track/3gdewACMIVMEWVbyb8O9sY
+Dua Lipa|Dance The Night|2023|https://open.spotify.com/track/11C4y2Yz1XbHmaQwO06s9f
+Capital Bra|One Night Stand|2018|https://open.spotify.com/track/4i2DmyVwf29lEdmLGNTyGM
+Bobby Hebb|Sunny|1966|https://open.spotify.com/track/4vju55Ag7apDL2CfotuE7Q
+Pietro Lombardi|Ti Amo|2011|https://open.spotify.com/track/2vlXmglKhzSlV5XJgPzjnx
+Norman Greenbaum|Spirit In The Sky|1969|https://open.spotify.com/track/0jvN7eQJJt4nxQzgQfZ1SP
+Cassandra Steen|Stadt|2009|https://open.spotify.com/track/6nE5RgNaFN5E5bpXeH2z9M
+Marteria|Lila Wolken|2012|https://open.spotify.com/track/2i7LYnvqSFfmimscnZqVLn
+Rod Stewart|Sailing|1975|https://open.spotify.com/track/6OuRbvP4PgbuzBIapVzmFJ
+Juliane Werding|Am Tag als Conny Kramer starb|1972|https://open.spotify.com/track/7kTHUVnGMMOHW1CLdgvzui
+J Balvin|Mi Gente|2017|https://open.spotify.com/track/5r6X3m7zrVHmU2lSp3DXmP
+Asaf Avidan|One Day / Reckoning Song|2012|https://open.spotify.com/track/5bGG1abhVIUm6EAa36ipRX
+Donna Summer|I Feel Love|1977|https://open.spotify.com/track/3x0wa95iAU1ZMmf3yAQkjZ
+Calvin Harris|Summer|2014|https://open.spotify.com/track/6YUTL4dYpB9xZO5qExPf05
+Peter Maffay|Du|1970|https://open.spotify.com/track/6fFshpRdAV1MHSpzXP3Yyk
+SNAP!|Rhythm Is A Dancer|1992|https://open.spotify.com/track/1IWzfq3sLedGQ3fb2hAMBA
+Banaroo|Dubi Dam Dam|2005|https://open.spotify.com/track/6FRw4Ed7mA8b1bVbWVL3yI
+Bee Gees|Night Fever|1977|https://open.spotify.com/track/0qemIQjSxcKyf42VPfZnfa
+USHER|Yeah!|2004|https://open.spotify.com/track/0utLWSIbolqT7KyppMuxKY
+Mariah Carey|Without You|1993|https://open.spotify.com/track/1kMOJBmpfWD9fir6st9uqS
+Gianna Nannini|Un'Estate Italiana|1989|https://open.spotify.com/track/50jCUPNEHtmLfK6PQzcnOH
+Cascada|Evacuate the Dancefloor|2009|https://open.spotify.com/track/4Zfq7r0v4FKeoxwhyLYSyb
+Ne-Yo|Closer|2008|https://open.spotify.com/track/0GX5oOKtU0nnx5OkhenW2i
+The Outhere Brothers|Boom Boom Boom|1995|https://open.spotify.com/track/1m3YR95r3ZuLtu66T8l4Ab
+Ricky Martin|The Cup of Life|1998|https://open.spotify.com/track/7aUCLXZ4D4UD5sCgIgxqjl
+Sarah Connor|Let's Get Back To Bed - Boy!|2001|https://open.spotify.com/track/0EbWhshcHu8Y0NkdgABv3d
+Alannah Myles|Black Velvet|1989|https://open.spotify.com/track/1KU5EHSz04JhGg3rReGJ0N
+Michael Schulte|Waterfall|2018|https://open.spotify.com/track/7aJgh6LCvhXJfD7PHjhG70
+Loona|Bailando|1998|https://open.spotify.com/track/0oxOXYVVZ7vDknU6kagLwO
+SNAP!|The Power|1990|https://open.spotify.com/track/0nQLxiNGbbUoSGrxksETLm
+Snoop Dogg|Drop It Like It's Hot|2004|https://open.spotify.com/track/2NBQmPrOEEjA8VbeWOQGxO
+Bob Sinclar|Love Generation|2005|https://open.spotify.com/track/3s3DWOPtKQSgJVDRKu85Tt
+Sean Paul|Get Busy|2003|https://open.spotify.com/track/6bK9BH9Ts8Gj5JFvnQkzak
+The Beach Boys|Barbara Ann|1965|https://open.spotify.com/track/2KOt2JrCB720UxIbyzweQo
+K.Maro|Femme Like U|2004|https://open.spotify.com/track/4iVnfuAmwJNAGsiHz8Po6Y
+Mireille Mathieu|Akropolis Adieu|1971|https://open.spotify.com/track/5mmuzYKRWwpgsUNxhMg2ZW
+Scott McKenzie|San Francisco (Be Sure to Wear Flowers in Your Hair)|1967|https://open.spotify.com/track/6vcNJUWtUPB0hKC6VbZriY
+KAMRAD|I Believe|2022|https://open.spotify.com/track/6Gz7e7gqh7ytnzZzgSA9AR
+Purple Disco Machine|Substitution|2023|https://open.spotify.com/track/2F2p7b5Xq20mRyEeWYaeUF
+Zara Larsson|Lush Life|2015|https://open.spotify.com/track/1rIKgCH4H52lrvDcz50hS8
+Ava Max|So Am I|2019|https://open.spotify.com/track/2Xnv3GntqbBH1juvUYSpHG
+Shakira|La Tortura|2005|https://open.spotify.com/track/5BSclXJTa9B0iURhUjZo50
+Justin Timberlake|SexyBack|2006|https://open.spotify.com/track/0O45fw2L5vsWpdsOdXwNAR
+Harold Faltermeyer|Axel F|1984|https://open.spotify.com/track/2kgqupahrJpYB4r1poTXEY
+Bryan Adams|Summer Of '69|1984|https://open.spotify.com/track/0GONea6G2XdnHWjNZd6zt3
+P!nk|Cover Me In Sunshine|2021|https://open.spotify.com/track/6Tio0ZoDeSQnI7EBAqWer2
+Nelly|Hot In Herre|2002|https://open.spotify.com/track/3hpUL1gDZWiz8k4DtYhZsS
+La Bouche|Be My Lover|1995|https://open.spotify.com/track/3vSn1frPgFcRXrjWOfhMLl
+Hot Chocolate|No Doubt About It|1980|https://open.spotify.com/track/1XcyciZOU2UcFgvSlFazeW
+Nana Mouskouri|Guten Morgen Sonnenschein|1977|https://open.spotify.com/track/5lpXFKgD6PeT6endUq5EX9
+De Electronica's|Dance Little Birdie|1980|https://open.spotify.com/track/5WIWTRAfxVY5mvRw4cdb0c
+Beagle Music|Like Ice in the Sunshine|1986|https://open.spotify.com/track/0UNzSO6Ahn3MQ8izYLwc5K
+Dr. Alban|It's My Life|1992|https://open.spotify.com/track/4539Tbm6Rt5BaNKXJJj9RH
+Bernhard Brink|Blondes Wunder|1990|https://open.spotify.com/track/6Nrs5TM730JUEp44XKOWqu
+Corona|The Rhythm of the Night|1993|https://open.spotify.com/track/0ofMkI3jzmGCElAOgOLeo3
+Terry Jacks|Seasons in the Sun|1973|https://open.spotify.com/track/7pGMRy91RcQT9oHdPgYz3A
+Mickie Krause|Nur Noch Schuhe An!|2005|https://open.spotify.com/track/2Fo33Bf61uSKCtFmTcgxuV
+Bürger Lars Dietrich|Sexy Eis|1996|https://open.spotify.com/track/76UofYbCEIpOfu12Ls1kPt
+Sonique|It Feels So Good|1998|https://open.spotify.com/track/4Y8q64VnhD0vFYy9g2WFpi
+Felix Jaehn|Ain't Nobody (Loves Me Better)|2015|https://open.spotify.com/track/3c8iiZGfEammKJuWTErE5x
+Tacabro|Tacata|2012|https://open.spotify.com/track/6EhPXpRYkwGwg8lx3XiGTI
+Scatman John|Scatman's World|1995|https://open.spotify.com/track/6dugx9WBSS8TDxbKqp9zmj
+Mike Oldfield|Moonlight Shadow|1983|https://open.spotify.com/track/4WpmwEdc4RBos8W8icSSxW
+Mr. Probz|Waves|2013|https://open.spotify.com/track/3s8GJ1A9ujxsKcLaJ2wY7Q
+Hubert Kah|Rosemarie|1982|https://open.spotify.com/track/4LYvl2jiB2EkCpZzTA8vxS
+Visage|Fade To Grey|1980|https://open.spotify.com/track/3yobQNuKVJ62WDU7h725Fu
+Alvaro Soler|Solo Para Ti|2022|https://open.spotify.com/track/2uAgZ0PelSImQe3BME9CiT
+Britney Spears|Everytime|2003|https://open.spotify.com/track/0dRhSF9LV0HR8Jwd3MMMKJ
+Emilíana Torrini|Jungle Drum|2009|https://open.spotify.com/track/49sGyqfSqURWHIKDbkTfdQ
+Dennis Lloyd|Nevermind|2016|https://open.spotify.com/track/63SevszngYpZOwf63o61K4
+Lilly Wood and The Prick|Prayer in C|2014|https://open.spotify.com/track/5fnA9mkIfScSqHIpeDyvck
+Aventura|Obsesion|2002|https://open.spotify.com/track/65H6t1WQBim6q93yM8fEwn
+Lady Gaga|The Edge Of Glory|2011|https://open.spotify.com/track/57F80059mWaWFvWG3tBTbO
+DNCE|Cake By The Ocean|2015|https://open.spotify.com/track/76hfruVvmfQbw0eYn1nmeC
+U96|Heaven|1996|https://open.spotify.com/track/3gpFz8oAnbKQz83jf17yco
+Spice Girls|Wannabe|1996|https://open.spotify.com/track/1Je1IMUlBXcx1Fz0WE7oPT
+Pitbull|I Know You Want Me (Calle Ocho)|2009|https://open.spotify.com/track/5RzFJd6W40SDTyZkX6xx45
+Sportfreunde Stiller|'54, '74, '90, 2010|2006|https://open.spotify.com/track/6ee1motyT1KuUMiz8dMqxj
+Boney M.|Daddy Cool|1976|https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g
+Daniel Boone|Beautiful Sunday|1972|https://open.spotify.com/track/6DqNZJ4hhBYd8qj9WbpSTJ
+Buddy|Ab in den Süden|2003|https://open.spotify.com/track/2XQ00wanrsQOL9djhTQEEY
+Diddy|I'll Be Missing You|1997|https://open.spotify.com/track/3QHONiXGMGU3z68mQInncF
+Kygo|Stole the Show|2015|https://open.spotify.com/track/5masKPHeAOVNgxdLebIcK7
+Luis Fonsi|Despacito|2017|https://open.spotify.com/track/6habFhsOp2NvshLv26DqMb
+Gabriella Cilmi|Sweet About Me|2008|https://open.spotify.com/track/3Ws8j16fKE1jj74XksiyV6
+Mark Forster|Au Revoir|2014|https://open.spotify.com/track/1ZMODMeLK5x6W8r8jsmmgX
+Culcha Candela|Hamma!|2007|https://open.spotify.com/track/3vaBHxfz5WPBLLPt1hTUvI
+Ed Sheeran|Shape of You|2017|https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3
+Jive Bunny and the Mastermixers|Swing The Mood|1989|https://open.spotify.com/track/3Aimpqxpvmz7jhJlNnEd5c
+The Rolling Stones|Jumpin' Jack Flash|1968|https://open.spotify.com/track/1uBsu3PbD2909UBIfEMLvK
+Safri Duo|Played-A-Live (The Bongo Song)|2000|https://open.spotify.com/track/2MDdh4rbNNBiy8l6XgI6E9
+UB40|Kingston Town|1989|https://open.spotify.com/track/1YnVYHXoak0syv4xBRHQRb
+Ed Sheeran & Justin Bieber|I Don't Care|2019|https://open.spotify.com/track/3HVWdVOQ0ZA45FuZGSfvns
+The Rembrandts|I'll Be There for You|1995|https://open.spotify.com/track/1lfjTOtTRUDkzcmahA4lcs
+Double You|Please Don't Go|1992|https://open.spotify.com/track/0bwNb4KRkhzahJJMFsGoPR
+Dynoro|In My Mind|2018|https://open.spotify.com/track/0E9ZjEAyAwOXZ7wJC0PD33
+Lynn Anderson|Rose Garden|1970|https://open.spotify.com/track/5YwgJ6lpZ3SiAQwBEpjqey
+Tiziano Ferro|Perdona|2001|https://open.spotify.com/track/4T3o83F13gwUaF0xCtAfNl
+Maroon 5|This Love|2002|https://open.spotify.com/track/6ECp64rv50XVz93WvxXMGF
+Tom Jones|It's Not Unusual|1965|https://open.spotify.com/track/3TlIt0ReIxPsVZcOEivT5U
+Das Bo|Türlich, Türlich (Sicher, Dicker)|2000|https://open.spotify.com/track/0zv3f19rNhmZhNmNA2xJsF
+Pras|Ghetto Supastar (That is What You Are)|1998|https://open.spotify.com/track/31bf9SEOppLU6lQ85d8om6
+Juanes|La Camisa Negra|2004|https://open.spotify.com/track/0sUWZTmLTZj21G6dmlsJlj
+Carly Rae Jepsen|Call Me Maybe|2011|https://open.spotify.com/track/20I6sIOMTCkB6w7ryavxtO
+Texas Lightning|No No Never|2006|https://open.spotify.com/track/5EEiZp74udn1TOG6ty9Pq6
+DJ BoBo|Everybody|1994|https://open.spotify.com/track/4Kc0S6bWVeO7Q4SoMPAyX1
+Eros Ramazzotti|Cose Della Vita (with Tina Turner)|1997|https://open.spotify.com/track/2bJtJv5NGkYUFP6prU3WSg
+Dante Thomas|Miss California|2001|https://open.spotify.com/track/7ct57a8zA6DTc8Cz2QIFIg
+Hermes House Band|Country Roads|2001|https://open.spotify.com/track/0yD9qeu9sM5HhKWzv8dZ5N
+Men Without Hats|The Safety Dance|1982|https://open.spotify.com/track/5O4NFbDqJ8SOfbjnIhdPDt
+Crystal Waters|Gypsy Woman (She's Homeless)|1991|https://open.spotify.com/track/4UJ1AKSbXAbPlPVFe66wK7
+Lana Del Rey|Summertime Sadness|2012|https://open.spotify.com/track/7sZUHAC6nadme4EwrLe99Q
+T. Rex|Get It On|1971|https://open.spotify.com/track/0LoQuiekvzqx7n8flgEKzF
+Eiffel 65|Blue (Da Ba Dee)|1998|https://open.spotify.com/track/2yAVzRiEQooPEJ9SYx11L3
+US5|Maria|2005|https://open.spotify.com/track/5e4K5KMw5o13ZDLS6ONAEf
+2 Unlimited|No Limit|1993|https://open.spotify.com/track/1hGvGM76KOX6tpAyaHB0au
+Don McLean|American Pie|1971|https://open.spotify.com/track/6lHTt7tzOzCcVaBf1CIQfR
+The Rubettes|Sugar Baby Love|1974|https://open.spotify.com/track/294ii3rwz6bTJ2XMn5BDu0
+Namika|Lieblingsmensch|2015|https://open.spotify.com/track/6oHDvarQSp0mf5AD1SyNH0
+The Beatles|Let It Be|1970|https://open.spotify.com/track/7iN1s7xHE4ifF5povM6A48
+A Touch Of Class|Around the World (La La La La La)|2000|https://open.spotify.com/track/0IbTukfZdB91gclEXUQZkH
+LMFAO|Party Rock Anthem|2011|https://open.spotify.com/track/7mitXLIMCflkhZiD34uEQI
+C.C. Catch|Backseat of Your Cadillac|1988|https://open.spotify.com/track/08ELdy0Y3kHX59SR5qy69z
+Gnarls Barkley|Crazy|2006|https://open.spotify.com/track/1vxw6aYJls2oq3gW0DujAo
+DNA|Tom's Diner|1990|https://open.spotify.com/track/0mFIn4etymn4sDWNrERNJh
+OneRepublic|Love Runs Out|2014|https://open.spotify.com/track/3cOO5IQtOYs7huq4Z6lYfr
+Rick Astley|Never Gonna Give You Up|1987|https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT
+Peter Kent|It's a Real Good Feeling|1979|https://open.spotify.com/track/3k2F7ncBMqQOwAY29KiiPF
+Outlandish|Aicha|2003|https://open.spotify.com/track/5g7rz8nma2gAaEBHlvT68N
+Neil Young|Heart Of Gold|1972|https://open.spotify.com/track/5vd1QZ0tdXOExiegC55IAS
+Third Eye Blind|Semi-Charmed Life|1997|https://open.spotify.com/track/42et6fnHCw1HIPSrdPprMl
+Madcon|Glow|2010|https://open.spotify.com/track/4icNLSquKZp6e0iEkBn9RP
+David Hasselhoff|Looking for Freedom|1988|https://open.spotify.com/track/1eMhNaN4a92qoidBbkQCmG
+Kid Rock|All Summer Long|2007|https://open.spotify.com/track/5rX6C5QVvvZB7XckETNych
+Paul Anka|Zwei Mädchen aus Germany|1964|https://open.spotify.com/track/4ImlIOgbZtZbhY9AUSHpGm
+Alexandra Stan|Mr. Saxobeat|2010|https://open.spotify.com/track/2BTSWfjaTMYWCxhmVRhqLK
+James Hype|Ferrari|2022|https://open.spotify.com/track/4zN21mbAuaD0WqtmaTZZeP
+Katja Ebstein|Wunder gibt es immer wieder|1970|https://open.spotify.com/track/68pun2nSn33MONTnLYKgpm
+Soul Control|Chocolate (Choco Choco)|2004|https://open.spotify.com/track/3J5F2R62SIyivGUdebjR0O
+All-4-One|I Swear|1994|https://open.spotify.com/track/4WUnM4KNZ0kjp0CUeoyOnS
+Herbert Grönemeyer|Zeit, dass sich was dreht|2006|https://open.spotify.com/track/2ln6685JphEqCJYclkusqW
+Diether Krebs|Ich bin der Martin 'ne|1991|https://open.spotify.com/track/2znqUPNy69gC4l5cC6CtAK
+Udo Lindenberg|Komet|2023|https://open.spotify.com/track/7oQepKHmXDaPC3rgeLRvQu
+Julian Sommer|Dicht im Flieger|2022|https://open.spotify.com/track/6sS77FZh2eJfYBsFUW6hjI
+George McCrae|Rock Your Baby|1974|https://open.spotify.com/track/6pMHMzwTsWIxLigr54GGVm
+Vengaboys|We're Going To Ibiza!|1999|https://open.spotify.com/track/6trzHhvr6xqYJkNnbWwXz2
+Capital Bra|Frühstück in Paris|2020|https://open.spotify.com/track/6qAxQhNfM909QrDGLYEocf
+Kaoma|Lambada|1989|https://open.spotify.com/track/6xepovPqjvrkEw9Y5AMmTm
+Lena|Satellite|2010|https://open.spotify.com/track/2UjNsh4ipNrmog6wdS2JVv
+Thelma Houston|Don't Leave Me This Way|1976|https://open.spotify.com/track/4Af8yzidDPc520TFd4TmkE
+The Kinks|You Really Got Me|1964|https://open.spotify.com/track/29SyMC0plk6qw8NMF7lfRL
+Santana|Smooth|1999|https://open.spotify.com/track/0n2SEXB2qoRQg171q7XqeW
+The Pussycat Dolls|Don't Cha|2005|https://open.spotify.com/track/0BxfFnk0YzONqvmrkO0QrB
+Mark Medlock|You Can Get It|2007|https://open.spotify.com/track/264b3qoi07fjK6KxLuQ1NP
+Salt-N-Pepa|Let's Talk About Sex|1991|https://open.spotify.com/track/6hTBP6QLwJdxbKyLlLXrGo
+Shakira|Waka Waka (This Time for Africa)|2010|https://open.spotify.com/track/63Tl9k1sH8tznn3bqoMuyF
+Monrose|Hot Summer|2007|https://open.spotify.com/track/2vxYcyUrfuyqjF8psauo6k
+Riton|Friday|2021|https://open.spotify.com/track/4cG7HUWYHBV6R6tHn1gxrl
+Albert Hammond|The Free Electric Band|1973|https://open.spotify.com/track/2bbIswC2E2MMSSjcHFD17G
+Carl Douglas|Kung Fu Fighting|1974|https://open.spotify.com/track/40NRm1ZLvZpUSCUXAGGZ8J
+DJ Antoine|Welcome to St. Tropez|2011|https://open.spotify.com/track/5QIG1kl6klZIy0Lu67XNYJ
+Ofra Haza|Im Nin'alu|1988|https://open.spotify.com/track/5PomJFkGwOHkrk0Rfs2DnH
+Ottawan|D.I.S.C.O.|1979|https://open.spotify.com/track/7KkdYJqxvq4ZFq9gvFy06v
+George Baker Selection|Paloma Blanca|1975|https://open.spotify.com/track/37dPgiT3cY5XFbG3Ldq7zv
+Baltimora|Tarzan Boy|1985|https://open.spotify.com/track/273uCXd7NPrInaiNqtkOrA
+Stars On 45|Stars On 45|1981|https://open.spotify.com/track/59BkBWQitTPgS1inzGfyI5
+David Guetta|When Love Takes Over|2009|https://open.spotify.com/track/1hRFVIy9As8OVRk8B7CrD5
+Freddy Quinn|Aloha-Ahe|1962|https://open.spotify.com/track/6oCNhDipqAForPCDGtTBQP
+Kim Wilde|Chequered Love|1981|https://open.spotify.com/track/32CzlQoaKgZxT3WA4qHSgs
+Andy Borg|Arrivederci Claire|1982|https://open.spotify.com/track/0iSRq1li0tV14LuvlfLXtN
+Lipps Inc.|Funkytown|1979|https://open.spotify.com/track/37yIrMPeJYRm7zJ8rr3Uvv
+Miley Cyrus|Flowers|2023|https://open.spotify.com/track/4DHcnVTT87F0zZhRPYmZ3B
+Justin Wellington|Iko Iko (My Bestie)|2019|https://open.spotify.com/track/3pnxj3KnSjqO1Qkl2qLHIz
+John Travolta|You're The One That I Want|1978|https://open.spotify.com/track/0B9x2BRHqj3Qer7biM3pU3
+Jason Derulo|Want to Want Me|2015|https://open.spotify.com/track/7oGZAicScQt96OAW4AruYy
+Laura Branigan|Self Control|1984|https://open.spotify.com/track/6JNJERZGJwDVgkmbohBw7u
+Ai Se Eu Te Pego Nossa Nossa|Ai Se Eu Te Pego|2011|https://open.spotify.com/track/0ZX1AU9VjSVkzb8vro8PMU
+Dario G|Carnaval de Paris|1998|https://open.spotify.com/track/59mdyQniSaNFeXaKMGu9RB
+Opus|Live Is Life|1984|https://open.spotify.com/track/5luOvrlnzfvJQdQjrScVj4
+Ben Zucker|Unsere Lieder|2017|https://open.spotify.com/track/2GGJzyfq6mNovzf5vqv9MQ
+Robin Schulz|In Your Eyes|2020|https://open.spotify.com/track/61ZM92T2zaXIVsqncThQzC
+VIZE|Never Let Me Down|2020|https://open.spotify.com/track/0Je3J2ml1lrnTLXXIlxrvR
+Christina Stürmer|Millionen Lichter|2013|https://open.spotify.com/track/66og7eLYQaDJwjWbFB0IiJ
+Marlon Roudette|When The Beat Drops Out|2014|https://open.spotify.com/track/5aJhuze13LOoLthmiG8YIA
+Danyel Gerard|Butterfly|1971|https://open.spotify.com/track/72rLswhYvQz9LRx3LogMIW
+Don Omar|Danza Kuduro|2010|https://open.spotify.com/track/6DXLO8LndZMVOHM0wNbpzg
+Grace Jones|La Vie en rose|1977|https://open.spotify.com/track/3hpa0c7IAnst3pdnZTXGXT
+Wham!|Club Tropicana|1983|https://open.spotify.com/track/6tASfEUyB7lE2r6DLzURji
+Nelly Furtado|Maneater|2006|https://open.spotify.com/track/4wH4dJgrsxONID6KS2tDQM
+Madonna|La Isla Bonita|1986|https://open.spotify.com/track/6r8k1vznHrzlEKYxL4dZEe
+Mark Forster|Übermorgen|2020|https://open.spotify.com/track/1NP7bzm8UksJUWXsuFoOwE
+Gilbert O'Sullivan|Get Down|1973|https://open.spotify.com/track/1kX0JVbq1lG9VZNiLF3Bwz
+Desmond Dekker|Israelites|1968|https://open.spotify.com/track/0di7hMT6o1ogeUN1XDB9Ft
+Irene Cara|Flashdance... What A Feeling|1983|https://open.spotify.com/track/0aAR5HogGoT68EWFbyRFqx
+John Miles|Music|1976|https://open.spotify.com/track/2oXchyEBxQBe8vH6iFgbv0
+Oliver Onions|Santamaria|1980|https://open.spotify.com/track/3GYdFB1UtGEqKGlf6R80Nx
+Golden Earring|Radar Love|1973|https://open.spotify.com/track/4Zau4QvgyxWiWQ5KQrwL43
+David Guetta|Lovers on the Sun|2014|https://open.spotify.com/track/5UUr2ji5Lacg72thqzLyth

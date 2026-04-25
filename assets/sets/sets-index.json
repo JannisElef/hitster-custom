@@ -7,6 +7,20 @@
     "count": 8
   },
   {
+    "file": "HITSTER.txt",
+    "name": "HITSTER",
+    "description_en": "Classic HITSTER.",
+    "description_de": "Klassisches HITSTER.",
+    "count": 384
+  },
+  {
+    "file": "HITSTER-Summer_Party.txt",
+    "name": "HITSTER Summer Party",
+    "description_en": "German Version of HITSTER Summer Party.",
+    "description_de": "Deutschland Version von HITSTER Summer Party.",
+    "count": 308
+  },
+  {
     "file": "HITSTER-Celebration.txt",
     "name": "HITSTER Celebration",
     "description_en": "German Version of HITSTER Celebration.",
