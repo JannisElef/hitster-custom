@@ -26,5 +26,33 @@
     "description_en": "German Version of HITSTER Celebration.",
     "description_de": "Deutschland Version von HITSTER Celebration.",
     "count": 308
+  },
+  {
+    "file": "Top_100_most_recognizable_songs_of_all-time.txt",
+    "name": "Top 100 most recognizable songs of all-time",
+    "description_en": "Top 100 most recognizable songs of all-time (playlist by boogiehead).",
+    "description_de": "Die Top 100 der bekanntesten Lieder aller Zeiten (Playlist von boogiehead).",
+    "count": 100
+  },
+  {
+    "file": "Top_100_most_streamed_songs_on_Spotify.txt",
+    "name": "Top 100 most streamed songs on Spotify",
+    "description_en": "Top 100 most streamed songs on Spotify (playlist by boogiehead).",
+    "description_de": "Die Top 100 der meist-gestreamten Lieder auf Spotify (Playlist von boogiehead).",
+    "count": 100
+  },
+  {
+    "file": "Top_5_songs_from_each_year_since_1980.txt",
+    "name": "Top 5 songs from each year since 1980",
+    "description_en": "Top 5 songs from each year since 1980 (playlist by boogiehead).",
+    "description_de": "Die Top 5 Lieder pro Jahr seit 1980 (Playlist von boogiehead).",
+    "count": 220
+  },
+  {
+    "file": "Brutal_Mega_Absturz_Mixtape.txt",
+    "name": "Brutal Mega Absturz Mixtape",
+    "description_en": "The best songs of all the Brutal Mega Absturz Mixtapes (1 - 8).",
+    "description_de": "Die besten Lieder der Brutal Mega Absturz Mixtapes (1 - 8).",
+    "count": 260
   }
 ]

@@ -1,0 +1,102 @@
+# setName: Top 100 most recognizable songs of all-time
+# description: Top 100 most recognizable songs of all-time (playlist by boogiehead).
+Queen|Bohemian Rhapsody|1975|https://open.spotify.com/track/6l8GvAyoUZwWDgF1e4822w
+Michael Jackson|Billie Jean|1982|https://open.spotify.com/track/5ChkMS8OtdzJeqyybCc9R5
+Louis Armstrong|What A Wonderful World|1967|https://open.spotify.com/track/29U7stRjqHU6rMiS8BfaI9
+Nirvana|Smells Like Teen Spirit|1991|https://open.spotify.com/track/4CeeEOM32jQcH3eN9Q2dGj
+Whitney Houston|I Will Always Love You|1992|https://open.spotify.com/track/4eHbdreAnSOrDDsFfc4Fpm
+The Beatles|Hey Jude|1968|https://open.spotify.com/track/0aym2LBJBk9DAYuHHutrIl
+Queen|We Will Rock You|1977|https://open.spotify.com/track/54flyrjcdnQdco7300avMJ
+Rick Astley|Never Gonna Give You Up|1987|https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT
+Bon Jovi|Livin' On A Prayer|1986|https://open.spotify.com/track/37ZJ0p5Jm13JPevGcx4SkF
+ABBA|Dancing Queen|1976|https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr
+Bee Gees|Stayin Alive|1977|https://open.spotify.com/track/5ubvP9oKmxLUVq506fgLhk
+Britney Spears|...Baby One More Time|1998|https://open.spotify.com/track/3MjUtNVVq3C8Fn0MP3zhXa
+Journey|Don't Stop Believin'|1981|https://open.spotify.com/track/4bHsxqR3GMrXTxEPLuK5ue
+Survivor|Eye of the Tiger|1982|https://open.spotify.com/track/2KH16WveTQWT6KOG9Rg6e2
+Céline Dion|My Heart Will Go On|1997|https://open.spotify.com/track/33LC84JgLvK2KuW43MfaNq
+Queen|Another One Bites The Dust|1980|https://open.spotify.com/track/291RmMazWAmDitFuD6NJCv
+Michael Jackson|Beat It|1982|https://open.spotify.com/track/1OOtq8tRnDM8kG2gqUPjAj
+The Beatles|Here Comes The Sun|1969|https://open.spotify.com/track/6dGnYIeXmHdcikdzNNDMm2
+Los Del Rio|Macarena|1993|https://open.spotify.com/track/2df5QsXucx4VLiHNGusXD5
+Cyndi Lauper|Girls Just Want to Have Fun|1983|https://open.spotify.com/track/4y1LsJpmMti1PfRQV9AWWe
+Michael Jackson|Thriller|1982|https://open.spotify.com/track/2LlQb7Uoj1kKyGhlkBf9aC
+Eminem|Lose Yourself|2002|https://open.spotify.com/track/5Z01UMMf7V1o0MzF86s6WJ
+Led Zeppelin|Stairway to Heaven|1971|https://open.spotify.com/track/5CQ30WqJwcep0pYcV4AMNc
+John Lennon|Imagine|1971|https://open.spotify.com/track/7pKfPomDEeI4TPT6EOYjn9
+Spice Girls|Wannabe|1996|https://open.spotify.com/track/1Je1IMUlBXcx1Fz0WE7oPT
+Village People|Y.M.C.A.|1978|https://open.spotify.com/track/4YOJFyjqh8eAcbKFfv88mV
+Whitney Houston|I Wanna Dance with Somebody (Who Loves Me)|1987|https://open.spotify.com/track/2tUBqZG2AbRi7Q0BIrVrEj
+Lynyrd Skynyrd|Sweet Home Alabama|1974|https://open.spotify.com/track/7e89621JPkKaeDSTQ3avtg
+The Monkees|I'm a Believer|1966|https://open.spotify.com/track/1CSLeVCXmetBh8IkTPMFdL
+Oasis|Wonderwall|1995|https://open.spotify.com/track/1qPbGZqppFwLwcBC1JQ6Vr
+The Beatles|Let It Be|1970|https://open.spotify.com/track/7iN1s7xHE4ifF5povM6A48
+The Police|Every Breath You Take|1983|https://open.spotify.com/track/1JSTJqkT5qHq8MDJnJbRE1
+Elvis Presley|Jailhouse Rock|1957|https://open.spotify.com/track/4gphxUgq0JSFv2BCLhNDiE
+Queen|We Are The Champions|1977|https://open.spotify.com/track/7ccI9cStQbQdystvc6TvxD
+Aretha Franklin|Respect|1967|https://open.spotify.com/track/7s25THrKz86DM225dOYwnr
+Ricky Martin|Livin' la Vida Loca|1999|https://open.spotify.com/track/0Ph6L4l8dYUuXFmb71Ajnd
+50 Cent|In Da Club|2003|https://open.spotify.com/track/7iL6o9tox1zgHpKUfh9vuC
+The Rolling Stones|(I Can't Get No) Satisfaction|1965|https://open.spotify.com/track/2PzU4IB8Dr6mxV3lHuaG34
+Queen|Don't Stop Me Now|1978|https://open.spotify.com/track/7hQJA50XrCWABAu5v6QZ4i
+Beyoncé|Crazy In Love|2003|https://open.spotify.com/track/5IVuqXILoxVWvWEPm82Jxr
+MC Hammer|U Can't Touch This|1990|https://open.spotify.com/track/1B75hgRqe7A4fwee3g3Wmu
+Dr. Dre|Still D.R.E.|1999|https://open.spotify.com/track/503OTo2dSqe7qk76rgsbep
+Carly Rae Jepsen|Call Me Maybe|2011|https://open.spotify.com/track/3TGRqZ0a2l1LRblBkJoaDx
+Backstreet Boys|I Want It That Way|1999|https://open.spotify.com/track/47BBI51FKFwOMlIiX6m8ya
+a-ha|Take on Me|1984|https://open.spotify.com/track/2WfaOiMkCvy7F5fcp2zZ8L
+Outkast|Hey Ya!|2003|https://open.spotify.com/track/2PpruBYCo4H7WOBJ7Q2EwM
+Guns N' Roses|Sweet Child O' Mine|1987|https://open.spotify.com/track/7o2CTH4ctstm8TNelqjb51
+George Michael|Careless Whisper|1984|https://open.spotify.com/track/4jDmJ51x1o9NZB5Nxxc7gY
+Neil Diamond|Sweet Caroline|1969|https://open.spotify.com/track/62AuGbAkt8Ox2IrFFb8GKV
+Lady Gaga|Bad Romance|2009|https://open.spotify.com/track/0SiywuOBRcynK0uKGWdCnn
+Eurythmics|Sweet Dreams (Are Made of This)|1983|https://open.spotify.com/track/1TfqLAPs4K3s2rJMoCokcS
+Earth, Wind & Fire|September|1978|https://open.spotify.com/track/2grjqo0Frpf2okIBiifQKs
+Mark Ronson|Uptown Funk|2014|https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS
+Black Eyed Peas|I Gotta Feeling|2009|https://open.spotify.com/track/4kLLWz7srcuLKA7Et40PQR
+Michael Jackson|Smooth Criminal|1987|https://open.spotify.com/track/2bCQHF9gdG5BNDVuEIEnNk
+AC/DC|Back In Black|1980|https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj
+Queen|Under Pressure|1981|https://open.spotify.com/track/1mSClObliRtgPVT399COQH
+The Beach Boys|Good Vibrations|1966|https://open.spotify.com/track/7tf64lNC31lWlTsih0nfZf
+Shakira|Hips Don't Lie|2006|https://open.spotify.com/track/3ZFTkvIE7kyPt6Nu3PEa7V
+Luis Fonsi|Despacito|2017|https://open.spotify.com/track/6habFhsOp2NvshLv26DqMb
+PSY|Gangnam Style|2012|https://open.spotify.com/track/03UrZgTINDqvnUMbbIMhql
+Coldplay|Viva La Vida|2008|https://open.spotify.com/track/1mea3bSkSGXuIRvnydlB5b
+Simon & Garfunkel|The Sound of Silence|1964|https://open.spotify.com/track/3YfS47QufnLDFA71FUsgCM
+Ed Sheeran|Shape of You|2017|https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3
+Gotye|Somebody That I Used To Know|2011|https://open.spotify.com/track/4wCmqSrbyCgxEXROQE6vtV
+The Beatles|I Want To Hold Your Hand|1963|https://open.spotify.com/track/4pbG9SUmWIvsROVLF0zF9s
+Eagles|Hotel California|1976|https://open.spotify.com/track/40riOy7x9W7GXjyGp4pjAv
+The Killers|Mr. Brightside|2003|https://open.spotify.com/track/003vvx7Niy0yvhvHt4a68B
+Adele|Rolling in the Deep|2010|https://open.spotify.com/track/1c8gk2PeTE04A1pIDH9YMk
+The White Stripes|Seven Nation Army|2003|https://open.spotify.com/track/3m6KkYKdnbffMpGd9Pm9FP
+The Jackson 5|I Want You Back|1969|https://open.spotify.com/track/5LxvwujISqiB8vpRYv887S
+Aerosmith|Dream On|1973|https://open.spotify.com/track/1xsYj84j7hUDDnTTerGWlH
+Rihanna|Umbrella|2007|https://open.spotify.com/track/49FYlytm3dAAraYgpoJZux
+Blondie|Call Me|1980|https://open.spotify.com/track/7HKxTNVlkHsfMLhigmhC0I
+Madonna|Like a Virgin|1984|https://open.spotify.com/track/1ZPlNanZsJSPK5h9YZZFbZ
+Europe|The Final Countdown|1986|https://open.spotify.com/track/3MrRksHupTVEQ7YbA0FsZK
+Pink Floyd|Another Brick in the Wall, Pt. 2|1979|https://open.spotify.com/track/4gMgiXfqyzZLMhsksGmbQV
+Prince|Purple Rain|1984|https://open.spotify.com/track/54X78diSLoUDI3joC2bjMz
+Marvin Gaye|Ain't No Mountain High Enough|1967|https://open.spotify.com/track/7tqhbajSfrz2F7E1Z75ASX
+Shakira|Waka Waka (This Time for Africa)|2010|https://open.spotify.com/track/6bNB5gxFX6Q87DbQWb8OWZ
+Bob Marley & The Wailers|Three Little Birds|1977|https://open.spotify.com/track/75FYqcxt1YEAtqDLrOeIJn
+2Pac|California Love|1995|https://open.spotify.com/track/3ia3dJETSOllPsv3LJkE35
+Lady Gaga|Poker Face|2008|https://open.spotify.com/track/5R8dQOPq8haW94K7mgERlO
+Wham!|Wake Me Up Before You Go-Go|1984|https://open.spotify.com/track/0ikz6tENMONtK6qGkOrU3c
+The Animals|House Of The Rising Sun|1964|https://open.spotify.com/track/7BY005dacJkbO6EPiOh2wb
+Elvis Presley|Hound Dog|1956|https://open.spotify.com/track/64Ny7djQ6rNJspquof2KoX
+Smash Mouth|All Star|1999|https://open.spotify.com/track/3cfOd4CMv2snFaKAnMdnvK
+Eminem|The Real Slim Shady|2000|https://open.spotify.com/track/3yfqSUWxFvZELEM4PmlwIR
+James Brown & The Famous Flames|I Got You (I Feel Good)|1965|https://open.spotify.com/track/5haXbSJqjjM0TCJ5XkfEaC
+Gloria Gaynor|I Will Survive|1978|https://open.spotify.com/track/7cv28LXcjAC3GsXbUvXKbX
+Linkin Park|In the End|2000|https://open.spotify.com/track/60a0Rd6pjrkxjPbaKzXjfq
+The Cranberries|Zombie|1994|https://open.spotify.com/track/7EZC6E7UjZe63f1jRmkWxt
+Kanye West|Gold Digger|2005|https://open.spotify.com/track/1PS1QMdUqOal0ai3Gt7sDQ
+Coolio|Gangsta's Paradise|1995|https://open.spotify.com/track/1DIXPcTDzTj8ZMHt3PDt8p
+Madonna|Vogue|1990|https://open.spotify.com/track/27QvYgBk0CHOVHthWnkuWt
+USHER|Yeah!|2004|https://open.spotify.com/track/5rb9QrpfcKFHM1EUbSIurX
+Eminem|Without Me|2002|https://open.spotify.com/track/7lQ8MOhq6IN2w8EYcFNSUk
+The Weeknd|Blinding Lights|2019|https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b
+Wiz Khalifa|See You Again|2015|https://open.spotify.com/track/2JzZzZUQj3Qff7wapcbKjc
+Britney Spears|Toxic|2003|https://open.spotify.com/track/6I9VzXrHxO9rA9A5euc8Ak
