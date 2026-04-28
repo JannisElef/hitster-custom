@@ -124,6 +124,11 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .prev-meta h3{font-size:14px;font-weight:600;margin-bottom:8px;}
 .prev-meta p{font-size:12px;color:var(--text3);line-height:1.9;}
 
+/* Text/stroke controls */
+.txt-controls{display:grid;grid-template-columns:auto auto;gap:10px 24px;align-items:center;margin-top:14px;margin-bottom:4px;}
+.txt-ctrl-row{display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.txt-ctrl-lbl{font-size:11px;color:var(--text3);white-space:nowrap;min-width:72px;}
+
 /* Drop */
 .drop-zone{border:1.5px dashed var(--border2);border-radius:8px;padding:24px;text-align:center;cursor:pointer;transition:all .15s;color:var(--text3);font-size:13px;}
 .drop-zone:hover{border-color:var(--accent);color:var(--text2);}
@@ -133,17 +138,18 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .check-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
 
 /* PDF settings */
-.pdf-settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
+.pdf-settings{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
 .pdf-field{display:flex;flex-direction:column;gap:5px;}
-.pdf-field label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+.pdf-field label{font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .pdf-field input[type="number"]{width:100%;padding:7px 10px;font-size:13px;}
 
-@media(max-width:580px){
+@media(max-width:700px){
   .page{padding:12px;}
   .size-grid{flex-direction:column;}
   .step-btn span:not(.step-num){display:none;}
   .preview-area{flex-direction:column;align-items:center;}
   .pdf-settings{grid-template-columns:1fr 1fr;}
+  .txt-controls{grid-template-columns:1fr;}
 }
 .sets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px;}
 .set-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s;}
@@ -173,9 +179,15 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
   <!-- STEP 1 -->
   <div class="step-content active" id="sc-1">
-    <div style="margin-bottom:14px">
-      <label class="label" data-i="lbl_name">Set / Playlist Name</label>
-      <input type="text" id="set-name" placeholder="My Mix · Summer 2024 · …">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div>
+        <label class="label" data-i="lbl_name">Set / Playlist Name</label>
+        <input type="text" id="set-name" placeholder="My Mix · Summer 2024 · …">
+      </div>
+      <div>
+        <label class="label" data-i="lbl_desc">Description</label>
+        <input type="text" id="set-desc" placeholder="e.g. 80s Pop · 45 songs">
+      </div>
     </div>
     <div class="alert alert-info" style="margin-bottom:14px;line-height:1.7" id="bopster-hint">
       💡 <span data-i="bopster_title"></span><br>
@@ -288,15 +300,37 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <button class="btn btn-ghost btn-sm" onclick="clearBg()" data-i="btn_rmbg">Remove</button>
       </div>
     </div>
+    <!-- Text / stroke controls -->
+    <div class="txt-controls">
+      <div class="txt-ctrl-row">
+        <span class="txt-ctrl-lbl" data-i="lbl_txtcol">Text color</span>
+        <label class="check-row" style="margin:0;gap:5px">
+          <input type="checkbox" id="chk-auto-text" checked onchange="renderPreview()">
+          <span style="font-size:11px;white-space:nowrap" data-i="lbl_autotext">Auto (contrast)</span>
+        </label>
+        <input type="color" id="txt-color" value="#ffffff" title="Custom text color"
+          style="width:28px;height:28px;border:1px solid var(--border);border-radius:5px;cursor:pointer;padding:2px;background:var(--surface2)"
+          oninput="document.getElementById('chk-auto-text').checked=false;renderPreview()">
+      </div>
+      <div class="txt-ctrl-row">
+        <span class="txt-ctrl-lbl" data-i="lbl_stroke">Text stroke</span>
+        <input type="range" id="stroke-w" min="0" max="4" step="0.5" value="0"
+          style="width:90px;accent-color:var(--accent)" oninput="document.getElementById('stroke-lbl').textContent=this.value;renderPreview()">
+        <span id="stroke-lbl" style="font-size:11px;color:var(--text3);min-width:16px;text-align:right">0</span>
+        <input type="color" id="stroke-col" value="#000000" title="Stroke color"
+          style="width:28px;height:28px;border:1px solid var(--border);border-radius:5px;cursor:pointer;padding:2px;background:var(--surface2)"
+          oninput="renderPreview()">
+      </div>
+    </div>
     <div class="preview-area">
       <div class="card-wrap">
         <div class="card-lbl" data-i="prev_front">Front</div>
-        <div id="prev-front" style="width:150px;height:150px;border-radius:8px;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10%"></div>
+        <div id="prev-front" style="width:220px;height:220px;border-radius:10px;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10%"></div>
       </div>
       <div class="card-wrap">
         <div class="card-lbl" data-i="prev_back">Back</div>
-        <div style="width:150px;height:150px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden">
-          <div id="prev-qr" style="width:134px;height:134px;display:flex;align-items:center;justify-content:center"></div>
+        <div style="width:220px;height:220px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <div id="prev-qr" style="width:200px;height:200px;display:flex;align-items:center;justify-content:center"></div>
         </div>
       </div>
       <div class="prev-meta">
@@ -310,32 +344,50 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
   <!-- STEP 4 -->
   <div class="step-content" id="sc-4">
-    <div class="alert alert-info" data-i="pdf_info">Front + back on A4. Print double-sided (flip short edge) and cut.</div>
+    <div class="alert alert-info" style="margin-bottom:10px" data-i="pdf_info">Front + back on A4. Print double-sided (flip short edge) and cut.</div>
+    <div class="alert" style="background:rgba(255,200,0,.08);border-color:rgba(255,200,0,.25);color:#c9a600;margin-bottom:14px;font-size:11px" data-i="pdf_duplex_warn">⚠ Duplex printing can cause front/back misalignment depending on your printer. Separate PDF export (front + back as two files) lets you print each side independently and align manually — recommended if your printer shifts.</div>
+
     <label class="label" style="margin-bottom:10px" data-i="lbl_pdf_layout">PDF Layout</label>
+    <!-- Mini layout preview: two separate pages -->
+    <div style="display:flex;gap:10px;margin-bottom:12px;overflow-x:auto">
+      <div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center" data-i="prev_front">Front</div>
+        <canvas id="pdf-prev-front" style="display:block;border:1px solid var(--border);border-radius:6px;background:#fff"></canvas>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center" data-i="prev_back">Back</div>
+        <canvas id="pdf-prev-back" style="display:block;border:1px solid var(--border);border-radius:6px;background:#fff"></canvas>
+      </div>
+    </div>
+
     <div class="pdf-settings" id="pdf-settings-grid">
       <div class="pdf-field">
         <label data-i="lbl_margin">Page margin (mm)</label>
-        <input type="number" id="pdf-margin" value="6" min="0" max="30" step="0.1">
+        <input type="number" id="pdf-margin" value="6" min="0" max="30" step="0.1" oninput="drawPdfPreview()">
       </div>
       <div class="pdf-field">
         <label data-i="lbl_gap">Gap between cards (mm)</label>
-        <input type="number" id="pdf-gap" value="3" min="0" max="20" step="0.1">
+        <input type="number" id="pdf-gap" value="3" min="0" max="20" step="0.1" oninput="drawPdfPreview()">
       </div>
       <div class="pdf-field">
         <label data-i="lbl_qr_pad">QR padding (mm)</label>
-        <input type="number" id="pdf-qr-pad" value="2" min="0" max="10" step="0.1">
+        <input type="number" id="pdf-qr-pad" value="2" min="0" max="10" step="0.1" oninput="drawPdfPreview()">
       </div>
       <div class="pdf-field">
         <label data-i="lbl_qr_size">QR code size (mm)</label>
-        <input type="number" id="pdf-qr-size" value="35" min="5" max="120" step="0.5">
+        <input type="number" id="pdf-qr-size" value="35" min="5" max="120" step="0.5" oninput="drawPdfPreview()">
       </div>
     </div>
-    <label class="check-row">
+    <label class="check-row" style="margin-bottom:10px">
       <input type="checkbox" id="chk-summary" checked>
       <span data-i="lbl_summary">Include summary card</span>
     </label>
-    <div class="row" style="margin-bottom:16px">
-      <button class="btn" id="gen-btn" onclick="generatePDF()" data-i="btn_gen">Generate PDF</button>
+    <div class="row" style="margin-bottom:8px;flex-wrap:wrap;gap:8px">
+      <button class="btn" id="gen-btn" onclick="generatePDF('combined')" data-i="btn_gen">Generate PDF</button>
+      <button class="btn btn-ghost btn-sm" id="gen-front-btn" onclick="generatePDF('front')" data-i="btn_gen_front">Fronts only PDF</button>
+      <button class="btn btn-ghost btn-sm" id="gen-back-btn" onclick="generatePDF('back')" data-i="btn_gen_back">Backs only PDF</button>
+    </div>
+    <div class="row" style="margin-bottom:16px;flex-wrap:wrap;gap:8px">
       <button class="btn btn-ghost btn-sm" onclick="exportData('json')" data-i="btn_expj">Export JSON</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('csv')" data-i="btn_expc">Export CSV</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('txt')" data-i="btn_expt">Export TXT</button>
@@ -355,7 +407,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 const T={
   en:{
     s_import:'Import',s_years:'Years',s_design:'Design',s_export:'Export',
-    lbl_name:'Set / Playlist Name',lbl_input:'Songs',
+    lbl_name:'Set / Playlist Name',lbl_desc:'Description',lbl_input:'Songs',
     h_url:'Track URL:',h_txt:'Text:',
     h_sep:'One entry per line. URL is optional — used as QR code target.',
     h_conv:'Convert playlists to TXT: https://bopster.app/wizard',
@@ -379,11 +431,14 @@ const T={
     btn_to_exp:'Generate PDF →',lbl_summary:'Include summary card',
     lbl_pdf_layout:'PDF Layout',lbl_margin:'Page margin (mm)',lbl_gap:'Gap between cards (mm)',lbl_qr_pad:'QR padding (mm)',lbl_qr_size:'QR code size (mm)',
     pdf_info:'Front + back on A4. Print double-sided (flip short edge) and cut.',
-    btn_gen:'Generate PDF',pdf_done:'✓ PDF created — download started.',
+    lbl_txtcol:'Text color',lbl_autotext:'Auto (contrast)',lbl_stroke:'Text stroke',
+    btn_gen:'Generate PDF',btn_gen_front:'Fronts only PDF',btn_gen_back:'Backs only PDF',
+    pdf_duplex_warn:'⚠ Duplex printing can cause front/back misalignment depending on your printer. Separate PDF export (front + back as two files) lets you print each side independently and align manually — recommended if your printer shifts.',
+    pdf_done:'✓ PDF created — download started.',
   },
   de:{
     s_import:'Import',s_years:'Jahre',s_design:'Design',s_export:'Export',
-    lbl_name:'Set / Playlist-Name',lbl_input:'Songs',
+    lbl_name:'Set / Playlist-Name',lbl_desc:'Beschreibung',lbl_input:'Songs',
     h_url:'Track-URL:',h_txt:'Text:',
     h_sep:'Ein Eintrag pro Zeile. URL optional — wird als QR-Ziel verwendet.',
     h_conv:'Playlists konvertieren: https://bopster.app/wizard',
@@ -407,7 +462,10 @@ const T={
     btn_to_exp:'PDF erstellen →',lbl_summary:'Summary-Karte einschließen',
     lbl_pdf_layout:'PDF-Layout',lbl_margin:'Seitenrand (mm)',lbl_gap:'Abstand zwischen Karten (mm)',lbl_qr_pad:'QR-Padding (mm)',lbl_qr_size:'QR-Code Größe (mm)',
     pdf_info:'Vorder- und Rückseite auf A4. Doppelseitig drucken (kurze Kante). Ausschneiden.',
-    btn_gen:'PDF erstellen',pdf_done:'✓ PDF erstellt — Download gestartet.',
+    lbl_txtcol:'Schriftfarbe',lbl_autotext:'Auto (Kontrast)',lbl_stroke:'Text-Stroke',
+    btn_gen:'PDF erstellen',btn_gen_front:'Nur Vorderseiten PDF',btn_gen_back:'Nur Rückseiten PDF',
+    pdf_duplex_warn:'⚠ Duplex-Druck kann je nach Drucker zu Versatz zwischen Vorder- und Rückseite führen. Separater Export (zwei PDFs) ermöglicht manuelles Ausrichten — empfohlen bei Druckern die versetzen.',
+    pdf_done:'✓ PDF erstellt — Download gestartet.',
   }
 };
 let lang='en';
@@ -428,7 +486,7 @@ function applyLang(){
 const CC=[
   {h:'#6A0DAD'},{h:'#AA1090'},{h:'#DD1A72'},
   {h:'#FF2255'},{h:'#FF5C00'},{h:'#FFA500'},
-  {h:'#FFD700'},{h:'#00AABB'},{h:'#1E40AF'},
+  {h:'#FFD700'},{h:'#4CAF50'},{h:'#00AABB'},{h:'#1E40AF'},
 ];
 const YEAR_MIN=1920,YEAR_MAX=2025;
 function yearToT(y){return Math.max(0,Math.min(1,((y||1970)-YEAR_MIN)/(YEAR_MAX-YEAR_MIN)));}
@@ -471,7 +529,7 @@ function goStep(n){
   document.getElementById('s'+n+'btn').classList.add('active');
   if(n===2){renderTable();drawHistogram();}
   if(n===3){buildSwatches();renderPreview();}
-  if(n===4){updatePdfDefaults();}
+  if(n===4){updatePdfDefaults();setTimeout(drawPdfPreview,50);}
 }
 
 // ══════════════════════════════════════════════
@@ -530,7 +588,9 @@ function processInput(){
     }
   }
   if(!newSongs.length){showMsg('s1-msg','No valid entries found.','err');return;}
-  songs.push(...newSongs.filter(s=>s.title||s.url));
+  // Reset songs (don't append, replace)
+  songs=newSongs.filter(s=>s.title||s.url);
+  document.getElementById('set-name').value=setName||document.getElementById('set-name').value;
   showMsg('s1-msg','✓ '+songs.length+' songs loaded.','ok');
   setTimeout(()=>goStep(2),400);
 }
@@ -860,46 +920,114 @@ function getSongGrad(song){
   if(fixedColor)return[lerpHex(fixedColor,'#000000',0.18),lerpHex(fixedColor,'#ffffff',0.18)];
   return yearGradPair(song?.year);
 }
+function getTextColor(autoTc){
+  const autoCheck=document.getElementById('chk-auto-text');
+  if(autoCheck&&!autoCheck.checked){
+    return document.getElementById('txt-color').value||'#ffffff';
+  }
+  return autoTc;
+}
+function getStroke(){
+  const w=parseFloat(document.getElementById('stroke-w')?.value||0);
+  const c=document.getElementById('stroke-col')?.value||'#000000';
+  document.getElementById('stroke-lbl')&&(document.getElementById('stroke-lbl').textContent=w);
+  return{w,c};
+}
 function renderPreview(){
   const song=songs[0]||{artist:'ABBA',title:'Dancing Queen',year:1976,url:'https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr'};
   const front=document.getElementById('prev-front');
   front.innerHTML='';front.style.border='none';
-  let tc='#fff';
-  if(designMode==='minimal'){front.style.background='#fff';front.style.border='2px solid #000';tc='#000';}
+  let autoTc='#fff';
+  if(designMode==='minimal'){front.style.background='#fff';front.style.border='2px solid #000';autoTc='#000';}
   else if(designMode==='custom_img'&&bgDataUrl){front.style.background=`url(${bgDataUrl}) center/cover`;}
-  else{const[c1,c2]=getSongGrad(song);front.style.background=`linear-gradient(160deg,${c1},${c2})`;tc=contrastText(lerpHex(c1,c2,0.5));}
-  const S=150,tSz=Math.round(S*.115),ySz=Math.round(S*.32),aSz=Math.round(S*.095);
+  else{const[c1,c2]=getSongGrad(song);front.style.background=`linear-gradient(160deg,${c1},${c2})`;autoTc=contrastText(lerpHex(c1,c2,0.5));}
+  const tc=getTextColor(autoTc);
+  const{w:sw,c:sc}=getStroke();
+  const strokeStyle=sw>0?`-webkit-text-stroke:${sw}px ${sc};text-stroke:${sw}px ${sc};`:'';
+  const S=220,tSz=Math.round(S*.115),ySz=Math.round(S*.32),aSz=Math.round(S*.095);
   const sh=designMode==='minimal'?'none':'0 1px 5px rgba(0,0,0,.5)';
   front.innerHTML=`
-    <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:${tSz}px;text-align:center;line-height:1.2;color:${tc};text-shadow:${sh};word-break:break-word;padding:0 4px;width:100%">${esc(song.title||'Title')}</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:${ySz}px;text-align:center;line-height:1;color:${tc};text-shadow:${sh};letter-spacing:2px">${song.year||'????'}</div>
-    <div style="font-family:'DM Sans',sans-serif;font-style:italic;font-size:${aSz}px;text-align:center;opacity:.9;color:${tc};text-shadow:${sh};word-break:break-word;padding:0 4px;width:100%">${esc(song.artist||'Artist')}</div>`;
+    <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:${tSz}px;text-align:center;line-height:1.2;color:${tc};text-shadow:${sh};${strokeStyle}word-break:break-word;padding:0 4px;width:100%">${esc(song.title||'Title')}</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:${ySz}px;text-align:center;line-height:1;color:${tc};text-shadow:${sh};${strokeStyle}letter-spacing:2px">${song.year||'????'}</div>
+    <div style="font-family:'DM Sans',sans-serif;font-style:italic;font-size:${aSz}px;text-align:center;opacity:.9;color:${tc};text-shadow:${sh};${strokeStyle}word-break:break-word;padding:0 4px;width:100%">${esc(song.artist||'Artist')}</div>`;
   const qrWrap=document.getElementById('prev-qr');qrWrap.innerHTML='';
-  if(song.url){try{new QRCode(qrWrap,{text:song.url,width:134,height:134,colorDark:'#000',colorLight:'#fff'});}catch{}}
+  if(song.url){try{new QRCode(qrWrap,{text:song.url,width:200,height:200,colorDark:'#000',colorLight:'#fff'});}catch{}}
+  drawPdfPreview();
 }
 
 // ══════════════════════════════════════════════
 //  STEP 4 — PDF
-//  Front page: left-aligned  x = margin + col*(sz+gap)
-//  Back page:  right-aligned x = A4W - margin - sz - colB*(sz+gap)
-//  where colB = (cols-1) - colF  (mirror for short-edge duplex)
 // ══════════════════════════════════════════════
+function drawPdfPreview(){
+  const cFront=document.getElementById('pdf-prev-front');
+  const cBack=document.getElementById('pdf-prev-back');
+  if(!cFront||!cBack)return;
+  const{margin,gap}=getPdfSettings();
+  const A4W=210,A4H=297,sz=cardSz;
+  const cols=Math.max(1,Math.floor((A4W-2*margin+gap)/(sz+gap)));
+  const rows=Math.max(1,Math.floor((A4H-2*margin+gap)/(sz+gap)));
+  // Scale to fit 240px wide
+  const scale=Math.min(240/A4W,480/A4H);
+  const W=Math.round(A4W*scale),H=Math.round(A4H*scale);
+  const gridW=cols*sz+(cols-1)*gap;
+  const backGridLeft=A4W-margin-gridW;
+
+  function drawPage(canvas,isFront){
+    canvas.width=W;canvas.height=H;
+    canvas.style.width=W+'px';canvas.style.height=H+'px';
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,W,H);
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      const cx=isFront?margin+c*(sz+gap):backGridLeft+((cols-1)-c)*(sz+gap);
+      const cy=margin+r*(sz+gap);
+      const px=Math.round(cx*scale),py=Math.round(cy*scale);
+      const ps=Math.round(sz*scale);
+      if(isFront){
+        const song=songs[r*cols+c]||null;
+        const[c1,c2]=song?getSongGrad(song):['#FF5C00','#FFD700'];
+        const g=ctx.createLinearGradient(px,py,px,py+ps);
+        g.addColorStop(0,c1);g.addColorStop(1,c2);
+        ctx.fillStyle=g;ctx.fillRect(px,py,ps,ps);
+        const tc=getTextColor(song?contrastText(lerpHex(c1,c2,.5)):'#fff');
+        ctx.fillStyle=tc;
+        ctx.font=`bold ${Math.round(ps*.22)}px sans-serif`;
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(song?.year||'—',px+ps/2,py+ps*.55);
+      }else{
+        ctx.fillStyle='#f5f5f5';ctx.fillRect(px,py,ps,ps);
+        const q=Math.round(ps*.52),qx=px+(ps-q)/2,qy=py+(ps-q)/2;
+        ctx.fillStyle='#ddd';ctx.fillRect(qx,qy,q,q);
+        ctx.fillStyle='#f5f5f5';ctx.fillRect(qx+2,qy+2,q-4,q-4);
+        ctx.fillStyle='#aaa';
+        ctx.font=`${Math.round(ps*.14)}px sans-serif`;
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText('QR',px+ps/2,py+ps/2);
+      }
+      ctx.strokeStyle='#ccc';ctx.lineWidth=.5;ctx.strokeRect(px,py,ps,ps);
+    }
+    // page label
+    ctx.fillStyle='#bbb';ctx.font=`${Math.round(7*scale)}px sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText((setName||'Deck')+' · A',W/2,H-2);
+  }
+  drawPage(cFront,true);
+  drawPage(cBack,false);
+}
+
 function updatePdfDefaults(){
   const sz=cardSz;
   const margin=document.getElementById('pdf-margin');
   const gap=document.getElementById('pdf-gap');
   const qrPad=document.getElementById('pdf-qr-pad');
   const qrSize=document.getElementById('pdf-qr-size');
-  // For 65mm: margin=5, gap=2.5 → 2*5 + 2*2.5 + 3*65 = 210 (exactly 3 cards wide on A4)
-  // Scale proportionally for other sizes
   const scale=sz/65;
   if(!margin._userEdited) margin.value=(Math.round(5*scale*10)/10);
   if(!gap._userEdited)    gap.value=(Math.round(2.5*scale*10)/10);
   if(!qrPad._userEdited)  qrPad.value=(Math.round(sz*0.03*10)/10);
   if(!qrSize._userEdited) qrSize.value=(Math.round(sz*0.75*10)/10);
+  drawPdfPreview();
 }
 ['pdf-margin','pdf-gap','pdf-qr-pad','pdf-qr-size'].forEach(id=>{
-  // Mark as user-edited once changed manually
   document.addEventListener('DOMContentLoaded',()=>{
     const el=document.getElementById(id);
     if(el)el.addEventListener('change',()=>{el._userEdited=true;});
@@ -918,13 +1046,13 @@ function getPdfSettings(){
   };
 }
 
-async function generatePDF(){
+async function generatePDF(mode='combined'){
   if(!songs.length)return;
   setName=document.getElementById('set-name').value.trim();
   const inclSummary=document.getElementById('chk-summary').checked;
   document.getElementById('pdf-pw').style.display='block';
   document.getElementById('pdf-done').style.display='none';
-  document.getElementById('gen-btn').disabled=true;
+  ['gen-btn','gen-front-btn','gen-back-btn'].forEach(id=>{const e=document.getElementById(id);if(e)e.disabled=true;});
   const pf=document.getElementById('pdf-pf'),pt=document.getElementById('pdf-ptxt');
 
   const{jsPDF}=window.jspdf;
@@ -935,81 +1063,103 @@ async function generatePDF(){
   const rows_=Math.max(1,Math.floor((A4H-2*margin+gap)/(sz+gap)));
   const perPage=cols*rows_;
 
-  // Letter codes: A, B, C, ... Z, AA, AB, ...
   function pairCode(idx){
     const alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if(idx<26)return alpha[idx];
     return alpha[Math.floor(idx/26)-1]+alpha[idx%26];
   }
   const deckName=setName||'Deck';
+  const gridW=cols*sz+(cols-1)*gap;
+  const backGridLeft=A4W-margin-gridW;
 
   function drawPageLabel(doc,pageIdx){
     const label=deckName+' · '+pairCode(pageIdx);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(7);
+    doc.setFont('helvetica','normal');doc.setFontSize(7);
     doc.setTextColor(160,160,160);
     doc.text(label,A4W/2,A4H-3,{align:'center',baseline:'bottom'});
   }
 
-  // Pre-render all QR images
+  // Pre-render QR images if needed
   const qrImgs=[];
-  for(let i=0;i<songs.length;i++){
-    pf.style.width=Math.round(i/songs.length*40)+'%';
-    pt.textContent=`QR ${i+1}/${songs.length}`;
-    qrImgs.push(await makeQRImage(songs[i].url||'https://open.spotify.com'));
-    await sleep(5);
+  if(mode!=='front'){
+    for(let i=0;i<songs.length;i++){
+      pf.style.width=Math.round(i/songs.length*35)+'%';
+      pt.textContent=`QR ${i+1}/${songs.length}`;
+      qrImgs.push(await makeQRImage(songs[i].url||'https://open.spotify.com'));
+      await sleep(5);
+    }
   }
 
-  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const pageCount=Math.ceil(songs.length/perPage);
   const lastPageSongs=songs.length-(pageCount-1)*perPage;
   const summaryFitsOnLast=inclSummary&&lastPageSongs<perPage;
 
+  // Create docs
+  const docFront=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const docBack=mode!=='front'?new jsPDF({orientation:'portrait',unit:'mm',format:'a4'}):null;
+
   for(let p=0;p<pageCount;p++){
     const batch=songs.slice(p*perPage,(p+1)*perPage);
-    if(p>0)doc.addPage();
 
-    // Front — left-aligned
-    batch.forEach((s,i)=>{
-      const col=i%cols,row=Math.floor(i/cols);
-      drawFront(doc,s,margin+col*(sz+gap),margin+row*(sz+gap),sz);
-    });
-    if(p===pageCount-1&&summaryFitsOnLast){
-      const si=lastPageSongs,col=si%cols,row=Math.floor(si/cols);
-      drawSummaryCard(doc,margin+col*(sz+gap),margin+row*(sz+gap),sz);
+    // FRONT pages
+    if(mode!=='back'){
+      if(p>0)docFront.addPage();
+      batch.forEach((s,i)=>{
+        const col=i%cols,row=Math.floor(i/cols);
+        drawFront(docFront,s,margin+col*(sz+gap),margin+row*(sz+gap),sz);
+      });
+      if(p===pageCount-1&&summaryFitsOnLast){
+        const si=lastPageSongs,col=si%cols,row=Math.floor(si/cols);
+        drawSummaryCard(docFront,margin+col*(sz+gap),margin+row*(sz+gap),sz);
+      }
+      drawPageLabel(docFront,p);
     }
-    drawPageLabel(doc,p);
 
-    // Back — right-aligned block, cards mirrored horizontally for short-edge duplex
-    // After flipping the page, col 0 (left) becomes rightmost → mirror: colB = (cols-1) - col
-    doc.addPage();
-    const gridW=cols*sz+(cols-1)*gap;
-    const backGridLeft=A4W-margin-gridW;
-    batch.forEach((s,i)=>{
-      const col=i%cols,row=Math.floor(i/cols);
-      const colB=(cols-1)-col; // mirror column so card aligns with its front after flip
-      const globalIdx=p*perPage+i;
-      drawBack(doc,qrImgs[globalIdx],backGridLeft+colB*(sz+gap),margin+row*(sz+gap),sz);
-    });
-    drawPageLabel(doc,p);
+    // BACK pages
+    if(mode!=='front'){
+      if(p>0)docBack.addPage();
+      batch.forEach((s,i)=>{
+        const col=i%cols,row=Math.floor(i/cols);
+        const colB=(cols-1)-col;
+        const globalIdx=p*perPage+i;
+        drawBack(docBack,qrImgs[globalIdx],backGridLeft+colB*(sz+gap),margin+row*(sz+gap),sz);
+      });
+      drawPageLabel(docBack,p);
+    }
 
-    pf.style.width=Math.round(40+((p+1)/pageCount*55))+'%';
+    // Combined: add back page right after front page
+    if(mode==='combined'){
+      docFront.addPage();
+      batch.forEach((s,i)=>{
+        const col=i%cols,row=Math.floor(i/cols);
+        const colB=(cols-1)-col;
+        const globalIdx=p*perPage+i;
+        drawBack(docFront,qrImgs[globalIdx],backGridLeft+colB*(sz+gap),margin+row*(sz+gap),sz);
+      });
+      drawPageLabel(docFront,p);
+    }
+
+    pf.style.width=Math.round(35+((p+1)/pageCount*60))+'%';
     pt.textContent=`Page ${p+1}/${pageCount}`;
     await sleep(20);
   }
 
   if(inclSummary&&!summaryFitsOnLast){
-    doc.addPage();
-    drawSummaryCard(doc,margin,margin,sz);
+    if(mode!=='back'){docFront.addPage();drawSummaryCard(docFront,margin,margin,sz);}
+    if(mode==='back'){docBack.addPage();drawSummaryCard(docBack,margin,margin,sz);}
   }
 
   pf.style.width='100%';
-  doc.save((setName||'hitster')+'-cards.pdf');
+  const base=setName||'hitster';
+  if(mode==='combined') docFront.save(base+'-cards.pdf');
+  else if(mode==='front') docFront.save(base+'-fronts.pdf');
+  else if(mode==='back')  docBack.save(base+'-backs.pdf');
+
   document.getElementById('pdf-pw').style.display='none';
   const done=document.getElementById('pdf-done');
   done.style.display='block';
   done.textContent=T[lang].pdf_done;
-  document.getElementById('gen-btn').disabled=false;
+  ['gen-btn','gen-front-btn','gen-back-btn'].forEach(id=>{const e=document.getElementById(id);if(e)e.disabled=false;});
 }
 
 function makeQRImage(url){
@@ -1044,19 +1194,41 @@ function drawFront(doc,song,x,y,sz){
       doc.setFillColor(r,g,b);doc.rect(x,y+(s/steps)*sz,sz,sz/steps+.4,'F');
     }
   }
-  let tc=[255,255,255];
-  if(designMode==='minimal'){tc=[0,0,0];}
-  else{const[c1,c2]=getSongGrad(song);tc=contrastText(lerpHex(c1,c2,.5))==='#000'?[0,0,0]:[255,255,255];}
-  doc.setTextColor(...tc);
+  // Text color
+  const autoCheck=document.getElementById('chk-auto-text');
+  let tcHex;
+  if(designMode==='minimal'){tcHex='#000000';}
+  else if(autoCheck&&!autoCheck.checked){tcHex=document.getElementById('txt-color').value||'#ffffff';}
+  else{const[c1,c2]=getSongGrad(song);tcHex=contrastText(lerpHex(c1,c2,.5))==='#000'?'#000000':'#ffffff';}
+  const{r:tr,g:tg,b:tb}=hexRgb(tcHex);
+
+  // Stroke settings
+  const strokeW=parseFloat(document.getElementById('stroke-w')?.value||0);
+  const strokeHex=document.getElementById('stroke-col')?.value||'#000000';
+  const{r:sr,g:sg,b:sb}=hexRgb(strokeHex);
+
+  function drawText(text,x,y,opts){
+    if(strokeW>0){
+      // draw stroke pass first (slightly offset in 4 directions)
+      doc.setTextColor(sr,sg,sb);
+      const offMm=strokeW*0.35/2.835; // px to mm
+      [[-offMm,0],[offMm,0],[0,-offMm],[0,offMm]].forEach(([ox,oy])=>{
+        doc.text(text,x+ox,y+oy,opts);
+      });
+    }
+    doc.setTextColor(tr,tg,tb);
+    doc.text(text,x,y,opts);
+  }
+
   const pad=sz*.1;
   doc.setFont('helvetica','bold');doc.setFontSize(Math.max(7,sz*.20));
   const tLines=doc.splitTextToSize((song.title||'').toUpperCase(),sz-pad*2);
-  doc.text(tLines.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
+  drawText(tLines.slice(0,2),x+sz/2,y+pad,{align:'center',baseline:'top'});
   doc.setFontSize(Math.max(18,sz*.75));
-  doc.text(String(song.year||'????'),x+sz/2,y+sz*.54,{align:'center',baseline:'middle'});
+  drawText(String(song.year||'????'),x+sz/2,y+sz*.54,{align:'center',baseline:'middle'});
   doc.setFont('helvetica','italic');doc.setFontSize(Math.max(5,sz*.20));
   const aLines=doc.splitTextToSize(song.artist||'',sz-pad*2);
-  doc.text(aLines.slice(0,2),x+sz/2,y+sz-pad,{align:'center',baseline:'bottom'});
+  drawText(aLines.slice(0,2),x+sz/2,y+sz-pad,{align:'center',baseline:'bottom'});
 }
 
 function drawBack(doc,qrDataUrl,x,y,sz){
@@ -1160,11 +1332,14 @@ function parseContent(content,filename){
     const p=JSON.parse(content);
     songs=p.songs||p;
     if(p.meta?.setName){setName=p.meta.setName;document.getElementById('set-name').value=setName;}
+    if(p.meta?.description){const d=document.getElementById('set-desc');if(d)d.value=p.meta.description;}
     songs.forEach(s=>{if(!s.status)s.status=s.year?'ok':'pending';s.url=s.url||'';});
   }else{
     const allLines=content.split(/\r?\n/);
     const cl=allLines.find(l=>l.startsWith('# setName:'));
     if(cl){setName=cl.replace('# setName:','').trim();document.getElementById('set-name').value=setName;}
+    const dl2=allLines.find(l=>l.startsWith('# description:'));
+    if(dl2){const d=document.getElementById('set-desc');if(d)d.value=dl2.replace('# description:','').trim();}
     const validLines=allLines.filter(l=>l.trim()&&!l.startsWith('#'));
     const isPipe=validLines.length>0&&validLines[0].includes('|');
     const sep=isPipe?'|':',';
@@ -1183,7 +1358,7 @@ function parseContent(content,filename){
 // ══════════════════════════════════════════════
 function exportData(fmt){
   setName=document.getElementById('set-name').value.trim();
-  const desc=''; // could be extended with a description field later
+  const desc=(document.getElementById('set-desc')?.value||'').trim();
   if(fmt==='json'){
     dl(new Blob([JSON.stringify({meta:{setName,description:desc},songs},null,2)],{type:'application/json'}),(setName||'hitster')+'.json');
   }else if(fmt==='txt'){
