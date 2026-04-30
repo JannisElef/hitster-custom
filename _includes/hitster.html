@@ -161,9 +161,23 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .set-tile-count{font-size:10px;color:var(--text3);}
 .set-tile-err{font-size:11px;color:var(--text3);font-style:italic;}
 @media(max-width:580px){.sets-grid{grid-template-columns:1fr 1fr;}}
+/* Lightbox */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9000;touch-action:none;}
+#lightbox.open{display:flex;align-items:center;justify-content:center;}
+#lb-img{border-radius:12px;transform-origin:center center;cursor:grab;user-select:none;max-width:90vmin;max-height:90vmin;}
+#lb-img.dragging{cursor:grabbing;}
+#lb-close{position:fixed;top:16px;right:20px;font-size:32px;color:#fff;cursor:pointer;z-index:9001;line-height:1;opacity:.7;background:none;border:none;font-family:sans-serif;}
+#lb-close:hover{opacity:1;}
+#lb-hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.4);font-size:11px;pointer-events:none;}
 </style>
 </head>
 <body>
+
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button id="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" draggable="false">
+  <div id="lb-hint">Scroll to zoom · Drag to pan · Click outside to close</div>
+</div>
 
 <div id="topbar">
   <div class="logo-mini">HITSTER</div>
@@ -326,21 +340,15 @@ tr:hover td{background:rgba(255,255,255,.02);}
     <div class="preview-area">
       <div class="card-wrap">
         <div class="card-lbl" data-i="prev_front">Front</div>
-        <div id="prev-front" style="width:220px;height:220px;border-radius:10px;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10%"></div>
+        <canvas id="prev-front" width="220" height="220" style="width:220px;height:220px;border-radius:10px;cursor:zoom-in" onclick="openLightbox('prev-front')"></canvas>
       </div>
       <div class="card-wrap">
         <div class="card-lbl" data-i="prev_back">Back</div>
-        <div style="width:220px;height:220px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden">
-          <div id="prev-qr" style="width:200px;height:200px;display:flex;align-items:center;justify-content:center"></div>
-        </div>
-      </div>
-      <div class="prev-meta">
-        <h3 data-i="prev_h">Card layout</h3>
-        <p data-i="prev_p">Front: title bold top · year huge center · artist italic bottom&#10;Back: QR code → scan with phone camera&#10;PDF: front left-aligned, back right-aligned (short-edge duplex)</p>
+        <canvas id="prev-back" width="220" height="220" style="width:220px;height:220px;border-radius:10px;cursor:zoom-in;background:#fff" onclick="openLightbox('prev-back')"></canvas>
       </div>
     </div>
     <div class="spacer"></div>
-    <button class="btn" onclick="goStep(4)" data-i="btn_to_exp">Generate PDF →</button>
+    <button class="btn" onclick="goStep(4)" data-i="btn_to_exp">Export →</button>
   </div>
 
   <!-- STEP 4 -->
@@ -353,11 +361,11 @@ tr:hover td{background:rgba(255,255,255,.02);}
     <div style="display:flex;gap:10px;margin-bottom:12px;overflow-x:auto">
       <div>
         <div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center" data-i="prev_front">Front</div>
-        <canvas id="pdf-prev-front" style="display:block;border:1px solid var(--border);border-radius:6px;background:#fff"></canvas>
+        <canvas id="pdf-prev-front" style="display:block;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:zoom-in" onclick="openLightbox('pdf-prev-front')"></canvas>
       </div>
       <div>
         <div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center" data-i="prev_back">Back</div>
-        <canvas id="pdf-prev-back" style="display:block;border:1px solid var(--border);border-radius:6px;background:#fff"></canvas>
+        <canvas id="pdf-prev-back" style="display:block;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:zoom-in" onclick="openLightbox('pdf-prev-back')"></canvas>
       </div>
     </div>
 
@@ -462,7 +470,7 @@ const T={
     drop_hint:'Click to upload background image',btn_rmbg:'Remove',
     prev_front:'Front',prev_back:'Back',prev_h:'Card layout',
     prev_p:'Front: title bold top · year huge center · artist italic bottom\nBack: QR code → scan with phone camera\nPDF: front left-aligned, back right-aligned (short-edge duplex)',
-    btn_to_exp:'Generate PDF →',lbl_summary:'Include summary card',
+    btn_to_exp:'Export →',
     lbl_pdf_layout:'PDF Layout',lbl_margin:'Page margin (mm)',lbl_gap:'Gap between cards (mm)',lbl_qr_pad:'QR padding (mm)',lbl_qr_size:'QR code size (mm)',
     pdf_info:'Front + back on A4. Print double-sided (flip short edge) and cut.',
     lbl_txtcol:'Text color',lbl_autotext:'Auto (contrast)',lbl_stroke:'Text stroke',
@@ -496,7 +504,7 @@ const T={
     drop_hint:'Klicken um Hintergrundbild hochzuladen',btn_rmbg:'Entfernen',
     prev_front:'Vorne',prev_back:'Hinten',prev_h:'Karten-Layout',
     prev_p:'Vorne: Titel fett oben · Jahr riesig mitte · Interpret kursiv unten\nHinten: QR-Code → mit Handy-Kamera scannen\nPDF: Vorderseite links, Rückseite rechts (kurze Kante Duplex)',
-    btn_to_exp:'PDF erstellen →',lbl_summary:'Summary-Karte einschließen',
+    btn_to_exp:'Export →',
     lbl_pdf_layout:'PDF-Layout',lbl_margin:'Seitenrand (mm)',lbl_gap:'Abstand zwischen Karten (mm)',lbl_qr_pad:'QR-Padding (mm)',lbl_qr_size:'QR-Code Größe (mm)',
     pdf_info:'Vorder- und Rückseite auf A4. Doppelseitig drucken (kurze Kante). Ausschneiden.',
     lbl_txtcol:'Schriftfarbe',lbl_autotext:'Auto (Kontrast)',lbl_stroke:'Text-Stroke',
@@ -594,37 +602,33 @@ function processInput(){
   const newSongs=[];
   for(const line of lines){
     if(line.startsWith('#'))continue;
-    // Skip placeholder/header lines like "artist|title|year|url"
     if(/^artist\s*[|,]/i.test(line))continue;
-    const spotifyId=trackId(line);
-    if(spotifyId){
-      const cleanUrl=normalizeSpotifyUrl(line);
-      newSongs.push({artist:'',title:'Spotify: '+spotifyId.slice(0,8)+'…',url:cleanUrl,year:null,mbUrl:null,status:'pending'});
-    }else if(line.includes('|')){
+
+    if(line.includes('|')){
+      // Pipe-separated: parse fields first (url may be in p[3])
       const p=line.split('|').map(v=>v.trim());
-      // Skip if first two fields look like header words
       if(/^artist$/i.test(p[0])&&/^title$/i.test(p[1]))continue;
-      // Skip if both artist and title are empty
       if(!p[0]&&!p[1])continue;
-      newSongs.push({
-        artist:p[0]||'',title:p[1]||'',
-        year:p[2]&&/^\d{4}$/.test(p[2].trim())?+p[2]:null,
-        url:p[3]||'',
-        mbUrl:'',
-        status:p[2]&&/^\d{4}$/.test(p[2].trim())?'ok':'pending'
-      });
+      const yr=p[2]&&/^\d{4}$/.test(p[2])?+p[2]:null;
+      // Normalize spotify URL if present in field 3
+      const rawUrl=p[3]||'';
+      const url=rawUrl&&trackId(rawUrl)?normalizeSpotifyUrl(rawUrl):rawUrl;
+      newSongs.push({artist:p[0]||'',title:p[1]||'',year:yr,url,mbUrl:'',status:yr?'ok':'pending'});
     }else if(line.includes(',')){
-      // bare CSV line without quotes
       const p=line.split(',').map(v=>v.trim());
       if(/^artist$/i.test(p[0]))continue;
       if(!p[0]&&!p[1])continue;
-      newSongs.push({
-        artist:p[0]||'',title:p[1]||'',
-        year:p[2]&&/^\d{4}$/.test(p[2].trim())?+p[2]:null,
-        url:p[3]||'',
-        mbUrl:'',
-        status:p[2]&&/^\d{4}$/.test(p[2].trim())?'ok':'pending'
-      });
+      const yr=p[2]&&/^\d{4}$/.test(p[2])?+p[2]:null;
+      const rawUrl=p[3]||'';
+      const url=rawUrl&&trackId(rawUrl)?normalizeSpotifyUrl(rawUrl):rawUrl;
+      newSongs.push({artist:p[0]||'',title:p[1]||'',year:yr,url,mbUrl:'',status:yr?'ok':'pending'});
+    }else{
+      // Bare Spotify URL only
+      const spotifyId=trackId(line);
+      if(spotifyId){
+        const cleanUrl=normalizeSpotifyUrl(line);
+        newSongs.push({artist:'',title:'Spotify: '+spotifyId.slice(0,8)+'…',url:cleanUrl,year:null,mbUrl:null,status:'pending'});
+      }
     }
   }
   if(!newSongs.length){showMsg('s1-msg','No valid entries found.','err');return;}
@@ -690,7 +694,10 @@ function renderTable(){
       renderTable();
     };
   });
-  if(!tblFetching)fetchYears();
+  if(!tblFetching){
+    const needsLookup=songs.some(s=>s.status==='pending');
+    if(needsLookup)fetchYears();
+  }
 }
 
 function stLabel(s){
@@ -762,7 +769,7 @@ async function fetchYears(){
   const pw=document.getElementById('mb-pw'),pf=document.getElementById('mb-pf');
   pw.style.display='block';pf.style.width='0%';
 
-  // First: fetch Spotify metadata for songs that only have a URL
+  // Only fetch Spotify metadata for songs that have NO artist AND no real title (bare URL paste)
   const spotifyOnly=songs.filter(s=>s.url&&trackId(s.url)&&!s.artist&&(!s.title||s.title.startsWith('Spotify:')));
   for(const s of spotifyOnly){
     await fetchSpotifyMeta(s);
@@ -770,6 +777,7 @@ async function fetchYears(){
   }
   if(spotifyOnly.length)renderTable();
 
+  // Only look up MB for songs that have artist+title but no year yet
   const pending=songs.filter(s=>s.status==='pending'&&s.artist&&s.title&&!s.title.startsWith('Spotify:'));
   for(let i=0;i<pending.length;i++){
     await fetchYear(pending[i]);
@@ -974,25 +982,127 @@ function getStroke(){
   return{w,c};
 }
 function renderPreview(){
-  const song=songs[0]||{artist:'ABBA',title:'Dancing Queen',year:1976,url:'https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr'};
-  const front=document.getElementById('prev-front');
-  front.innerHTML='';front.style.border='none';
+  // Always use a fixed sample - not from table
+  const sample={artist:'ABBA',title:'Dancing Queen',year:1976,url:'https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr'};
+
+  // ── Front canvas ──────────────────────────────
+  const canvas=document.getElementById('prev-front');
+  if(!canvas||typeof canvas.getContext!=='function'){drawPdfPreview();return;}
+  const S=220,dpr=window.devicePixelRatio||1;
+  canvas.width=S*dpr;canvas.height=S*dpr;
+  canvas.style.width=S+'px';canvas.style.height=S+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+
+  // Background
   let autoTc='#fff';
-  if(designMode==='minimal'){front.style.background='#fff';front.style.border='2px solid #000';autoTc='#000';}
-  else if(designMode==='custom_img'&&bgDataUrl){front.style.background=`url(${bgDataUrl}) center/cover`;}
-  else{const[c1,c2]=getSongGrad(song);front.style.background=`linear-gradient(160deg,${c1},${c2})`;autoTc=contrastText(lerpHex(c1,c2,0.5));}
+  if(designMode==='minimal'){
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,S,S);
+    ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.strokeRect(1,1,S-2,S-2);
+    autoTc='#000';
+  }else if(designMode==='custom_img'&&bgDataUrl){
+    const img=new Image();img.src=bgDataUrl;
+    img.onload=()=>{
+      ctx.drawImage(img,0,0,S,S);
+      _drawPreviewOverlay(ctx,sample,S,autoTc);
+    };
+    drawPdfPreview();return;
+  }else{
+    const[c1,c2]=getSongGrad(sample);
+    const grad=ctx.createLinearGradient(0,0,0,S);
+    grad.addColorStop(0,c1);grad.addColorStop(1,c2);
+    ctx.fillStyle=grad;ctx.fillRect(0,0,S,S);
+    autoTc=contrastText(lerpHex(c1,c2,0.5));
+  }
+  _drawPreviewOverlay(ctx,sample,S,autoTc);
+
+  // ── Back canvas QR ────────────────────────────
+  renderBackPreview(sample);
+  drawPdfPreview();
+}
+
+function _drawPreviewOverlay(ctx,song,S,autoTc){
   const tc=getTextColor(autoTc);
   const{w:sw,c:sc}=getStroke();
-  const strokeStyle=sw>0?`-webkit-text-stroke:${sw}px ${sc};text-stroke:${sw}px ${sc};`:'';
-  const S=220,tSz=Math.round(S*.115),ySz=Math.round(S*.32),aSz=Math.round(S*.095);
-  const sh=designMode==='minimal'?'none':'0 1px 5px rgba(0,0,0,.5)';
-  front.innerHTML=`
-    <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:${tSz}px;text-align:center;line-height:1.2;color:${tc};text-shadow:${sh};${strokeStyle}word-break:break-word;padding:0 4px;width:100%">${esc(song.title||'Title')}</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:${ySz}px;text-align:center;line-height:1;color:${tc};text-shadow:${sh};${strokeStyle}letter-spacing:2px">${song.year||'????'}</div>
-    <div style="font-family:'DM Sans',sans-serif;font-style:italic;font-size:${aSz}px;text-align:center;opacity:.9;color:${tc};text-shadow:${sh};${strokeStyle}word-break:break-word;padding:0 4px;width:100%">${esc(song.artist||'Artist')}</div>`;
-  const qrWrap=document.getElementById('prev-qr');qrWrap.innerHTML='';
-  if(song.url){try{new QRCode(qrWrap,{text:song.url,width:200,height:200,colorDark:'#000',colorLight:'#fff'});}catch{}}
-  drawPdfPreview();
+  const pad=S*.1;
+  const FONT='Arial,Helvetica,sans-serif';
+
+  // shadow helper
+  function setShadow(on){
+    if(on&&designMode!=='minimal'){ctx.shadowColor='rgba(0,0,0,.45)';ctx.shadowBlur=3;ctx.shadowOffsetY=1;}
+    else{ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;}
+  }
+
+  function fillWithStroke(text,x,y,baseline,fSz,fStyle){
+    ctx.save();
+    ctx.font=`${fStyle} ${fSz}px ${FONT}`;
+    ctx.textAlign='center';ctx.textBaseline=baseline;
+    if(sw>0){
+      // Clean stroke: draw filled text in stroke color at scale, then shrink with clip trick
+      // Use canvas strokeText which is built-in and correct
+      ctx.lineWidth=sw*2.5;
+      ctx.strokeStyle=sc;
+      ctx.lineJoin='round';
+      setShadow(false);
+      ctx.strokeText(text,x,y);
+    }
+    setShadow(true);
+    ctx.fillStyle=tc;
+    ctx.fillText(text,x,y);
+    ctx.restore();
+  }
+
+  const titleSz=Math.max(7,S*.135);
+  const yearSz =Math.max(14,S*.38);
+  const artistSz=Math.max(5,S*.105);
+
+  // Title (word-wrap)
+  ctx.font=`bold ${titleSz}px ${FONT}`;
+  const titleStr=(song.title||'Title').toUpperCase();
+  const maxW=S-pad*2;
+  const words=titleStr.split(' ');let lines=[],cur='';
+  words.forEach(w=>{
+    const test=cur?cur+' '+w:w;
+    if(ctx.measureText(test).width>maxW&&cur){lines.push(cur);cur=w;}
+    else cur=test;
+  });if(cur)lines.push(cur);
+  lines=lines.slice(0,2);
+  lines.forEach((l,i)=>fillWithStroke(l,S/2,pad+i*titleSz*1.25,'top',titleSz,'bold'));
+
+  fillWithStroke(String(song.year||'????'),S/2,S*.54,'middle',yearSz,'bold');
+
+  ctx.save();ctx.globalAlpha=0.9;
+  fillWithStroke(song.artist||'Artist',S/2,S-pad,'bottom',artistSz,'italic');
+  ctx.restore();
+}
+
+function renderBackPreview(song){
+  const canvas=document.getElementById('prev-back');
+  if(!canvas)return;
+  const S=220,dpr=window.devicePixelRatio||1;
+  canvas.width=S*dpr;canvas.height=S*dpr;
+  canvas.style.width=S+'px';canvas.style.height=S+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,S,S);
+
+  if(!song.url){ctx.fillStyle='#ccc';ctx.fillRect(S*.25,S*.25,S*.5,S*.5);return;}
+  // Render QR via hidden div, then draw onto canvas
+  const host=document.createElement('div');
+  host.style.cssText='position:fixed;left:-9999px;top:-9999px;width:180px;height:180px;background:#fff';
+  document.body.appendChild(host);
+  try{new QRCode(host,{text:song.url,width:180,height:180,colorDark:'#000',colorLight:'#fff'});}catch{}
+  let waited=0;
+  const poll=setInterval(()=>{
+    waited+=40;
+    const qrCanvas=host.querySelector('canvas'),img=host.querySelector('img');
+    if(qrCanvas&&qrCanvas.width>0){
+      clearInterval(poll);
+      const off=(S-180)/2;
+      ctx.drawImage(qrCanvas,off,off,180,180);
+      try{document.body.removeChild(host);}catch{}
+    }else if(waited>1000){clearInterval(poll);try{document.body.removeChild(host);}catch{};}
+  },40);
 }
 
 // ══════════════════════════════════════════════
@@ -1115,7 +1225,7 @@ async function generatePDF(mode='combined'){
   function drawPageLabel(doc,pageIdx){
     const label=deckName+' · '+pairCode(pageIdx);
     doc.setFont('helvetica','normal');doc.setFontSize(7);
-    doc.setTextColor(160,160,160);
+    doc.setTextColor(0,0,0);
     doc.text(label,A4W/2,A4H-3,{align:'center',baseline:'bottom'});
   }
 
@@ -1522,12 +1632,12 @@ function drawFront(doc,song,x,y,sz){
 
   function drawText(text,x,y,opts){
     if(strokeW>0){
-      // draw stroke pass first (slightly offset in 4 directions)
       doc.setTextColor(sr,sg,sb);
-      const offMm=strokeW*0.35/2.835; // px to mm
-      [[-offMm,0],[offMm,0],[0,-offMm],[0,offMm]].forEach(([ox,oy])=>{
-        doc.text(text,x+ox,y+oy,opts);
-      });
+      // offset in mm: strokeW is 0-4 scale, at 65mm card ≈ 0.4mm per unit
+      const offMm=strokeW*(sz/65)*0.4;
+      const dirs=[[-offMm,0],[offMm,0],[0,-offMm],[0,offMm],
+                  [-offMm*.6,-offMm*.6],[offMm*.6,-offMm*.6],[-offMm*.6,offMm*.6],[offMm*.6,offMm*.6]];
+      dirs.forEach(([ox,oy])=>{doc.text(text,x+ox,y+oy,opts);});
     }
     doc.setTextColor(tr,tg,tb);
     doc.text(text,x,y,opts);
@@ -1713,6 +1823,89 @@ function showMsg(id,text,type='info'){
   const cls={err:'alert-err',ok:'alert-ok',warn:'alert-warn',info:'alert-info'}[type]||'alert-info';
   el.innerHTML=text?`<div class="alert ${cls}">${text}</div>`:'';
 }
+
+// ══════════════════════════════════════════════
+//  LIGHTBOX (zoom / pan / pinch)
+// ══════════════════════════════════════════════
+(function(){
+  let scale=1,tx=0,ty=0,dragging=false,lastX=0,lastY=0;
+  let pinchDist=null;
+
+  function applyTransform(){
+    const img=document.getElementById('lb-img');
+    img.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+  }
+
+  window.openLightbox=function(canvasId){
+    const canvas=document.getElementById(canvasId);
+    if(!canvas)return;
+    scale=1;tx=0;ty=0;
+    const img=document.getElementById('lb-img');
+    img.src=canvas.toDataURL('image/png');
+    document.getElementById('lightbox').classList.add('open');
+    applyTransform();
+  };
+
+  window.closeLightbox=function(e){
+    if(e&&(e.target===document.getElementById('lb-img')))return;
+    document.getElementById('lightbox').classList.remove('open');
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    const lb=document.getElementById('lightbox');
+    const img=document.getElementById('lb-img');
+
+    // Wheel zoom
+    lb.addEventListener('wheel',e=>{
+      e.preventDefault();
+      const delta=e.deltaY<0?1.12:1/1.12;
+      scale=Math.max(0.5,Math.min(10,scale*delta));
+      applyTransform();
+    },{passive:false});
+
+    // Mouse drag
+    img.addEventListener('mousedown',e=>{
+      dragging=true;lastX=e.clientX;lastY=e.clientY;
+      img.classList.add('dragging');e.preventDefault();
+    });
+    document.addEventListener('mousemove',e=>{
+      if(!dragging)return;
+      tx+=e.clientX-lastX;ty+=e.clientY-lastY;
+      lastX=e.clientX;lastY=e.clientY;
+      applyTransform();
+    });
+    document.addEventListener('mouseup',()=>{dragging=false;img.classList.remove('dragging');});
+
+    // Touch pinch + pan
+    lb.addEventListener('touchstart',e=>{
+      if(e.touches.length===2){
+        pinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      }else if(e.touches.length===1){
+        lastX=e.touches[0].clientX;lastY=e.touches[0].clientY;
+      }
+    },{passive:true});
+    lb.addEventListener('touchmove',e=>{
+      e.preventDefault();
+      if(e.touches.length===2&&pinchDist){
+        const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+        scale=Math.max(0.5,Math.min(10,scale*(d/pinchDist)));
+        pinchDist=d;
+        applyTransform();
+      }else if(e.touches.length===1){
+        tx+=e.touches[0].clientX-lastX;ty+=e.touches[0].clientY-lastY;
+        lastX=e.touches[0].clientX;lastY=e.touches[0].clientY;
+        applyTransform();
+      }
+    },{passive:false});
+    lb.addEventListener('touchend',()=>{pinchDist=null;});
+
+    // Double-click reset
+    img.addEventListener('dblclick',()=>{scale=1;tx=0;ty=0;applyTransform();});
+
+    // Escape key
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+  });
+})();
 
 detectLang();
 loadSetsIndex();
