@@ -5,6 +5,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 :root{
   --bg:#0c0c0e;--surface:#1c1c1f;--surface2:#242428;
@@ -392,6 +393,39 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <button class="btn btn-ghost btn-sm" onclick="exportData('csv')" data-i="btn_expc">Export CSV</button>
       <button class="btn btn-ghost btn-sm" onclick="exportData('txt')" data-i="btn_expt">Export TXT</button>
     </div>
+
+    <!-- Image Export Section -->
+    <div style="border-top:1px solid var(--border);padding-top:16px;margin-bottom:16px">
+      <label class="label" style="margin-bottom:10px" data-i="lbl_img_export">Image Export (ZIP)</label>
+      <div class="pdf-settings" style="grid-template-columns:repeat(3,1fr)">
+        <div class="pdf-field">
+          <label data-i="lbl_img_fmt">Format</label>
+          <select id="img-format" style="width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:7px;padding:7px 10px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif">
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+          </select>
+        </div>
+        <div class="pdf-field">
+          <label data-i="lbl_img_quality">JPG Quality (1–100)</label>
+          <input type="number" id="img-quality" value="92" min="1" max="100" step="1">
+        </div>
+        <div class="pdf-field">
+          <label data-i="lbl_img_dpi">DPI (A4 resolution)</label>
+          <select id="img-dpi" style="width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:7px;padding:7px 10px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif">
+            <option value="96">96 dpi (screen)</option>
+            <option value="150">150 dpi</option>
+            <option value="300" selected>300 dpi (print)</option>
+            <option value="600">600 dpi (high)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom:8px;flex-wrap:wrap;gap:8px">
+        <button class="btn btn-ghost btn-sm" id="img-btn" onclick="generateImages()">
+          <span style="font-size:14px">🖼</span> <span data-i="btn_img_zip">Download Images (ZIP)</span>
+        </button>
+      </div>
+      <p style="font-size:11px;color:var(--text3);margin-top:4px" data-i="img_info">Each A4 page exported as image. ZIP contains <code>front/</code> and <code>back/</code> folders.</p>
+    </div>
     <div id="pdf-pw" style="display:none">
       <div class="prog-wrap"><div class="prog-fill" id="pdf-pf"></div></div>
       <p id="pdf-ptxt" style="font-size:12px;color:var(--text3);margin-top:6px"></p>
@@ -435,6 +469,9 @@ const T={
     btn_gen:'Generate PDF',btn_gen_front:'Fronts only PDF',btn_gen_back:'Backs only PDF',
     pdf_duplex_warn:'⚠ Duplex printing can cause front/back misalignment depending on your printer. Separate PDF export (front + back as two files) lets you print each side independently and align manually — recommended if your printer shifts.',
     pdf_done:'✓ PDF created — download started.',
+    lbl_img_export:'Image Export (ZIP)',lbl_img_fmt:'Format',lbl_img_quality:'JPG Quality (1–100)',lbl_img_dpi:'DPI (A4 resolution)',
+    btn_img_zip:'Download Images (ZIP)',img_info:'Each A4 page exported as image. ZIP contains front/ and back/ folders.',
+    img_done:'✓ ZIP created — download started.',img_generating:'Rendering page',
   },
   de:{
     s_import:'Import',s_years:'Jahre',s_design:'Design',s_export:'Export',
@@ -466,6 +503,9 @@ const T={
     btn_gen:'PDF erstellen',btn_gen_front:'Nur Vorderseiten PDF',btn_gen_back:'Nur Rückseiten PDF',
     pdf_duplex_warn:'⚠ Duplex-Druck kann je nach Drucker zu Versatz zwischen Vorder- und Rückseite führen. Separater Export (zwei PDFs) ermöglicht manuelles Ausrichten — empfohlen bei Druckern die versetzen.',
     pdf_done:'✓ PDF erstellt — Download gestartet.',
+    lbl_img_export:'Bild-Export (ZIP)',lbl_img_fmt:'Format',lbl_img_quality:'JPG-Qualität (1–100)',lbl_img_dpi:'DPI (A4-Auflösung)',
+    btn_img_zip:'Bilder herunterladen (ZIP)',img_info:'Jede A4-Seite wird als Bild exportiert. ZIP enthält Ordner front/ und back/.',
+    img_done:'✓ ZIP erstellt — Download gestartet.',img_generating:'Seite wird gerendert',
   }
 };
 let lang='en';
@@ -1160,6 +1200,279 @@ async function generatePDF(mode='combined'){
   done.style.display='block';
   done.textContent=T[lang].pdf_done;
   ['gen-btn','gen-front-btn','gen-back-btn'].forEach(id=>{const e=document.getElementById(id);if(e)e.disabled=false;});
+}
+
+// ══════════════════════════════════════════════
+//  IMAGE EXPORT (PNG/JPG → ZIP)
+// ══════════════════════════════════════════════
+
+// Load a data-URL into an HTMLImageElement and wait until it's ready
+function loadImg(src){
+  return new Promise(resolve=>{
+    if(!src){resolve(null);return;}
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=()=>resolve(null);
+    img.src=src;
+  });
+}
+
+async function generateImages(){
+  if(!songs.length)return;
+  if(typeof JSZip==='undefined'){alert('JSZip not loaded. Check your internet connection.');return;}
+  setName=document.getElementById('set-name').value.trim();
+  const inclSummary=document.getElementById('chk-summary').checked;
+  const fmt=document.getElementById('img-format').value;
+  const quality=Math.max(1,Math.min(100,parseInt(document.getElementById('img-quality').value)||92))/100;
+  const dpi=parseInt(document.getElementById('img-dpi').value)||300;
+
+  const A4W_MM=210,A4H_MM=297;
+  const PX_W=Math.round(A4W_MM/25.4*dpi);
+  const PX_H=Math.round(A4H_MM/25.4*dpi);
+  const scl=PX_W/A4W_MM;        // px per mm
+  const pxPerPt=dpi/72;         // px per typographic point
+
+  const{margin,gap,qrPad,qrSize}=getPdfSettings();
+  const sz=cardSz;
+  const cols=Math.max(1,Math.floor((A4W_MM-2*margin+gap)/(sz+gap)));
+  const rows_=Math.max(1,Math.floor((A4H_MM-2*margin+gap)/(sz+gap)));
+  const perPage=cols*rows_;
+  const gridW=cols*sz+(cols-1)*gap;
+  const backGridLeft=A4W_MM-margin-gridW;
+
+  const pw=document.getElementById('pdf-pw');
+  const pf=document.getElementById('pdf-pf');
+  const pt=document.getElementById('pdf-ptxt');
+  pw.style.display='block';
+  document.getElementById('pdf-done').style.display='none';
+  const imgBtn=document.getElementById('img-btn');
+  imgBtn.disabled=true;
+
+  // Pre-render all QR codes as data-URLs, then load into Image elements
+  const qrDataUrls=[];
+  for(let i=0;i<songs.length;i++){
+    pf.style.width=Math.round(i/songs.length*25)+'%';
+    pt.textContent=`QR ${i+1}/${songs.length}`;
+    qrDataUrls.push(await makeQRImage(songs[i].url||'https://open.spotify.com'));
+    await sleep(5);
+  }
+  // Load all QR data-URLs into real Image objects (so drawImage works synchronously)
+  pt.textContent='Loading QR images…';
+  const qrImgEls=await Promise.all(qrDataUrls.map(u=>loadImg(u)));
+
+  // Pre-load background image if custom
+  const bgImgEl=bgDataUrl?await loadImg(bgDataUrl):null;
+
+  const pageCount=Math.ceil(songs.length/perPage);
+  const lastPageSongs=songs.length-(pageCount-1)*perPage;
+  const summaryFitsOnLast=inclSummary&&lastPageSongs<perPage;
+  const zip=new JSZip();
+  const folderFront=zip.folder('front');
+  const folderBack=zip.folder('back');
+  const mimeType=fmt==='jpg'?'image/jpeg':'image/png';
+  const ext=fmt==='jpg'?'jpg':'png';
+
+  function pageCode(i){const a='ABCDEFGHIJKLMNOPQRSTUVWXYZ';return i<26?a[i]:a[Math.floor(i/26)-1]+a[i%26];}
+  function makeName(p,side){return`page_${pageCode(p)}_${side}.${ext}`;}
+  function ptToPx(pt){return pt*pxPerPt;}
+
+  // Word-wrap helper — same logic as jsPDF splitTextToSize
+  function splitText(ctx,text,maxPx){
+    if(!text)return[''];
+    const words=String(text).split(' ');
+    const lines=[];let cur='';
+    for(const w of words){
+      const test=cur?cur+' '+w:w;
+      if(ctx.measureText(test).width>maxPx&&cur){lines.push(cur);cur=w;}
+      else cur=test;
+    }
+    if(cur)lines.push(cur);
+    return lines.length?lines:[''];
+  }
+
+  // Draw text lines with optional stroke — mirrors PDF drawText()
+  function drawTxt(ctx,lines,cx,y,fontSizePx,tcHex,strokeW,strokeHex,baseline){
+    const lh=fontSizePx*1.2;
+    const arr=Array.isArray(lines)?lines:[lines];
+    arr.forEach((line,i)=>{
+      const ly=baseline==='bottom'
+        ? y - (arr.length-1-i)*lh
+        : baseline==='middle'
+        ? y + (i - (arr.length-1)/2)*lh
+        : y + i*lh;
+      if(strokeW>0){
+        ctx.save();
+        ctx.strokeStyle=strokeHex;
+        ctx.lineWidth=strokeW*pxPerPt*0.35*2;
+        ctx.lineJoin='round';
+        ctx.textBaseline=baseline;
+        ctx.strokeText(line,cx,ly);
+        ctx.restore();
+      }
+      ctx.fillStyle=tcHex;
+      ctx.textBaseline=baseline;
+      ctx.fillText(line,cx,ly);
+    });
+  }
+
+  // ── FRONT CARD — mirrors drawFront(doc,song,x,y,sz) 1:1 ──
+  function drawFrontCard(ctx,song,xMM,yMM,szMM){
+    const x=Math.round(xMM*scl),y=Math.round(yMM*scl),s=Math.round(szMM*scl);
+
+    // Background
+    if(designMode==='custom_img'&&bgImgEl){
+      ctx.drawImage(bgImgEl,x,y,s,s);
+    }else if(designMode==='minimal'){
+      ctx.fillStyle='#ffffff';ctx.fillRect(x,y,s,s);
+      ctx.strokeStyle='#000000';ctx.lineWidth=Math.max(1,0.3*scl);
+      ctx.strokeRect(x,y,s,s);
+    }else{
+      const[c1,c2]=getSongGrad(song);
+      const grad=ctx.createLinearGradient(x,y,x,y+s);
+      grad.addColorStop(0,c1);grad.addColorStop(1,c2);
+      ctx.fillStyle=grad;ctx.fillRect(x,y,s,s);
+    }
+
+    // Text colour
+    const autoCheck=document.getElementById('chk-auto-text');
+    let tcHex;
+    if(designMode==='minimal'){tcHex='#000000';}
+    else if(autoCheck&&!autoCheck.checked){tcHex=document.getElementById('txt-color').value||'#ffffff';}
+    else{const[c1,c2]=getSongGrad(song);tcHex=contrastText(lerpHex(c1,c2,.5))==='#000'?'#000000':'#ffffff';}
+
+    const strokeW=parseFloat(document.getElementById('stroke-w')?.value||0);
+    const strokeHex=document.getElementById('stroke-col')?.value||'#000000';
+    const padPx=s*0.1;
+    ctx.textAlign='center';
+
+    // Title — bold, max(7, sz×0.20) pt
+    const titlePx=ptToPx(Math.max(7,szMM*0.20));
+    ctx.font=`bold ${titlePx}px Arial, sans-serif`;
+    const titleLines=splitText(ctx,(song.title||'').toUpperCase(),s-padPx*2).slice(0,2);
+    drawTxt(ctx,titleLines,x+s/2,y+padPx,titlePx,tcHex,strokeW,strokeHex,'top');
+
+    // Year — bold, max(18, sz×0.75) pt
+    const yearPx=ptToPx(Math.max(18,szMM*0.75));
+    ctx.font=`bold ${yearPx}px Arial, sans-serif`;
+    drawTxt(ctx,[String(song.year||'????')],x+s/2,y+s*0.54,yearPx,tcHex,strokeW,strokeHex,'middle');
+
+    // Artist — italic, max(5, sz×0.20) pt
+    const artistPx=ptToPx(Math.max(5,szMM*0.20));
+    ctx.font=`italic ${artistPx}px Arial, sans-serif`;
+    const artistLines=splitText(ctx,song.artist||'',s-padPx*2).slice(0,2);
+    drawTxt(ctx,artistLines,x+s/2,y+s-padPx,artistPx,tcHex,strokeW,strokeHex,'bottom');
+  }
+
+  // ── BACK CARD — mirrors drawBack(doc,qrDataUrl,x,y,sz) ──
+  function drawBackCard(ctx,qrImgEl,xMM,yMM,szMM){
+    const x=Math.round(xMM*scl),y=Math.round(yMM*scl),s=Math.round(szMM*scl);
+    ctx.fillStyle='#ffffff';ctx.fillRect(x,y,s,s);
+    if(qrImgEl){
+      const qrSzPx=Math.round(Math.min(qrSize,szMM-qrPad*2)*scl);
+      const off=Math.round((s-qrSzPx)/2);
+      ctx.drawImage(qrImgEl,x+off,y+off,qrSzPx,qrSzPx);
+    }
+    ctx.strokeStyle='#bebebe';ctx.lineWidth=Math.max(1,0.2*scl);ctx.strokeRect(x,y,s,s);
+  }
+
+  // ── SUMMARY CARD — mirrors drawSummaryCard(doc,x,y,sz) ──
+  function drawSummaryCard(ctx,xMM,yMM,szMM){
+    const x=Math.round(xMM*scl),y=Math.round(yMM*scl),s=Math.round(szMM*scl);
+    const isM=designMode==='minimal';
+    ctx.fillStyle=isM?'#ffffff':'#f8f8f8';ctx.fillRect(x,y,s,s);
+    ctx.strokeStyle=isM?'#000000':'#b4b4b4';ctx.lineWidth=Math.max(1,0.3*scl);ctx.strokeRect(x,y,s,s);
+    const padPx=s*0.07;
+    ctx.textAlign='center';ctx.textBaseline='top';
+    const namePx=ptToPx(Math.max(7,szMM*0.20));
+    ctx.font=`bold ${namePx}px Arial, sans-serif`;
+    ctx.fillStyle='#141414';
+    const nl=splitText(ctx,(setName||'HITSTER').toUpperCase(),s-padPx*2).slice(0,2);
+    nl.forEach((line,i)=>ctx.fillText(line,x+s/2,y+padPx+i*namePx*1.2));
+    ctx.font=`${ptToPx(Math.max(6,szMM*0.14))}px Arial, sans-serif`;
+    ctx.fillStyle='#646464';
+    ctx.fillText(`${songs.length} ${lang==='de'?'Songs':'songs'}`,x+s/2,y+s*0.36);
+    const years=songs.map(s2=>s2.year).filter(yr=>yr&&yr>=1900&&yr<=2030);
+    if(years.length){
+      const minY=Math.floor(Math.min(...years)/BIN)*BIN,maxY=Math.ceil(Math.max(...years)/BIN)*BIN;
+      const bins={};for(let yr=minY;yr<=maxY;yr+=BIN)bins[yr]=0;
+      years.forEach(yr=>{const b=Math.floor(yr/BIN)*BIN;if(bins[b]!==undefined)bins[b]++;});
+      const keys=Object.keys(bins).map(Number).sort((a,b2)=>a-b2);
+      const maxC=Math.max(...Object.values(bins),1);
+      const hx=x+padPx,hw=s-padPx*2,chartTop=y+s*0.47,chartH=s*0.37,bw=hw/keys.length;
+      keys.forEach((yr,i)=>{
+        const count=bins[yr];if(!count)return;
+        const bh=(count/maxC)*chartH*0.95,bx=hx+i*bw,by=chartTop+chartH-bh;
+        if(isM){const g=Math.round(80+120*(i/Math.max(keys.length-1,1)));ctx.fillStyle=`rgb(${g},${g},${g})`;}
+        else{const t=i/Math.max(keys.length-1,1);ctx.fillStyle=tToColor(yearToT(minY+t*(maxY-minY)));}
+        ctx.fillRect(bx+0.5,by,bw-0.5,bh);
+      });
+      ctx.font=`${ptToPx(Math.max(5,szMM*0.09))}px Arial, sans-serif`;
+      ctx.fillStyle='#8c8c8c';ctx.textBaseline='top';
+      ctx.fillText(`${minY}–${maxY}`,x+s/2,y+s*0.88);
+    }
+  }
+
+  // ── PAGE LABEL ──
+  function drawLabelCanvas(ctx,p){
+    ctx.font=`${ptToPx(7)}px Arial, sans-serif`;
+    ctx.fillStyle='#a0a0a0';ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText((setName||'Deck')+' · '+pageCode(p),PX_W/2,PX_H-Math.round(3*scl));
+  }
+
+  function renderA4(drawFn){
+    const canvas=document.createElement('canvas');
+    canvas.width=PX_W;canvas.height=PX_H;
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,PX_W,PX_H);
+    drawFn(ctx);
+    return canvas.toDataURL(mimeType,quality);
+  }
+
+  for(let p=0;p<pageCount;p++){
+    pf.style.width=Math.round(30+((p+1)/pageCount*65))+'%';
+    pt.textContent=`${T[lang].img_generating||'Rendering page'} ${p+1}/${pageCount}`;
+    const batch=songs.slice(p*perPage,(p+1)*perPage);
+    const isLastPage=p===pageCount-1;
+
+    const frontUrl=renderA4(ctx=>{
+      batch.forEach((song,i)=>{
+        const col=i%cols,row=Math.floor(i/cols);
+        drawFrontCard(ctx,song,margin+col*(sz+gap),margin+row*(sz+gap),sz);
+      });
+      if(isLastPage&&summaryFitsOnLast){
+        const si=lastPageSongs,col=si%cols,row=Math.floor(si/cols);
+        drawSummaryCard(ctx,margin+col*(sz+gap),margin+row*(sz+gap),sz);
+      }
+      drawLabelCanvas(ctx,p);
+    });
+    folderFront.file(makeName(p,'front'),frontUrl.split(',')[1],{base64:true});
+
+    const backUrl=renderA4(ctx=>{
+      batch.forEach((song,i)=>{
+        const col=i%cols,row=Math.floor(i/cols);
+        const colB=(cols-1)-col;
+        const globalIdx=p*perPage+i;
+        drawBackCard(ctx,qrImgEls[globalIdx],backGridLeft+colB*(sz+gap),margin+row*(sz+gap),sz);
+      });
+      drawLabelCanvas(ctx,p);
+    });
+    folderBack.file(makeName(p,'back'),backUrl.split(',')[1],{base64:true});
+    await sleep(30);
+  }
+
+  if(inclSummary&&!summaryFitsOnLast){
+    const sumUrl=renderA4(ctx=>drawSummaryCard(ctx,margin,margin,sz));
+    folderFront.file(makeName(pageCount,'summary'),sumUrl.split(',')[1],{base64:true});
+  }
+
+  pf.style.width='100%';
+  const blob=await zip.generateAsync({type:'blob'});
+  dl(blob,`${setName||'hitster'}-images.zip`);
+  pw.style.display='none';
+  const done=document.getElementById('pdf-done');
+  done.style.display='block';
+  done.textContent=T[lang].img_done||'✓ ZIP created — download started.';
+  imgBtn.disabled=false;
 }
 
 function makeQRImage(url){
