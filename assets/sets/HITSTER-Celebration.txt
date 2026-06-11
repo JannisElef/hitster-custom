@@ -294,7 +294,7 @@ Olivia Rodrigo|good 4 u|2021|https://open.spotify.com/track/4ZtFanR9U6ndgddUvNcj
 Alvaro Soler|Solo Para Ti|2022|https://open.spotify.com/track/2uAgZ0PelSImQe3BME9CiT
 PSY|Gangnam Style|2012|https://open.spotify.com/track/03UrZgTINDqvnUMbbIMhql
 Axwell /\ Ingrosso|Sun Is Shining|2017|https://open.spotify.com/track/4b2tcjrG1qUkSdsqEFP2dB
-Elvis Presley|A Little Less Conversation|1968|https://open.spotify.com/track/7FNIEfhhBlzsZFxCwI5Nwh
+Elvis Presley, Junkie XL|A Little Less Conversation (JXL Radio Edit)|2002|https://open.spotify.com/track/7FNIEfhhBlzsZFxCwI5Nwh
 Jan Delay|Oh Jonny|2009|https://open.spotify.com/track/1IivtUqnUfW9jH3pM08D8U
 First Class|Beach Baby|1974|https://open.spotify.com/track/5J74pF4Nn86qyLQihpkXq4
 Danzel|Pump It Up!|2004|https://open.spotify.com/track/3HEBH4eycANlb6xqAc8HE6
